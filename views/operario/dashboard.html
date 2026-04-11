@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avisens | Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styleO.css" />
+  </head>
+
+  <body>
+    <div class="app-container">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
+          <h1 class="brand-name">Avisens</h1>
+        </div>
+
+        <nav class="side-nav">
+          <a href="dashboard.html" class="nav-item active">
+            <i class="fa-solid fa-table-cells-large"></i> Dashboard
+          </a>
+          <a href="sensores.html" class="nav-item">
+            <i class="fa-solid fa-tower-broadcast"></i> Sensores
+          </a>
+          <a href="curvas.html" class="nav-item">
+            <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
+          </a>
+          <a href="alertas.html" class="nav-item">
+            <i class="fa-solid fa-triangle-exclamation"></i> Alertas
+          </a>
+          <a href="automatizacion.html" class="nav-item">
+            <i class="fa-solid fa-gear"></i> Automatización
+          </a>
+          <a href="inventario.html" class="nav-item">
+            <i class="fa-solid fa-box"></i> Inventario
+          </a>
+          <a href="mantenimiento.html" class="nav-item">
+            <i class="fa-solid fa-wrench"></i> Mantenimiento
+          </a>
+          <a href="usuarios.html" class="nav-item">
+            <i class="fa-solid fa-user-group"></i> Usuarios
+          </a>
+        </nav>
+      </aside>
+
+      <div class="main-wrapper">
+        <header class="top-header">
+          <div class="header-titles">
+            <h2>Dashboard</h2>
+            <p class="subtitle">Monitoreo en tiempo real</p>
+          </div>
+          <a href="index.html" class="user-profile">
+            <div class="user-info">
+              <span class="user-name">Avisens Admin</span>
+              <span class="user-role">Acceso Total</span>
+            </div>
+            <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+          </a>
+        </header>
+
+        <main class="content-area">
+          <section class="section-block fade-in">
+            <div class="section-header">
+              <h2 class="section-title">Galpones Activos (4)</h2>
+              <div class="system-mode">
+                <span
+                  class="status-indicator pulse-animation"
+                  style="
+                    background: var(--status-optimal);
+                    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+                  "
+                ></span>
+                Automático
+              </div>
+            </div>
+
+            <div class="sheds-grid">
+              <article class="shed-card" data-status="optimal">
+                <div class="shed-header">
+                  <h3 class="shed-name">Galpón 1</h3>
+                  <span class="status-indicator"></span>
+                </div>
+                <div class="shed-metrics">
+                  <div class="metric">
+                    <span class="metric-label">Temp:</span
+                    ><span class="metric-value">32°C</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">Hum:</span
+                    ><span class="metric-value">65%</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">CO₂:</span
+                    ><span class="metric-value">850 ppm</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">NH₃:</span
+                    ><span class="metric-value">12 ppm</span>
+                  </div>
+                </div>
+                <div class="shed-footer">
+                  <span><i class="fa-solid fa-kiwi-bird"></i> 15,000 aves</span>
+                  <span>Día 28</span>
+                </div>
+              </article>
+
+              <article class="shed-card" data-status="warning">
+                <div class="shed-header">
+                  <h3 class="shed-name">Galpón 2</h3>
+                  <span class="status-indicator"></span>
+                </div>
+                <div class="shed-metrics">
+                  <div class="metric">
+                    <span class="metric-label">Temp:</span
+                    ><span class="metric-value">29°C</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">Hum:</span
+                    ><span class="metric-value">62%</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">CO₂:</span
+                    ><span class="metric-value warning-text">920 ppm</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">NH₃:</span
+                    ><span class="metric-value warning-text">15 ppm</span>
+                  </div>
+                </div>
+                <div class="shed-footer">
+                  <span><i class="fa-solid fa-kiwi-bird"></i> 14,500 aves</span>
+                  <span>Día 21</span>
+                </div>
+              </article>
+
+              <article class="shed-card" data-status="critical">
+                <div class="shed-header">
+                  <h3 class="shed-name">Galpón 3</h3>
+                  <span class="status-indicator pulse-animation"></span>
+                </div>
+                <div class="shed-metrics">
+                  <div class="metric">
+                    <span class="metric-label">Temp:</span
+                    ><span class="metric-value critical-text">35°C</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">Hum:</span
+                    ><span class="metric-value">72%</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">CO₂:</span
+                    ><span class="metric-value critical-text">1150 ppm</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">NH₃:</span
+                    ><span class="metric-value critical-text">22 ppm</span>
+                  </div>
+                </div>
+                <div class="shed-footer">
+                  <span><i class="fa-solid fa-kiwi-bird"></i> 14,800 aves</span>
+                  <span>Día 35</span>
+                </div>
+              </article>
+
+              <article class="shed-card" data-status="optimal">
+                <div class="shed-header">
+                  <h3 class="shed-name">Galpón 4</h3>
+                  <span class="status-indicator"></span>
+                </div>
+                <div class="shed-metrics">
+                  <div class="metric">
+                    <span class="metric-label">Temp:</span
+                    ><span class="metric-value">31°C</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">Hum:</span
+                    ><span class="metric-value">64%</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">CO₂:</span
+                    ><span class="metric-value">880 ppm</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">NH₃:</span
+                    ><span class="metric-value">13 ppm</span>
+                  </div>
+                </div>
+                <div class="shed-footer">
+                  <span><i class="fa-solid fa-kiwi-bird"></i> 15,200 aves</span>
+                  <span>Día 14</span>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="section-block fade-in" style="animation-delay: 0.1s">
+            <h2 class="section-title">Alertas Recientes</h2>
+            <div class="alerts-list">
+              <div class="alert-item" data-type="critical">
+                <div class="alert-icon">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="alert-content">
+                  <div class="alert-top">
+                    <strong>Galpón 3</strong>
+                    <span class="alert-time">Hace 5 min</span>
+                  </div>
+                  <p>Temperatura crítica: 35°C</p>
+                </div>
+              </div>
+
+              <div class="alert-item" data-type="critical">
+                <div class="alert-icon">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="alert-content">
+                  <div class="alert-top">
+                    <strong>Galpón 3</strong>
+                    <span class="alert-time">Hace 12 min</span>
+                  </div>
+                  <p>Amoníaco alto: 22 ppm</p>
+                </div>
+              </div>
+
+              <div class="alert-item" data-type="warning">
+                <div class="alert-icon">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+                <div class="alert-content">
+                  <div class="alert-top">
+                    <strong>Galpón 2</strong>
+                    <span class="alert-time">Hace 25 min</span>
+                  </div>
+                  <p>CO₂ elevado: 920 ppm</p>
+                </div>
+              </div>
+
+              <div class="alert-item" data-type="optimal">
+                <div class="alert-icon">
+                  <i class="fa-solid fa-check-circle"></i>
+                </div>
+                <div class="alert-content">
+                  <div class="alert-top">
+                    <strong>Galpón 1</strong>
+                    <span class="alert-time">Hace 1 hr</span>
+                  </div>
+                  <p>Sistemas operando normalmente</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <nav class="bottom-nav">
+        <a href="#" class="bottom-nav-item active">
+          <i class="fa-solid fa-table-columns"></i>
+          <span>Inicio</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+          <i class="fa-solid fa-temperature-half"></i>
+          <span>Sensores</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+          <i class="fa-solid fa-bell"></i>
+          <span>Alertas</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+          <i class="fa-solid fa-gear"></i>
+          <span>Ajustes</span>
+        </a>
+      </nav>
+    </div>
+  </body>
+</html>

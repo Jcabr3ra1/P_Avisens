@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AVISENS</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .form-control { 
+            width: 100%; padding: 0.875rem 1rem; margin-bottom: 1.25rem; 
+            background: var(--bg-primary); border: 1px solid var(--border-color); 
+            color: var(--text-primary); border-radius: 0.5rem; outline: none; 
+            transition: all 0.3s; font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
+        .form-control:focus { 
+            border-color: var(--status-optimal); 
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.2); 
+        }
+        .btn-full { 
+            width: 100%; justify-content: center; margin-top: 10px; 
+            text-decoration: none; text-align: center; cursor: pointer;
+            border: none; padding: 1rem; border-radius: 0.5rem;
+            font-family: 'Inter', sans-serif; font-weight: 600;
+        }
+    </style>
+</head>
+<body class="login-body">
+
+    <div class="login-wrapper">
+        <div class="login-card fade-in">
+            <div class="login-header">
+                <div class="brand-icon-large">🐔</div>
+                <h2>AVISENS</h2>
+                <p class="subtitle">Sistema de Gestión Avícola</p>
+            </div>
+            
+            <form id="formLogin">
+                <input type="text" id="usuario" class="form-control" placeholder="Usuario" required>
+                <input type="password" id="clave" class="form-control" placeholder="Contraseña" required>
+                
+                <button type="submit" class="btn-primary btn-full">
+                    Ingresar al Sistema
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Escuchamos el evento 'submit' (cuando se presiona el botón de ingresar)
+        document.getElementById('formLogin').addEventListener('submit', function(event) {
+            // Prevenimos que la página se recargue automáticamente
+            event.preventDefault();
+
+            // Obtenemos los valores que el usuario escribió
+            const usuario = document.getElementById('usuario').value.trim();
+            const clave = document.getElementById('clave').value.trim();
+
+            // Validamos las credenciales usando condicionales if/else
+            if (usuario === 'admin' && clave === '123') {
+                
+                // Redirige al dashboard del SuperAdmin
+                window.location.href = 'superadmin/dashboard.html';
+                
+            } else if (usuario === 'administrador' && clave === '123') {
+                
+                // Redirige al dashboard del Operario
+                window.location.href = 'operario/dashboard.html';
+                
+            } else {
+                
+                // Muestra un mensaje de error si las credenciales no coinciden
+                alert('Credenciales incorrectas. Por favor, verifique su usuario y contraseña.');
+                
+            }
+        });
+    </script>
+</body>
+</html>

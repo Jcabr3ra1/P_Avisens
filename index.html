@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVISENS - Tecnología para progresar</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="logo">
+            <div class="brand-icon">🐔</div>
+            AVISENS
+        </div>
+        <ul class="menu">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#tecnologias">Tecnologías</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="views/login.html" class="btn-login">Iniciar Sesión</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Sistema de Gestión <span>Avícola</span></h1>
+        <p>Tecnología IoT e Inteligencia de Datos para maximizar el progreso y el control de tu granja.</p>
+        <a href="#tecnologias" class="btn-primary" style="width: auto; padding: 1rem 2rem; border-radius: 2rem;">Descubrir más</a>
+    </section>
+
+    <section id="tecnologias" class="seccion">
+        <h2 class="seccion-titulo">Tecnologías Utilizadas</h2>
+        <div class="contenedor_tecnologias">
+            <div class="card">
+                <i class="fa-brands fa-html5"></i>
+                <h3>HTML5</h3>
+            </div>
+            <div class="card">
+                <i class="fa-brands fa-css3-alt"></i>
+                <h3>CSS3</h3>
+            </div>
+            <div class="card">
+                <i class="fa-brands fa-js"></i>
+                <h3>JavaScript</h3>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-database"></i>
+                <h3>MySQL / SQLite</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="carrusel">
+        <div class="slider" id="slider">
+            <div class="slide">Visualización 1 (Tu Imagen)</div>
+            <div class="slide">Visualización 2 (Tu Imagen)</div>
+            <div class="slide">Visualización 3 (Tu Imagen)</div>
+        </div>
+        <button class="prev" onclick="moverCarrusel(-1)">&#10094;</button>
+        <button class="next" onclick="moverCarrusel(1)">&#10095;</button>
+    </section>
+
+    <section id="contacto" class="seccion contacto">
+        <h2 class="seccion-titulo">Contáctenos</h2>
+        <form id="formulario">
+            <input type="text" id="nombre" class="form-control" placeholder="Nombre completo" required>
+            <input type="email" id="correo" class="form-control" placeholder="Correo electrónico" required>
+            <textarea id="mensaje" class="form-control" placeholder="¿En qué podemos ayudarte?" required></textarea>
+            <button type="submit" class="btn-primary">Enviar Mensaje</button>
+        </form>
+        <p id="respuesta" style="margin-top: 1rem; color: var(--brand-green);"></p>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-contenido">
+            <h3>AVISENS ® 2025</h3>
+            <p>Desarrollado por: El mochodelcodigo</p>
+            <p>mirada@osena.edu.co</p>
+        </div>
+    </footer>
+
+    <script>
+        // Logica simple para el formulario
+        document.getElementById('formulario').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('respuesta').innerText = "¡Mensaje enviado con éxito! Nos contactaremos pronto.";
+            this.reset();
+        });
+
+        // Lógica simple para el carrusel
+        let slideIndex = 0;
+        function moverCarrusel(n) {
+            const slides = document.querySelectorAll('.slide');
+            slideIndex += n;
+            if (slideIndex >= slides.length) slideIndex = 0;
+            if (slideIndex < 0) slideIndex = slides.length - 1;
+            document.getElementById('slider').style.transform = `translateX(-${slideIndex * 100}%)`;
+        }
+    </script>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
