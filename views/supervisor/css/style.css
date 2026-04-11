@@ -1849,3 +1849,53 @@ body {
   gap: 12px;
   margin-top: 24px;
 }
+
+.form-grid select {
+  width: 100%;
+  padding: 10px 40px 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: #ffffff; /* texto blanco */
+  font-size: 0.875rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+
+.form-grid select:hover {
+  background-color: var(--bg-card);
+}
+
+.form-grid select:focus {
+  border-color: var(--border-color);
+  box-shadow: none;
+}
+
+/* Opciones del dropdown */
+.form-grid select option {
+  background: var(--bg-card);
+  color: #ffffff;
+}
+
+.detailed-alert-card.read {
+  opacity: 0.55;
+  filter: grayscale(1);
+  border-color: var(--border-color);
+}
+
+.detailed-alert-card.read .alert-icon-large {
+  color: var(--text-muted) !important;
+  text-shadow: none;
+}
+}
+
+.detailed-alert-card.read {
+  opacity: 0.5;
+  filter: grayscale(1);
+  transition: all 0.3s ease;
+}
