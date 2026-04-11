@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avisens | Administracion De Operarios </title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/usuario.js" defer></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">
+            <img src="img/logo.png" alt="Avisens logo" />
+          </div>
+          <h1 class="brand-name">Avisens</h1>
+        </div>
+
+        <nav class="side-nav">
+          <a href="dashboard.html" class="nav-item">
+            <i class="fa-solid fa-table-cells-large"></i> Dashboard
+          </a>
+          <a href="sensores.html" class="nav-item">
+            <i class="fa-solid fa-tower-broadcast"></i> Sensores
+          </a>
+          <a href="curvas.html" class="nav-item">
+            <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
+          </a>
+          <a href="alertas.html" class="nav-item">
+            <i class="fa-solid fa-triangle-exclamation"></i> Alertas
+          </a>
+          <a href="automatizacion.html" class="nav-item">
+            <i class="fa-solid fa-gear"></i> Automatización
+          </a>
+          <a href="inventario.html" class="nav-item">
+            <i class="fa-solid fa-box"></i> Inventario
+          </a>
+          <a href="mantenimiento.html" class="nav-item">
+            <i class="fa-solid fa-wrench"></i> Mantenimiento
+          </a>
+          <a href="usuarios.html" class="nav-item active">
+            <i class="fa-solid fa-user-group"></i> Usuarios
+          </a>
+        </nav>
+      </aside>
+
+      <div class="main-wrapper">
+        <header class="top-header">
+          <div class="header-titles">
+            <h2>Gestión de Usuarios</h2>
+            <p class="subtitle">Administración de Operarios</p>
+          </div>
+          <a href="index.html" class="user-profile">
+            <div class="user-info">
+              <span class="user-name">Avisens Admin</span>
+              <span class="user-role">Acceso Total</span>
+            </div>
+            <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+          </a>
+        </header>
+
+        <main class="content-area">
+          <section class="section-block fade-in">
+            <div class="alerts-summary-grid">
+              <div class="summary-card optimal-summary">
+                <div class="summary-icon">
+                  <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="summary-data">
+                  <h3>Total Operarios</h3>
+                  <span>4 Cuentas Activas</span>
+                </div>
+              </div>
+              <div class="summary-card warning-summary">
+                <div class="summary-icon">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+                <div class="summary-data">
+                  <h3>Operarios Activos</h3>
+                  <span>Hace 5 minutos</span>
+                </div>
+              </div>
+              <div class="summary-card warning-summary">
+                <div class="summary-icon">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+                <div class="summary-data">
+                  <h3>Operarios Inactivos</h3>
+                  <span>Hace 5 minutos</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-block fade-in" style="animation-delay: 0.1s">
+            <div class="section-header">
+              <h2 class="section-title">Directorio del Personal</h2>
+              <button id="btn-abrir-modal" class="btn-primary">
+                <i class="fa-solid fa-user-plus"></i> Añadir Usuario
+              </button>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Rol Asignado</th>
+                    <th>Estado</th>
+                    <th>Galpon Asignado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="table-avatar">
+                          <i class="fa-solid fa-user-astronaut"></i>
+                        </div>
+                        <div>
+                          <strong>Armando Caicedo</strong><br />
+                        </div>
+                      </div>
+                    </td>
+                    <td>Operario</td>
+                    <td><span class="status-dot online"></span> Activo</td>
+                    <td>Galpon 1 </td>
+                    <td>
+                      <button class="icon-btn edit">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button class="icon-btn delete">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="table-avatar">
+                          <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                          <strong>Juan Martínez</strong><br />
+                        </div>
+                      </div>
+                    </td>
+                    <td>Operario</td>
+                    <td><span class="status-dot online"></span> Activo</td>
+                     <td>Galpon 2 </td>
+                    <td>
+                      <button class="icon-btn edit">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button class="icon-btn delete">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="table-avatar">
+                          <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <div>
+                          <strong>María López</strong><br />
+                        </div>
+                      </div>
+                    </td>
+                    <td>Operario</td>
+                    <td>
+                      <span class="status-dot offline"></span> Inactivo
+                    </td>
+                     <td>Galpon 3 </td>
+                    <td>
+                      <button class="icon-btn edit">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button class="icon-btn delete">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="table-avatar">
+                          <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <div>
+                          <strong>Carlos Ruiz</strong><br />
+                        </div>
+                      </div>
+                    </td>
+                    <td>Operario</td>
+                    </td>
+                    <td><span class="status-dot online"></span> Activo</td>
+                     <td>Galpon 4 </td>
+                    <td>
+                      <button class="icon-btn edit">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button class="icon-btn delete">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+          <i class="fa-solid fa-table-cells-large"></i><span>Inicio</span>
+        </a>
+        <a href="sensores.html" class="bottom-nav-item">
+          <i class="fa-solid fa-tower-broadcast"></i><span>Sensores</span>
+        </a>
+        <a href="alertas.html" class="bottom-nav-item">
+          <i class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span>
+        </a>
+        <a href="usuarios.html" class="bottom-nav-item active">
+          <i class="fa-solid fa-user-group"></i><span>Usuarios</span>
+        </a>
+      </nav>
+    </div>
+    <div id="modal-usuario" class="modal-overlay hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Añadir Nuevo Usuario</h3>
+          <button id="btn-cerrar-modal" class="icon-btn">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form action="#">
+            <div class="form-group">
+              <label for="nombre">Nombre completo</label>
+              <input
+                type="text"
+                id="nombre"
+                class="form-control"
+                placeholder="Ej. Juan Pérez"
+              />
+            </div>
+            <div class="form-group">
+              <label for="rol">Rol Asignado</label>
+              <select id="rol" class="form-control">
+                <option>Operario</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="rol">Galpon a Asignar </label>
+              <select id="rol" class="form-control">
+                <option>Galpon 1</option>
+                <option>Galpon 2</option>
+                <option>Galpon 3</option>
+                <option>Galpon 4</option>
+              </select>
+            </div>
+            <div class="modal-actions">
+              <button type="button" id="btn-cancelar" class="btn-secondary">
+                Cancelar
+              </button>
+              <button type="submit" class="btn-primary">Guardar Usuario</button>
+            </div>Inactivo
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-eliminar" class="modal-overlay hidden">
+      <div class="modal-content confirmation-modal">
+        <div class="modal-warning-icon">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h3>¿Eliminar Usuario?</h3>
+        <p>¿Estás seguro de que deseas eliminar a <strong id="nombre-usuario-eliminar"></strong>? Esta acción no se puede deshacer.</p>
+        <div class="modal-actions modal-actions-center">
+          <button type="button" id="btn-cancelar-eliminar" class="btn-secondary">Cancelar</button>
+          <button type="button" id="btn-confirmar-eliminar" class="btn-danger">Sí, eliminar</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

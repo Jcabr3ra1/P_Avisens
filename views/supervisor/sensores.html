@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avisens | Sensores Detalle</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
+          <h1 class="brand-name">Avisens</h1>
+        </div>
+        <nav class="side-nav">
+          <a href="dashboard.html" class="nav-item">
+            <i class="fa-solid fa-table-cells-large"></i> Dashboard
+          </a>
+          <a href="sensores.html" class="nav-item active">
+            <i class="fa-solid fa-tower-broadcast"></i> Sensores
+          </a>
+          <a href="curvas.html" class="nav-item">
+            <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
+          </a>
+          <a href="alertas.html" class="nav-item">
+            <i class="fa-solid fa-triangle-exclamation"></i> Alertas
+          </a>
+          <a href="automatizacion.html" class="nav-item">
+            <i class="fa-solid fa-gear"></i> Automatización
+          </a>
+          <a href="inventario.html" class="nav-item">
+            <i class="fa-solid fa-box"></i> Inventario
+          </a>
+          <a href="mantenimiento.html" class="nav-item">
+            <i class="fa-solid fa-wrench"></i> Mantenimiento
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-user-group"></i> Usuarios
+          </a>
+        </nav>
+      </aside>
+
+      <div class="main-wrapper">
+        <header class="top-header">
+          <div class="header-titles">
+            <h2>Sensores</h2>
+            <p class="subtitle">Análisis detallado por galpón</p>
+          </div>
+          <a href="index.html" class="user-profile">
+            <div class="user-info">
+              <span class="user-name">Avisens Admin</span>
+              <span class="user-role">Acceso Total</span>
+            </div>
+            <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+          </a>
+        </header>
+
+        <main class="content-area">
+          <section class="section-block fade-in">
+            <div class="shed-selector">
+              <h2 class="section-title">Galpón 3 (Estado Crítico)</h2>
+              <span
+                class="status-indicator pulse-animation"
+                style="
+                  background: var(--status-critical);
+                  box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+                "
+              ></span>
+            </div>
+          </section>
+
+          <section class="section-block fade-in" style="animation-delay: 0.1s">
+            <div class="sensors-grid">
+              <article class="sensor-card" data-status="critical">
+                <div class="sensor-top">
+                  <div class="sensor-title">
+                    <i class="fa-solid fa-temperature-high"></i>
+                    <h3>Temperatura</h3>
+                  </div>
+                  <span class="sensor-value critical-text">35°C</span>
+                </div>
+                <div class="progress-container">
+                  <div
+                    class="progress-bar critical-bg"
+                    style="width: 90%"
+                  ></div>
+                </div>
+                <div class="sensor-limits">
+                  <span>Mín: 28°C</span>
+                  <span>Máx: 32°C</span>
+                </div>
+              </article>
+
+              <article class="sensor-card" data-status="critical">
+                <div class="sensor-top">
+                  <div class="sensor-title">
+                    <i class="fa-solid fa-biohazard"></i>
+                    <h3>Amoníaco (NH₃)</h3>
+                  </div>
+                  <span class="sensor-value critical-text">22 ppm</span>
+                </div>
+                <div class="progress-container">
+                  <div
+                    class="progress-bar critical-bg"
+                    style="width: 85%"
+                  ></div>
+                </div>
+                <div class="sensor-limits">
+                  <span>Óptimo: < 10 ppm</span>
+                  <span>Límite: 20 ppm</span>
+                </div>
+              </article>
+
+              <article class="sensor-card" data-status="optimal">
+                <div class="sensor-top">
+                  <div class="sensor-title">
+                    <i class="fa-solid fa-droplet"></i>
+                    <h3>Humedad</h3>
+                  </div>
+                  <span class="sensor-value">72%</span>
+                </div>
+                <div class="progress-container">
+                  <div class="progress-bar optimal-bg" style="width: 72%"></div>
+                </div>
+                <div class="sensor-limits">
+                  <span>Mín: 60%</span>
+                  <span>Máx: 75%</span>
+                </div>
+              </article>
+
+              <article class="sensor-card" data-status="warning">
+                <div class="sensor-top">
+                  <div class="sensor-title">
+                    <i class="fa-solid fa-cloud"></i>
+                    <h3>Dióxido de Carbono (CO₂)</h3>
+                  </div>
+                  <span class="sensor-value warning-text">1150 ppm</span>
+                </div>
+                <div class="progress-container">
+                  <div class="progress-bar warning-bg" style="width: 75%"></div>
+                </div>
+                <div class="sensor-limits">
+                  <span>Óptimo: < 1000 ppm</span>
+                  <span>Límite: 2500 ppm</span>
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+          <i class="fa-solid fa-table-columns"></i><span>Inicio</span>
+        </a>
+        <a href="sensores.html" class="bottom-nav-item active">
+          <i class="fa-solid fa-temperature-half"></i><span>Sensores</span>
+        </a>
+        <a href="alertas.html" class="bottom-nav-item">
+          <i class="fa-solid fa-bell"></i><span>Alertas</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+          <i class="fa-solid fa-gear"></i><span>Ajustes</span>
+        </a>
+      </nav>
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+

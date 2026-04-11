@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisens | Inventario</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/inventario.js" defer></script>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
+                <h1 class="brand-name">Avisens</h1>
+            </div>
+            
+            <nav class="side-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-table-cells-large"></i> Dashboard
+                </a>
+                <a href="sensores.html" class="nav-item">
+                    <i class="fa-solid fa-tower-broadcast"></i> Sensores
+                </a>
+                <a href="curvas.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
+                </a>
+                <a href="alertas.html" class="nav-item">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Alertas
+                </a>
+                <a href="automatizacion.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i> Automatización
+                </a>
+                <a href="inventario.html" class="nav-item active">
+                    <i class="fa-solid fa-box"></i> Inventario
+                </a>
+                <a href="mantenimiento.html" class="nav-item">
+                    <i class="fa-solid fa-wrench"></i> Mantenimiento
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <i class="fa-solid fa-user-group"></i> Usuarios
+                </a>
+            </nav>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div class="header-titles">
+                    <h2>Inventario</h2>
+                    <p class="subtitle">Gestión de insumos y suministros</p>
+                </div>
+                <a href="index.html" class="user-profile">
+                    <div class="user-info">
+                        <span class="user-name">Supervisor</span>
+                    </div>
+                    <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+                </a>
+        </header>
+
+            <main class="content-area">
+                
+                <section class="section-block fade-in">
+                    <div class="alerts-summary-grid">
+                        <div class="summary-card optimal-summary">
+                            <div class="summary-icon"><i class="fa-solid fa-wheat-awn"></i></div>
+                            <div class="summary-data">
+                                <h3>Alimento</h3>
+                                <span>5,400 kg en bodega</span>
+                            </div>
+                        </div>
+                        <div class="summary-card warning-summary">
+                            <div class="summary-icon"><i class="fa-solid fa-syringe"></i></div>
+                            <div class="summary-data">
+                                <h3>Medicamentos</h3>
+                                <span>1 producto por agotarse</span>
+                            </div>
+                        </div>
+                        <div class="summary-card optimal-summary">
+                            <div class="summary-icon"><i class="fa-solid fa-box-open"></i></div>
+                            <div class="summary-data">
+                                <h3>Suministros</h3>
+                                <span>Stock adecuado</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-block fade-in" style="animation-delay: 0.1s;">
+                    <div class="section-header">
+                        <h2 class="section-title">Detalle de Insumos</h2>
+                        <button class="btn-outline"><i class="fa-solid fa-plus"></i> Nuevo Ingreso</button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Stock Actual</th>
+                                    <th>Capacidad de Bodega</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Bultos Iniciación (40kg)</strong><br><span class="text-xs text-muted">Marca: Purina</span></td>
+                                    <td>Alimento</td>
+                                    <td>135 bultos</td>
+                                    <td>
+                                        <div class="mini-progress-container">
+                                            <div class="mini-progress-bar optimal-bg" style="width: 80%;"></div>
+                                        </div>
+                                        <span class="text-xs text-muted">80% lleno</span>
+                                    </td>
+                                    <td><span class="badge optimal-badge">Suficiente</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bultos Engorde (40kg)</strong><br><span class="text-xs text-muted">Marca: Purina</span></td>
+                                    <td>Alimento</td>
+                                    <td>80 bultos</td>
+                                    <td>
+                                        <div class="mini-progress-container">
+                                            <div class="mini-progress-bar optimal-bg" style="width: 50%;"></div>
+                                        </div>
+                                        <span class="text-xs text-muted">50% lleno</span>
+                                    </td>
+                                    <td><span class="badge optimal-badge">Suficiente</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Vacuna Gumboro</strong><br><span class="text-xs text-muted">Lote: L-8492</span></td>
+                                    <td>Medicamento</td>
+                                    <td>2 frascos</td>
+                                    <td>
+                                        <div class="mini-progress-container">
+                                            <div class="mini-progress-bar critical-bg" style="width: 10%;"></div>
+                                        </div>
+                                        <span class="text-xs text-muted">10% lleno</span>
+                                    </td>
+                                    <td><span class="badge critical-badge">Crítico</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Viruta de madera</strong><br><span class="text-xs text-muted">Para camas</span></td>
+                                    <td>Suministros</td>
+                                    <td>15 pacas</td>
+                                    <td>
+                                        <div class="mini-progress-container">
+                                            <div class="mini-progress-bar warning-bg" style="width: 30%;"></div>
+                                        </div>
+                                        <span class="text-xs text-muted">30% lleno</span>
+                                    </td>
+                                    <td><span class="badge warning-badge">Por reabastecer</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="bottom-nav-item">
+                <i class="fa-solid fa-table-cells-large"></i><span>Inicio</span>
+            </a>
+            <a href="sensores.html" class="bottom-nav-item">
+                <i class="fa-solid fa-tower-broadcast"></i><span>Sensores</span>
+            </a>
+            <a href="alertas.html" class="bottom-nav-item">
+                <i class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span>
+            </a>
+            <a href="inventario.html" class="bottom-nav-item active">
+                <i class="fa-solid fa-box"></i><span>Inventario</span>
+            </a>
+        </nav>
+
+    </div>
+
+    <div id="modal-inventario" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Registrar Nuevo Ingreso</h3>
+                <button id="btn-cerrar-modal-inv" class="icon-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-nuevo-ingreso">
+                    <div class="form-group">
+                        <label for="producto-nombre">Nombre del Producto</label>
+                        <input type="text" id="producto-nombre" class="form-control" placeholder="Ej. Bultos Engorde (40kg)" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="producto-categoria">Categoría</label>
+                        <select id="producto-categoria" class="form-control" required>
+                            <option value="">Seleccione una categoría</option>
+                            <option value="Alimento">Alimento</option>
+                            <option value="Medicamento">Medicamento</option>
+                            <option value="Suministros">Suministros</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="producto-cantidad">Cantidad a Ingresar</label>
+                        <input type="number" id="producto-cantidad" class="form-control" placeholder="Ej. 50" required min="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="producto-notas">Notas / Lote / Marca (Opcional)</label>
+                        <input type="text" id="producto-notas" class="form-control" placeholder="Ej. Marca: Purina">
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" id="btn-cancelar-inv" class="btn-secondary">Cancelar</button>
+                        <button type="submit" class="btn-primary">Registrar Ingreso</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+

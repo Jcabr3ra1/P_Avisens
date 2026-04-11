@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisens | Curvas de Crecimiento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
+                <h1 class="brand-name">Avisens</h1>
+            </div>
+            
+            <nav class="side-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-table-cells-large"></i> Dashboard
+                </a>
+                <a href="sensores.html" class="nav-item">
+                    <i class="fa-solid fa-tower-broadcast"></i> Sensores
+                </a>
+                <a href="curvas.html" class="nav-item active">
+                    <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
+                </a>
+                <a href="alertas.html" class="nav-item">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Alertas
+                </a>
+                <a href="automatizacion.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i> Automatización
+                </a>
+                <a href="inventario.html" class="nav-item">
+                    <i class="fa-solid fa-box"></i> Inventario
+                </a>
+                <a href="mantenimiento.html" class="nav-item">
+                    <i class="fa-solid fa-wrench"></i> Mantenimiento
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <i class="fa-solid fa-user-group"></i> Usuarios
+                </a>
+            </nav>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div class="header-titles">
+                    <h2>Curvas de Crecimiento</h2>
+                    <p class="subtitle">Análisis de peso: Galpón 1</p>
+                </div>
+                <a href="index.html" class="user-profile">
+                    <div class="user-info">
+                        <span class="user-name">Avisens Admin</span>
+                        <span class="user-role">Acceso Total</span>
+                    </div>
+                    <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+                </a>
+        </header>
+
+            <main class="content-area">
+                
+                <section class="section-block fade-in">
+                    <div class="section-header">
+                        <h2 class="section-title">Evolución de Peso (Gramos)</h2>
+                        <div class="chart-legend">
+                            <span class="legend-item"><div class="box expected-box"></div> Esperado (Guía)</span>
+                            <span class="legend-item"><div class="box actual-box"></div> Real (Medido)</span>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="css-chart">
+                            <div class="y-axis">
+                                <span>3000g</span>
+                                <span>2000g</span>
+                                <span>1000g</span>
+                                <span>0g</span>
+                            </div>
+                            
+                            <div class="chart-bars">
+                                <div class="bar-group">
+                                    <div class="bars">
+                                        <div class="bar expected-bar" style="height: 6%;"></div>
+                                        <div class="bar actual-bar" style="height: 6.5%;"></div>
+                                    </div>
+                                    <span class="x-label">Sem 1</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bars">
+                                        <div class="bar expected-bar" style="height: 15%;"></div>
+                                        <div class="bar actual-bar" style="height: 14%;"></div>
+                                    </div>
+                                    <span class="x-label">Sem 2</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bars">
+                                        <div class="bar expected-bar" style="height: 30%;"></div>
+                                        <div class="bar actual-bar" style="height: 32%;"></div>
+                                    </div>
+                                    <span class="x-label">Sem 3</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bars">
+                                        <div class="bar expected-bar" style="height: 50%;"></div>
+                                        <div class="bar actual-bar" style="height: 53%;"></div>
+                                    </div>
+                                    <span class="x-label">Sem 4</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bars">
+                                        <div class="bar expected-bar" style="height: 75%;"></div>
+                                        <div class="bar actual-bar warning-bar" style="height: 68%;"></div> </div>
+                                    <span class="x-label">Sem 5</span>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bars">
+                                        <div class="bar expected-bar" style="height: 95%;"></div>
+                                        <div class="bar actual-bar" style="height: 98%;"></div>
+                                    </div>
+                                    <span class="x-label">Sem 6</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-block fade-in" style="animation-delay: 0.1s;">
+                    <h2 class="section-title">Registro Detallado</h2>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Edad</th>
+                                    <th>Peso Esperado</th>
+                                    <th>Peso Real</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Semana 4</td>
+                                    <td>1500 g</td>
+                                    <td>1590 g</td>
+                                    <td><span class="badge optimal-badge">Excelente</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Semana 5</td>
+                                    <td>2250 g</td>
+                                    <td>2040 g</td>
+                                    <td><span class="badge warning-badge">Bajo peso</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Semana 6</td>
+                                    <td>2850 g</td>
+                                    <td>2940 g</td>
+                                    <td><span class="badge optimal-badge">Excelente</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="bottom-nav-item">
+                <i class="fa-solid fa-table-cells-large"></i><span>Inicio</span>
+            </a>
+            <a href="sensores.html" class="bottom-nav-item">
+                <i class="fa-solid fa-tower-broadcast"></i><span>Sensores</span>
+            </a>
+            <a href="alertas.html" class="bottom-nav-item">
+                <i class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span>
+            </a>
+            <a href="#" class="bottom-nav-item">
+                <i class="fa-solid fa-gear"></i><span>Ajustes</span>
+            </a>
+        </nav>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+

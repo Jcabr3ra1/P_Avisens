@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisens | Automatización</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
+                <h1 class="brand-name">Avisens</h1>
+            </div>
+            
+            <nav class="side-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-table-cells-large"></i> Dashboard
+                </a>
+                <a href="sensores.html" class="nav-item">
+                    <i class="fa-solid fa-tower-broadcast"></i> Sensores
+                </a>
+                <a href="curvas.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
+                </a>
+                <a href="alertas.html" class="nav-item">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Alertas
+                </a>
+                <a href="automatizacion.html" class="nav-item active">
+                    <i class="fa-solid fa-gear"></i> Automatización
+                </a>
+                <a href="inventario.html" class="nav-item">
+                    <i class="fa-solid fa-box"></i> Inventario
+                </a>
+                <a href="mantenimiento.html" class="nav-item">
+                    <i class="fa-solid fa-wrench"></i> Mantenimiento
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <i class="fa-solid fa-user-group"></i> Usuarios
+                </a>
+            </nav>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div class="header-titles">
+                    <h2>Automatización</h2>
+                    <p class="subtitle">Control de sistemas ambientales</p>
+                </div>
+                <a href="index.html" class="user-profile">
+                    <div class="user-info">
+                        <span class="user-name">Avisens Admin</span>
+                        <span class="user-role">Acceso Total</span>
+                    </div>
+                    <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+                </a>
+        </header>
+
+            <main class="content-area">
+                
+                <section class="section-block fade-in">
+                    <div class="master-control-card">
+                        <div class="master-info">
+                            <h2 class="section-title">Modo de Operación: Galpón 1</h2>
+                            <p>Controla si los equipos responden a los sensores o a comandos manuales.</p>
+                        </div>
+                        <div class="master-toggle">
+                            <span class="mode-label">Manual</span>
+                            <label class="css-switch">
+                                <input type="checkbox" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                            <span class="mode-label active-mode">Automático</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-block fade-in" style="animation-delay: 0.1s;">
+                    <h2 class="section-title">Control de Equipos</h2>
+                    
+                    <div class="automation-grid">
+                        
+                        <article class="control-card">
+                            <div class="control-header">
+                                <div class="control-title">
+                                    <div class="control-icon"><i class="fa-solid fa-fan"></i></div>
+                                    <h3>Extractores de Aire</h3>
+                                </div>
+                                <label class="css-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="control-body">
+                                <div class="slider-header">
+                                    <span>Potencia actual</span>
+                                    <span class="slider-value">60%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="60" class="css-range">
+                                <div class="slider-limits">
+                                    <span>0%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="control-card">
+                            <div class="control-header">
+                                <div class="control-title">
+                                    <div class="control-icon"><i class="fa-solid fa-fire-burner"></i></div>
+                                    <h3>Criadoras (Calefacción)</h3>
+                                </div>
+                                <label class="css-switch">
+                                    <input type="checkbox">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="control-body">
+                                <div class="slider-header">
+                                    <span>Temperatura Objetivo</span>
+                                    <span class="slider-value">32°C</span>
+                                </div>
+                                <input type="range" min="20" max="40" value="32" class="css-range">
+                                <div class="slider-limits">
+                                    <span>20°C</span>
+                                    <span>40°C</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="control-card">
+                            <div class="control-header">
+                                <div class="control-title">
+                                    <div class="control-icon"><i class="fa-regular fa-lightbulb"></i></div>
+                                    <h3>Iluminación LED</h3>
+                                </div>
+                                <label class="css-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="control-body">
+                                <div class="slider-header">
+                                    <span>Intensidad (Lux)</span>
+                                    <span class="slider-value">80%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="80" class="css-range">
+                                <div class="slider-limits">
+                                    <span>Apagado</span>
+                                    <span>Máximo</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="control-card">
+                            <div class="control-header">
+                                <div class="control-title">
+                                    <div class="control-icon"><i class="fa-solid fa-person-arrow-up-from-line"></i></div>
+                                    <h3>Cortinas Laterales</h3>
+                                </div>
+                                <label class="css-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            <div class="control-body">
+                                <div class="slider-header">
+                                    <span>Apertura</span>
+                                    <span class="slider-value">100% (Arriba)</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="100" class="css-range">
+                                <div class="slider-limits">
+                                    <span>0% (Cerrado)</span>
+                                    <span>100% (Abierto)</span>
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="bottom-nav-item">
+                <i class="fa-solid fa-table-cells-large"></i><span>Inicio</span>
+            </a>
+            <a href="sensores.html" class="bottom-nav-item">
+                <i class="fa-solid fa-tower-broadcast"></i><span>Sensores</span>
+            </a>
+            <a href="alertas.html" class="bottom-nav-item">
+                <i class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span>
+            </a>
+            <a href="automatizacion.html" class="bottom-nav-item active">
+                <i class="fa-solid fa-gear"></i><span>Sistemas</span>
+            </a>
+        </nav>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+

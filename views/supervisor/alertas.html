@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisens | Centro de Alertas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
+                <h1 class="brand-name">Avisens</h1>
+            </div>
+            
+            <nav class="side-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-table-cells-large"></i> Dashboard
+                </a>
+                <a href="sensores.html" class="nav-item">
+                    <i class="fa-solid fa-tower-broadcast"></i> Sensores
+                </a>
+                <a href="curvas.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
+                </a>
+                <a href="alertas.html" class="nav-item active">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Alertas
+                </a>
+                <a href="automatizacion.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i> Automatización
+                </a>
+                <a href="inventario.html" class="nav-item">
+                    <i class="fa-solid fa-box"></i> Inventario
+                </a>
+                <a href="mantenimiento.html" class="nav-item">
+                    <i class="fa-solid fa-wrench"></i> Mantenimiento
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <i class="fa-solid fa-user-group"></i> Usuarios
+                </a>
+            </nav>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div class="header-titles">
+                    <h2>Centro de Alertas</h2>
+                    <p class="subtitle">Historial y notificaciones del sistema</p>
+                </div>
+                <a href="index.html" class="user-profile">
+                    <div class="user-info">
+                        <span class="user-name">Avisens Admin</span>
+                        <span class="user-role">Acceso Total</span>
+                    </div>
+                    <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+                </a>
+        </header>
+
+            <main class="content-area">
+                
+                <section class="section-block fade-in">
+                    <div class="alerts-summary-grid">
+                        <div class="summary-card critical-summary">
+                            <div class="summary-icon"><i class="fa-solid fa-fire"></i></div>
+                            <div class="summary-data">
+                                <h3>Críticas</h3>
+                                <span>2 sin resolver</span>
+                            </div>
+                        </div>
+                        <div class="summary-card warning-summary">
+                            <div class="summary-icon"><i class="fa-solid fa-bolt"></i></div>
+                            <div class="summary-data">
+                                <h3>Advertencias</h3>
+                                <span>1 en revisión</span>
+                            </div>
+                        </div>
+                        <div class="summary-card optimal-summary">
+                            <div class="summary-icon"><i class="fa-solid fa-shield-check"></i></div>
+                            <div class="summary-data">
+                                <h3>Sistema</h3>
+                                <span>Operando Normal</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-block fade-in" style="animation-delay: 0.1s;">
+                    <div class="section-header">
+                        <h2 class="section-title">Hoy</h2>
+                        <button class="btn-outline">Marcar todas como leídas</button>
+                    </div>
+
+                    <div class="detailed-alerts-list">
+                        
+                        <article class="detailed-alert-card unread" data-status="critical">
+                            <div class="alert-icon-large pulse-animation"><i class="fa-solid fa-temperature-arrow-up"></i></div>
+                            <div class="alert-info">
+                                <div class="alert-header">
+                                    <h4>Temperatura Crítica detectada</h4>
+                                    <span class="time-badge">Hace 5 min</span>
+                                </div>
+                                <p class="alert-desc">El <strong>Galpón 3</strong> ha registrado una temperatura de <strong>35°C</strong>, superando el límite máximo de 32°C. Los extractores han sido encendidos al 100%.</p>
+                                <div class="alert-actions">
+                                    <a href="#" class="btn-action primary-action">Ver Sensores</a>
+                                    <a href="#" class="btn-action secondary-action">Ignorar</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="detailed-alert-card unread" data-status="critical">
+                            <div class="alert-icon-large pulse-animation"><i class="fa-solid fa-biohazard"></i></div>
+                            <div class="alert-info">
+                                <div class="alert-header">
+                                    <h4>Niveles de Amoníaco peligrosos</h4>
+                                    <span class="time-badge">Hace 12 min</span>
+                                </div>
+                                <p class="alert-desc">El sensor de calidad del aire en el <strong>Galpón 3</strong> indica <strong>22 ppm de NH₃</strong>. Se requiere revisión inmediata de la ventilación y la cama.</p>
+                                <div class="alert-actions">
+                                    <a href="#" class="btn-action primary-action">Ver Sensores</a>
+                                    <a href="#" class="btn-action secondary-action">Ignorar</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="detailed-alert-card" data-status="warning">
+                            <div class="alert-icon-large"><i class="fa-solid fa-cloud"></i></div>
+                            <div class="alert-info">
+                                <div class="alert-header">
+                                    <h4>CO₂ Elevado</h4>
+                                    <span class="time-badge">Hace 25 min</span>
+                                </div>
+                                <p class="alert-desc">El <strong>Galpón 2</strong> presenta <strong>920 ppm de CO₂</strong>. El sistema automático de ventilación ha incrementado su potencia al 60%.</p>
+                                <div class="alert-actions">
+                                    <a href="#" class="btn-action secondary-action">Marcar como leído</a>
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+                </section>
+
+                <section class="section-block fade-in" style="animation-delay: 0.2s;">
+                    <div class="section-header">
+                        <h2 class="section-title">Ayer</h2>
+                    </div>
+                    <div class="detailed-alerts-list opacity-muted">
+                        <article class="detailed-alert-card" data-status="optimal">
+                            <div class="alert-icon-large"><i class="fa-solid fa-check"></i></div>
+                            <div class="alert-info">
+                                <div class="alert-header">
+                                    <h4>Mantenimiento completado</h4>
+                                    <span class="time-badge">16 Mar, 14:30</span>
+                                </div>
+                                <p class="alert-desc">El técnico "Carlos Ruiz" ha finalizado la limpieza de bebederos en el <strong>Galpón 1</strong>.</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="bottom-nav-item">
+                <i class="fa-solid fa-table-cells-large"></i><span>Inicio</span>
+            </a>
+            <a href="sensores.html" class="bottom-nav-item">
+                <i class="fa-solid fa-tower-broadcast"></i><span>Sensores</span>
+            </a>
+            <a href="alertas.html" class="bottom-nav-item active">
+                <i class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span>
+            </a>
+            <a href="#" class="bottom-nav-item">
+                <i class="fa-solid fa-gear"></i><span>Ajustes</span>
+            </a>
+        </nav>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisens | Mantenimiento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
+                <h1 class="brand-name">Avisens</h1>
+            </div>
+            
+            <nav class="side-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-table-cells-large"></i> Dashboard
+                </a>
+                <a href="sensores.html" class="nav-item">
+                    <i class="fa-solid fa-tower-broadcast"></i> Sensores
+                </a>
+                <a href="curvas.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
+                </a>
+                <a href="alertas.html" class="nav-item">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Alertas
+                </a>
+                <a href="automatizacion.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i> Automatización
+                </a>
+                <a href="inventario.html" class="nav-item">
+                    <i class="fa-solid fa-box"></i> Inventario
+                </a>
+                <a href="mantenimiento.html" class="nav-item active">
+                    <i class="fa-solid fa-wrench"></i> Mantenimiento
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <i class="fa-solid fa-user-group"></i> Usuarios
+                </a>
+            </nav>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div class="header-titles">
+                    <h2>Mantenimiento</h2>
+                    <p class="subtitle">Bitácora y programación de equipos</p>
+                </div>
+                <a href="index.html" class="user-profile">
+                    <div class="user-info">
+                        <span class="user-name">Avisens Admin</span>
+                        <span class="user-role">Acceso Total</span>
+                    </div>
+                    <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+                </a>
+        </header>
+
+            <main class="content-area">
+                
+                <section class="section-block fade-in">
+                    <div class="alerts-summary-grid">
+                        <div class="summary-card critical-summary">
+                            <div class="summary-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                            <div class="summary-data">
+                                <h3>Atrasados</h3>
+                                <span>1 equipo requiere atención</span>
+                            </div>
+                        </div>
+                        <div class="summary-card warning-summary">
+                            <div class="summary-icon"><i class="fa-solid fa-calendar-clock"></i></div>
+                            <div class="summary-data">
+                                <h3>Programados</h3>
+                                <span>3 tareas para esta semana</span>
+                            </div>
+                        </div>
+                        <div class="summary-card optimal-summary">
+                            <div class="summary-icon"><i class="fa-solid fa-check-double"></i></div>
+                            <div class="summary-data">
+                                <h3>Completados</h3>
+                                <span>12 tareas este mes</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-block fade-in" style="animation-delay: 0.1s;">
+                    <div class="section-header">
+                        <h2 class="section-title">Próximos Mantenimientos</h2>
+                        <button class="btn-outline"><i class="fa-solid fa-plus"></i> Programar Tarea</button>
+                    </div>
+
+                    <div class="tasks-grid">
+                        
+                        <article class="task-card" data-status="critical">
+                            <div class="task-header">
+                                <span class="task-date critical-text"><i class="fa-regular fa-clock"></i> Venció ayer</span>
+                                <span class="badge critical-badge">Preventivo</span>
+                            </div>
+                            <h3 class="task-title">Calibración de Sensores de NH₃</h3>
+                            <p class="task-desc">Limpieza de filtros y calibración de los sensores de amoníaco debido a lecturas inusuales.</p>
+                            <div class="task-footer">
+                                <div class="task-location"><i class="fa-solid fa-location-dot"></i> Galpón 3</div>
+                                <div class="task-assignee"><div class="tiny-avatar"><i class="fa-solid fa-user-astronaut"></i></div> Carlos R.</div>
+                            </div>
+                        </article>
+
+                        <article class="task-card" data-status="warning">
+                            <div class="task-header">
+                                <span class="task-date warning-text"><i class="fa-regular fa-clock"></i> Hoy, 14:00</span>
+                                <span class="badge warning-badge">Rutinario</span>
+                            </div>
+                            <h3 class="task-title">Revisión de Extractores (Motor 2)</h3>
+                            <p class="task-desc">Engrase de rodamientos y revisión de tensión de bandas en el extractor principal.</p>
+                            <div class="task-footer">
+                                <div class="task-location"><i class="fa-solid fa-location-dot"></i> Galpón 1</div>
+                                <div class="task-assignee"><div class="tiny-avatar"><i class="fa-solid fa-user-astronaut"></i></div> María L.</div>
+                            </div>
+                        </article>
+
+                        <article class="task-card" data-status="optimal">
+                            <div class="task-header">
+                                <span class="task-date"><i class="fa-regular fa-calendar"></i> 20 Marzo, 2026</span>
+                                <span class="badge optimal-badge">Limpieza</span>
+                            </div>
+                            <h3 class="task-title">Desinfección de Líneas de Agua</h3>
+                            <p class="task-desc">Flushing completo de las tuberías de los bebederos nipple con peróxido.</p>
+                            <div class="task-footer">
+                                <div class="task-location"><i class="fa-solid fa-location-dot"></i> Todos los galpones</div>
+                                <div class="task-assignee"><div class="tiny-avatar"><i class="fa-solid fa-users"></i></div> Equipo 1</div>
+                            </div>
+                        </article>
+
+                    </div>
+                </section>
+
+                <section class="section-block fade-in" style="animation-delay: 0.2s;">
+                    <h2 class="section-title mb-4">Historial de Servicio</h2>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Equipo / Tarea</th>
+                                    <th>Ubicación</th>
+                                    <th>Técnico</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>16 Mar 2026</td>
+                                    <td><strong>Ajuste de termostato</strong><br><span class="text-xs text-muted">Criadora a gas</span></td>
+                                    <td>Galpón 4</td>
+                                    <td>Carlos Ruiz</td>
+                                    <td><span class="badge optimal-badge">Completado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>12 Mar 2026</td>
+                                    <td><strong>Cambio de bombillas LED</strong><br><span class="text-xs text-muted">Línea central</span></td>
+                                    <td>Galpón 2</td>
+                                    <td>María López</td>
+                                    <td><span class="badge optimal-badge">Completado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>05 Mar 2026</td>
+                                    <td><strong>Reparación de cortina</strong><br><span class="text-xs text-muted">Motor del malacate atascado</span></td>
+                                    <td>Galpón 1</td>
+                                    <td>Carlos Ruiz</td>
+                                    <td><span class="badge optimal-badge">Completado</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="bottom-nav-item">
+                <i class="fa-solid fa-table-cells-large"></i><span>Inicio</span>
+            </a>
+            <a href="sensores.html" class="bottom-nav-item">
+                <i class="fa-solid fa-tower-broadcast"></i><span>Sensores</span>
+            </a>
+            <a href="alertas.html" class="bottom-nav-item">
+                <i class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span>
+            </a>
+            <a href="mantenimiento.html" class="bottom-nav-item active">
+                <i class="fa-solid fa-wrench"></i><span>Mantenim...</span>
+            </a>
+        </nav>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
