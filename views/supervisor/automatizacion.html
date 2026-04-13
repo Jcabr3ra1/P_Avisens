@@ -3,212 +3,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avisens | Automatización</title>
+    <title>Avisens | Automatización - Supervisor</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <div class="app-container">
-        
-        <aside class="sidebar">
-            <div class="brand">
-                <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
-                <h1 class="brand-name">Avisens</h1>
-            </div>
-            
-            <nav class="side-nav">
-                <a href="dashboard.html" class="nav-item">
-                    <i class="fa-solid fa-table-cells-large"></i> Dashboard
-                </a>
-                <a href="sensores.html" class="nav-item">
-                    <i class="fa-solid fa-tower-broadcast"></i> Sensores
-                </a>
-                <a href="curvas.html" class="nav-item">
-                    <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
-                </a>
-                <a href="alertas.html" class="nav-item">
-                    <i class="fa-solid fa-triangle-exclamation"></i> Alertas
-                </a>
-                <a href="automatizacion.html" class="nav-item active">
-                    <i class="fa-solid fa-gear"></i> Automatización
-                </a>
-                <a href="inventario.html" class="nav-item">
-                    <i class="fa-solid fa-box"></i> Inventario
-                </a>
-                <a href="mantenimiento.html" class="nav-item">
-                    <i class="fa-solid fa-wrench"></i> Mantenimiento
-                </a>
-                <a href="usuarios.html" class="nav-item">
-                    <i class="fa-solid fa-user-group"></i> Usuarios
-                </a>
-            </nav>
-        </aside>
 
-        <div class="main-wrapper">
-            <header class="top-header">
-                <div class="header-titles">
-                    <h2>Automatización</h2>
-                    <p class="subtitle">Control de sistemas ambientales</p>
-                </div>
-                <a href="index.html" class="user-profile">
-                    <div class="user-info">
-                        <span class="user-name">Avisens Admin</span>
-                        <span class="user-role">Acceso Total</span>
-                    </div>
-                    <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
-                </a>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo" onerror="this.outerHTML='🐔'"></div>
+          <h1 class="brand-name">Avisens</h1>
+        </div>
+        <nav class="side-nav">
+          <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+          <a href="sensores.html" class="nav-item"><i class="fa-solid fa-tower-broadcast"></i> Sensores</a>
+          <a href="curvas.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento</a>
+          <a href="alertas.html" class="nav-item"><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
+          <a href="automatizacion.html" class="nav-item active"><i class="fa-solid fa-gear"></i> Automatización</a>
+          <a href="inventario.html" class="nav-item"><i class="fa-solid fa-box"></i> Inventario</a>
+          <a href="operadores.html" class="nav-item"><i class="fa-solid fa-clipboard-list"></i> Tareas / Operadores</a>
+        </nav>
+      </aside>
+
+      <div class="main-wrapper">
+        <header class="top-header">
+          <div class="header-titles">
+            <h2>Automatización</h2>
+            <p class="subtitle">Control de sistemas ambientales</p>
+          </div>
+          <div class="header-right">
+            <div class="user-profile">
+              <div class="user-info">
+                <span class="user-name">María López</span>
+                <span class="user-role">Encargado/Supervisor</span>
+              </div>
+              <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+            </div>
+            <button class="btn-logout" onclick="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+          </div>
         </header>
 
-            <main class="content-area">
-                
-                <section class="section-block fade-in">
-                    <div class="master-control-card">
-                        <div class="master-info">
-                            <h2 class="section-title">Modo de Operación: Galpón 1</h2>
-                            <p>Controla si los equipos responden a los sensores o a comandos manuales.</p>
-                        </div>
-                        <div class="master-toggle">
-                            <span class="mode-label">Manual</span>
-                            <label class="css-switch">
-                                <input type="checkbox" checked>
-                                <span class="switch-slider"></span>
-                            </label>
-                            <span class="mode-label active-mode">Automático</span>
-                        </div>
+        <main class="content-area">
+
+          <!-- SELECTOR DE GALPÓN -->
+          <section class="section-block fade-in">
+            <div class="galpon-selector">
+              <div class="filter-group" style="min-width:160px;">
+                <label><i class="fa-solid fa-warehouse"></i> Galpón Seleccionado</label>
+                <select class="filter-select" id="auto-galpon" onchange="cambiarGalponAuto()">
+                  <option value="1" selected>Galpón 1</option>
+                  <option value="2">Galpón 2</option>
+                  <option value="3">Galpón 3</option>
+                  <option value="4">Galpón 4</option>
+                </select>
+              </div>
+              <span class="badge optimal-badge" id="auto-galpon-status">Óptimo</span>
+              <div class="galpon-metrics" id="auto-galpon-metrics">
+                <div class="galpon-metric">
+                  <span>Temp</span>
+                  <span class="gm-value" id="gm-temp">32°C</span>
+                </div>
+                <div class="galpon-metric">
+                  <span>Hum</span>
+                  <span class="gm-value" id="gm-hum">65%</span>
+                </div>
+                <div class="galpon-metric">
+                  <span>Ventil.</span>
+                  <span class="gm-value" style="color:var(--status-optimal);">ON</span>
+                </div>
+                <div class="galpon-metric">
+                  <span>Calef.</span>
+                  <span class="gm-value" style="color:var(--text-muted);">OFF</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TOGGLE MODO -->
+          <section class="section-block fade-in" style="animation-delay: 0.05s">
+            <div class="master-control-card mode-auto" id="master-card">
+              <div class="master-info">
+                <h2 class="section-title" id="master-title">Modo de Operación</h2>
+                <p id="master-desc">El sistema controla los equipos automáticamente según reglas configuradas.</p>
+              </div>
+              <div class="master-toggle">
+                <span class="mode-label" id="mode-manual">Manual</span>
+                <label class="css-switch" style="width:56px; height:28px;">
+                  <input type="checkbox" checked id="master-toggle-input">
+                  <span class="switch-slider" style="border-radius:28px;"></span>
+                </label>
+                <span class="mode-label active-mode" id="mode-auto">Automático</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- TABS -->
+          <div class="tabs-container">
+            <button class="tab-btn active" onclick="cambiarTabAuto('tab-controles', this)">
+              <i class="fa-solid fa-sliders"></i> Controles Manuales
+            </button>
+            <button class="tab-btn" onclick="cambiarTabAuto('tab-reglas', this)">
+              <i class="fa-solid fa-list-check"></i> Reglas de Automatización
+            </button>
+          </div>
+
+          <!-- TAB: Controles Manuales -->
+          <div id="tab-controles" class="tab-content active">
+            <div class="automation-grid" id="controls-grid">
+
+              <!-- Ventilador 1 -->
+              <article class="control-card control-disabled" id="ctrl-vent1">
+                <div class="control-header">
+                  <div class="control-title">
+                    <div class="control-icon"><i class="fa-solid fa-fan"></i></div>
+                    <h3>Ventilador 1</h3>
+                  </div>
+                  <label class="css-switch"><input type="checkbox" checked class="equip-toggle" data-device="Ventilador 1"><span class="switch-slider"></span></label>
+                </div>
+                <div class="control-body">
+                  <div class="slider-header">
+                    <span>Potencia actual</span>
+                    <span class="slider-value">60%</span>
+                  </div>
+                  <input type="range" min="0" max="100" value="60" class="css-range equip-slider">
+                  <div class="slider-limits"><span>0%</span><span>100%</span></div>
+                </div>
+              </article>
+
+              <!-- Ventilador 2 -->
+              <article class="control-card control-disabled" id="ctrl-vent2">
+                <div class="control-header">
+                  <div class="control-title">
+                    <div class="control-icon"><i class="fa-solid fa-fan"></i></div>
+                    <h3>Ventilador 2</h3>
+                  </div>
+                  <label class="css-switch"><input type="checkbox" class="equip-toggle" data-device="Ventilador 2"><span class="switch-slider"></span></label>
+                </div>
+                <div class="control-body">
+                  <div class="slider-header">
+                    <span>Potencia actual</span>
+                    <span class="slider-value">0%</span>
+                  </div>
+                  <input type="range" min="0" max="100" value="0" class="css-range equip-slider">
+                  <div class="slider-limits"><span>0%</span><span>100%</span></div>
+                </div>
+              </article>
+
+              <!-- Calefactor -->
+              <article class="control-card control-disabled" id="ctrl-calef">
+                <div class="control-header">
+                  <div class="control-title">
+                    <div class="control-icon"><i class="fa-solid fa-fire"></i></div>
+                    <h3>Calefactor</h3>
+                  </div>
+                  <label class="css-switch"><input type="checkbox" class="equip-toggle" data-device="Calefactor"><span class="switch-slider"></span></label>
+                </div>
+                <div class="control-body">
+                  <div class="slider-header">
+                    <span>Temperatura objetivo</span>
+                    <span class="slider-value">28°C</span>
+                  </div>
+                  <input type="range" min="18" max="35" value="28" class="css-range equip-slider" data-unit="°C">
+                  <div class="slider-limits"><span>18°C</span><span>35°C</span></div>
+                  <div class="feed-info">
+                    <i class="fa-solid fa-gauge-high"></i> Actual: <strong id="calef-actual-temp">32°C</strong> → Objetivo: <strong>28°C</strong>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Comedero -->
+              <article class="control-card control-disabled" id="ctrl-comedero">
+                <div class="control-header">
+                  <div class="control-title">
+                    <div class="control-icon"><i class="fa-solid fa-bowl-food"></i></div>
+                    <h3>Comedero Automático</h3>
+                  </div>
+                  <label class="css-switch"><input type="checkbox" checked class="equip-toggle" data-device="Comedero"><span class="switch-slider"></span></label>
+                </div>
+                <div class="control-body">
+                  <div class="feed-info">
+                    <div style="margin-bottom:0.5rem;">
+                      <i class="fa-solid fa-clock"></i> Próxima dosis: <strong>14:30</strong> (en 2h 15min)
                     </div>
-                </section>
-
-                <section class="section-block fade-in" style="animation-delay: 0.1s;">
-                    <h2 class="section-title">Control de Equipos</h2>
-                    
-                    <div class="automation-grid">
-                        
-                        <article class="control-card">
-                            <div class="control-header">
-                                <div class="control-title">
-                                    <div class="control-icon"><i class="fa-solid fa-fan"></i></div>
-                                    <h3>Extractores de Aire</h3>
-                                </div>
-                                <label class="css-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="control-body">
-                                <div class="slider-header">
-                                    <span>Potencia actual</span>
-                                    <span class="slider-value">60%</span>
-                                </div>
-                                <input type="range" min="0" max="100" value="60" class="css-range">
-                                <div class="slider-limits">
-                                    <span>0%</span>
-                                    <span>100%</span>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="control-card">
-                            <div class="control-header">
-                                <div class="control-title">
-                                    <div class="control-icon"><i class="fa-solid fa-fire-burner"></i></div>
-                                    <h3>Criadoras (Calefacción)</h3>
-                                </div>
-                                <label class="css-switch">
-                                    <input type="checkbox">
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="control-body">
-                                <div class="slider-header">
-                                    <span>Temperatura Objetivo</span>
-                                    <span class="slider-value">32°C</span>
-                                </div>
-                                <input type="range" min="20" max="40" value="32" class="css-range">
-                                <div class="slider-limits">
-                                    <span>20°C</span>
-                                    <span>40°C</span>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="control-card">
-                            <div class="control-header">
-                                <div class="control-title">
-                                    <div class="control-icon"><i class="fa-regular fa-lightbulb"></i></div>
-                                    <h3>Iluminación LED</h3>
-                                </div>
-                                <label class="css-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="control-body">
-                                <div class="slider-header">
-                                    <span>Intensidad (Lux)</span>
-                                    <span class="slider-value">80%</span>
-                                </div>
-                                <input type="range" min="0" max="100" value="80" class="css-range">
-                                <div class="slider-limits">
-                                    <span>Apagado</span>
-                                    <span>Máximo</span>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="control-card">
-                            <div class="control-header">
-                                <div class="control-title">
-                                    <div class="control-icon"><i class="fa-solid fa-person-arrow-up-from-line"></i></div>
-                                    <h3>Cortinas Laterales</h3>
-                                </div>
-                                <label class="css-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            <div class="control-body">
-                                <div class="slider-header">
-                                    <span>Apertura</span>
-                                    <span class="slider-value">100% (Arriba)</span>
-                                </div>
-                                <input type="range" min="0" max="100" value="100" class="css-range">
-                                <div class="slider-limits">
-                                    <span>0% (Cerrado)</span>
-                                    <span>100% (Abierto)</span>
-                                </div>
-                            </div>
-                        </article>
-
+                    <div style="margin-bottom:0.5rem;">
+                      <i class="fa-solid fa-weight-hanging"></i> Cantidad por dosis: <strong>50 kg</strong>
                     </div>
-                </section>
+                    <div style="margin-bottom:0.75rem;">
+                      <i class="fa-solid fa-list-ol"></i> Horarios: 06:00, 12:00, 18:00 — Hoy: <strong>2/3</strong> completadas
+                    </div>
+                    <button class="btn-outline btn-sm" onclick="dispensarAhora()">
+                      <i class="fa-solid fa-utensils"></i> Dispensar Ahora (50 kg)
+                    </button>
+                  </div>
+                </div>
+              </article>
 
-            </main>
-        </div>
+            </div>
+          </div>
 
-        <nav class="bottom-nav">
-            <a href="index.html" class="bottom-nav-item">
-                <i class="fa-solid fa-table-cells-large"></i><span>Inicio</span>
-            </a>
-            <a href="sensores.html" class="bottom-nav-item">
-                <i class="fa-solid fa-tower-broadcast"></i><span>Sensores</span>
-            </a>
-            <a href="alertas.html" class="bottom-nav-item">
-                <i class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span>
-            </a>
-            <a href="automatizacion.html" class="bottom-nav-item active">
-                <i class="fa-solid fa-gear"></i><span>Sistemas</span>
-            </a>
-        </nav>
+          <!-- TAB: Reglas de Automatización -->
+          <div id="tab-reglas" class="tab-content">
+            <div class="section-header">
+              <h2 class="section-title">Reglas de Automatización</h2>
+              <button class="btn-primary btn-sm" onclick="openModal('modal-nueva-regla-auto')">
+                <i class="fa-solid fa-plus"></i> Nueva Regla
+              </button>
+            </div>
 
+            <div class="rules-list" id="auto-rules-list">
+              <div class="rule-card">
+                <div class="rule-info">
+                  <div class="rule-name">🌡️ Ventilación por temperatura alta</div>
+                  <div class="rule-condition">Si Temp > 30°C → Ventiladores ON 100%</div>
+                  <div class="rule-meta"><span>Galpón 1</span><span>Activa</span><span>María López</span></div>
+                </div>
+                <div class="rule-actions">
+                  <button class="icon-btn edit" title="Editar"><i class="fa-solid fa-pen"></i></button>
+                  <span class="badge optimal-badge">Activa</span>
+                </div>
+              </div>
+              <div class="rule-card">
+                <div class="rule-info">
+                  <div class="rule-name">❄️ Calefacción automática</div>
+                  <div class="rule-condition">Si Temp < 22°C → Calefactor ON (28°C)</div>
+                  <div class="rule-meta"><span>Todos los galpones</span><span>Activa</span><span>Sistema</span></div>
+                </div>
+                <div class="rule-actions">
+                  <span class="badge optimal-badge">Activa</span>
+                </div>
+              </div>
+              <div class="rule-card">
+                <div class="rule-info">
+                  <div class="rule-name">🍽️ Alimentación programada</div>
+                  <div class="rule-condition">Horario: 06:00, 12:00, 18:00 → Dispensar 50kg</div>
+                  <div class="rule-meta"><span>Todos los galpones</span><span>Activa</span><span>Sistema</span></div>
+                </div>
+                <div class="rule-actions">
+                  <span class="badge optimal-badge">Activa</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LOG DE ACTIVIDAD -->
+          <section class="section-block fade-in" style="animation-delay: 0.15s; margin-top: 1.5rem;">
+            <div class="section-header">
+              <h2 class="section-title">Registro de Actividad</h2>
+              <button class="btn-outline btn-sm" onclick="exportarLogCSV()">
+                <i class="fa-solid fa-download"></i> Exportar Log
+              </button>
+            </div>
+
+            <div class="activity-log" id="activity-log">
+              <div class="log-entry">
+                <span class="log-time">10:45</span>
+                <span class="log-device"><i class="fa-solid fa-fan"></i> Ventilador 1</span>
+                <span class="log-action">ON 60%</span>
+                <span class="log-mode auto">Auto</span>
+                <span class="log-user">Sistema</span>
+              </div>
+              <div class="log-entry">
+                <span class="log-time">09:30</span>
+                <span class="log-device"><i class="fa-solid fa-bowl-food"></i> Comedero</span>
+                <span class="log-action">Dispensó 50kg</span>
+                <span class="log-mode auto">Auto</span>
+                <span class="log-user">Sistema</span>
+              </div>
+              <div class="log-entry">
+                <span class="log-time">08:15</span>
+                <span class="log-device"><i class="fa-solid fa-fire"></i> Calefactor</span>
+                <span class="log-action">OFF</span>
+                <span class="log-mode auto">Auto</span>
+                <span class="log-user">Sistema</span>
+              </div>
+              <div class="log-entry">
+                <span class="log-time">07:00</span>
+                <span class="log-device"><i class="fa-solid fa-bowl-food"></i> Comedero</span>
+                <span class="log-action">Dispensó 50kg</span>
+                <span class="log-mode auto">Auto</span>
+                <span class="log-user">Sistema</span>
+              </div>
+              <div class="log-entry">
+                <span class="log-time">06:45</span>
+                <span class="log-device"><i class="fa-solid fa-fan"></i> Ventilador 1</span>
+                <span class="log-action">ON 100%</span>
+                <span class="log-mode auto">Auto</span>
+                <span class="log-user">Sistema</span>
+              </div>
+              <div class="log-entry">
+                <span class="log-time">06:00</span>
+                <span class="log-device"><i class="fa-solid fa-fire"></i> Calefactor</span>
+                <span class="log-action">ON 28°C</span>
+                <span class="log-mode auto">Auto</span>
+                <span class="log-user">Sistema</span>
+              </div>
+            </div>
+          </section>
+
+        </main>
+      </div>
+
+      <!-- BOTTOM NAV -->
+      <nav class="bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item"><i class="fa-solid fa-table-columns"></i><span>Inicio</span></a>
+        <a href="sensores.html" class="bottom-nav-item"><i class="fa-solid fa-temperature-half"></i><span>Sensores</span></a>
+        <a href="alertas.html" class="bottom-nav-item"><i class="fa-solid fa-bell"></i><span>Alertas</span></a>
+        <a href="automatizacion.html" class="bottom-nav-item active"><i class="fa-solid fa-gear"></i><span>Sistemas</span></a>
+      </nav>
     </div>
+
+    <!-- MODAL: Nueva Regla de Automatización -->
+    <div id="modal-nueva-regla-auto" class="modal-overlay hidden">
+      <div class="modal-content modal-wide modal-success">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-plus-circle" style="color:var(--status-optimal);"></i> Nueva Regla de Automatización</h3>
+          <button class="icon-btn" onclick="closeModal('modal-nueva-regla-auto')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nombre de la regla <span class="required">*</span></label>
+            <input type="text" id="auto-regla-nombre" class="form-control" placeholder="Ej: Ventilación nocturna Galpón 3">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Tipo de regla</label>
+              <select id="auto-regla-tipo" class="form-control">
+                <option value="condicion">Basada en condición (IF-THEN)</option>
+                <option value="horario">Basada en horario (Schedule)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Aplicar a</label>
+              <select id="auto-regla-galpon" class="form-control">
+                <option value="all">Todos los galpones</option>
+                <option value="1">Galpón 1</option>
+                <option value="2">Galpón 2</option>
+                <option value="3">Galpón 3</option>
+                <option value="4">Galpón 4</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Parámetro (IF)</label>
+              <select id="auto-regla-param" class="form-control">
+                <option value="temp">Temperatura</option>
+                <option value="hum">Humedad</option>
+                <option value="co2">CO₂</option>
+                <option value="nh3">Amoníaco</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Condición</label>
+              <div style="display:flex; gap:0.5rem;">
+                <select id="auto-regla-op" class="form-control" style="width:50%;">
+                  <option value=">">Mayor que (>)</option>
+                  <option value="<">Menor que (<)</option>
+                </select>
+                <input type="number" id="auto-regla-valor" class="form-control" placeholder="30" style="width:50%;">
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Dispositivo (THEN)</label>
+              <select id="auto-regla-dispositivo" class="form-control">
+                <option value="vent">Ventiladores</option>
+                <option value="calef">Calefactor</option>
+                <option value="comedero">Comedero</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Acción</label>
+              <select id="auto-regla-accion" class="form-control">
+                <option value="on100">ON al 100%</option>
+                <option value="on75">ON al 75%</option>
+                <option value="on50">ON al 50%</option>
+                <option value="off">OFF</option>
+                <option value="temp28">Ajustar a 28°C</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Persistir por (minutos)</label>
+            <input type="number" id="auto-regla-persist" class="form-control" value="5" min="0">
+            <span class="form-hint">Solo ejecutar si la condición persiste por este tiempo. 0 = inmediato.</span>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-secondary" onclick="closeModal('modal-nueva-regla-auto')">Cancelar</button>
+            <button class="btn-primary" onclick="guardarReglaAuto()"><i class="fa-solid fa-floppy-disk"></i> Guardar Regla</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/automatizacion.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-

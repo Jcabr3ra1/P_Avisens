@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisens | Tareas y Operadores - Supervisor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo" onerror="this.outerHTML='🐔'"></div>
+          <h1 class="brand-name">Avisens</h1>
+        </div>
+        <nav class="side-nav">
+          <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+          <a href="sensores.html" class="nav-item"><i class="fa-solid fa-tower-broadcast"></i> Sensores</a>
+          <a href="curvas.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento</a>
+          <a href="alertas.html" class="nav-item"><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
+          <a href="automatizacion.html" class="nav-item"><i class="fa-solid fa-gear"></i> Automatización</a>
+          <a href="inventario.html" class="nav-item"><i class="fa-solid fa-box"></i> Inventario</a>
+          <a href="operadores.html" class="nav-item active"><i class="fa-solid fa-clipboard-list"></i> Tareas / Operadores</a>
+        </nav>
+      </aside>
+
+      <div class="main-wrapper">
+        <header class="top-header">
+          <div class="header-titles">
+            <h2>Tareas y Operadores</h2>
+            <p class="subtitle">Asignación, seguimiento y consumos</p>
+          </div>
+          <div class="header-right">
+            <div class="user-profile">
+              <div class="user-info">
+                <span class="user-name">María López</span>
+                <span class="user-role">Encargado/Supervisor</span>
+              </div>
+              <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+            </div>
+            <button class="btn-logout" onclick="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+          </div>
+        </header>
+
+        <main class="content-area">
+
+          <!-- RESUMEN -->
+          <section class="section-block fade-in">
+            <div class="alerts-summary-grid">
+              <div class="summary-card critical-summary" onclick="filtrarTareasPorEstado('pendiente')">
+                <div class="summary-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                <div class="summary-data">
+                  <h3 id="count-pendientes">4</h3>
+                  <span>Pendientes</span>
+                </div>
+              </div>
+              <div class="summary-card warning-summary" onclick="filtrarTareasPorEstado('en-progreso')">
+                <div class="summary-icon"><i class="fa-solid fa-spinner"></i></div>
+                <div class="summary-data">
+                  <h3 id="count-progreso">3</h3>
+                  <span>En Progreso</span>
+                </div>
+              </div>
+              <div class="summary-card optimal-summary" onclick="filtrarTareasPorEstado('completada')">
+                <div class="summary-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="summary-data">
+                  <h3 id="count-completadas">8</h3>
+                  <span>Completadas Hoy</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TABS -->
+          <section class="section-block fade-in" style="animation-delay: 0.05s">
+            <div class="tabs-container">
+              <button class="tab-btn active" onclick="cambiarTab('tab-tareas', this)">
+                <i class="fa-solid fa-list-check"></i> Tareas
+              </button>
+              <button class="tab-btn" onclick="cambiarTab('tab-operadores', this)">
+                <i class="fa-solid fa-users"></i> Operadores
+              </button>
+              <button class="tab-btn" onclick="cambiarTab('tab-consumos', this)">
+                <i class="fa-solid fa-wheat-awn"></i> Registro de Consumos
+              </button>
+            </div>
+
+            <!-- ======================== TAB 1: TAREAS ======================== -->
+            <div id="tab-tareas" class="tab-content active">
+
+              <!-- Filtros -->
+              <div class="filters-bar" style="margin-bottom:1rem;">
+                <div class="filter-group">
+                  <label>Operador</label>
+                  <select class="filter-select" id="filter-operador" onchange="aplicarFiltros()">
+                    <option value="all">Todos</option>
+                    <option value="carlos">Carlos Pérez</option>
+                    <option value="andrea">Andrea Gómez</option>
+                    <option value="jorge">Jorge Ramírez</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label>Estado</label>
+                  <select class="filter-select" id="filter-estado-tarea" onchange="aplicarFiltros()">
+                    <option value="all">Todas</option>
+                    <option value="pendiente">Pendientes</option>
+                    <option value="en-progreso">En Progreso</option>
+                    <option value="completada">Completadas</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label>Prioridad</label>
+                  <select class="filter-select" id="filter-prioridad" onchange="aplicarFiltros()">
+                    <option value="all">Todas</option>
+                    <option value="alta">🔴 Alta</option>
+                    <option value="media">🟡 Media</option>
+                    <option value="baja">🟢 Baja</option>
+                  </select>
+                </div>
+                <div class="search-wrapper">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input type="text" class="filter-input" id="search-tareas" placeholder="Buscar tareas..." oninput="aplicarFiltros()">
+                </div>
+                <button class="btn-clear-filters" onclick="limpiarFiltrosTareas()">
+                  <i class="fa-solid fa-rotate-left"></i> Limpiar
+                </button>
+              </div>
+
+              <!-- Header + acciones -->
+              <div class="section-header" style="margin-bottom: 1rem;">
+                <h2 class="section-title">Tareas Asignadas</h2>
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                  <button class="btn-outline btn-sm" onclick="exportarTareasCSV()">
+                    <i class="fa-solid fa-download"></i> Exportar
+                  </button>
+                  <button class="btn-primary btn-sm" onclick="openModal('modal-nueva-tarea')">
+                    <i class="fa-solid fa-plus"></i> Nueva Tarea
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-container">
+                <table class="data-table" id="tabla-tareas">
+                  <thead>
+                    <tr>
+                      <th>Tarea</th>
+                      <th>Asignado a</th>
+                      <th>Galpón</th>
+                      <th>Prioridad</th>
+                      <th>Fecha Límite</th>
+                      <th>Estado</th>
+                      <th class="text-center">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-tareas">
+                    <!-- Tarea 1: Pendiente / Alta -->
+                    <tr data-estado="pendiente" data-operador="carlos" data-prioridad="alta">
+                      <td>
+                        <strong>Revisar ventilación Galpón 1</strong><br>
+                        <span class="text-xs text-muted">Ventiladores reportan ruido inusual. Verificar correas y motor.</span>
+                      </td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">C</div>
+                          Carlos Pérez
+                        </div>
+                      </td>
+                      <td>Galpón 1</td>
+                      <td><span class="badge critical-badge"><i class="fa-solid fa-arrow-up"></i> Alta</span></td>
+                      <td class="text-xs">2026-04-13</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-hourglass-half"></i> Pendiente</span></td>
+                      <td class="action-buttons">
+                        <button class="icon-btn edit" title="Editar" onclick="editarTarea(this)"><i class="fa-solid fa-pen"></i></button>
+                        <button class="icon-btn delete" title="Eliminar" onclick="eliminarTarea(this)"><i class="fa-solid fa-trash"></i></button>
+                      </td>
+                    </tr>
+                    <!-- Tarea 2: En progreso / Alta -->
+                    <tr data-estado="en-progreso" data-operador="carlos" data-prioridad="alta">
+                      <td>
+                        <strong>Desinfección de bebederos</strong><br>
+                        <span class="text-xs text-muted">Limpieza profunda de todos los bebederos nipple. Usar solución yodada.</span>
+                      </td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">C</div>
+                          Carlos Pérez
+                        </div>
+                      </td>
+                      <td>Galpón 2</td>
+                      <td><span class="badge critical-badge"><i class="fa-solid fa-arrow-up"></i> Alta</span></td>
+                      <td class="text-xs">2026-04-13</td>
+                      <td><span class="badge info-badge"><i class="fa-solid fa-spinner"></i> En Progreso</span></td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Marcar completada" onclick="completarTarea(this)"><i class="fa-solid fa-check"></i></button>
+                        <button class="icon-btn edit" title="Editar" onclick="editarTarea(this)"><i class="fa-solid fa-pen"></i></button>
+                      </td>
+                    </tr>
+                    <!-- Tarea 3: Pendiente / Media -->
+                    <tr data-estado="pendiente" data-operador="andrea" data-prioridad="media">
+                      <td>
+                        <strong>Pesaje semanal Galpón 3</strong><br>
+                        <span class="text-xs text-muted">Realizar pesaje de muestra (mín. 50 aves). Registrar en sistema.</span>
+                      </td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">A</div>
+                          Andrea Gómez
+                        </div>
+                      </td>
+                      <td>Galpón 3</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-minus"></i> Media</span></td>
+                      <td class="text-xs">2026-04-14</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-hourglass-half"></i> Pendiente</span></td>
+                      <td class="action-buttons">
+                        <button class="icon-btn edit" title="Editar" onclick="editarTarea(this)"><i class="fa-solid fa-pen"></i></button>
+                        <button class="icon-btn delete" title="Eliminar" onclick="eliminarTarea(this)"><i class="fa-solid fa-trash"></i></button>
+                      </td>
+                    </tr>
+                    <!-- Tarea 4: En progreso / Media -->
+                    <tr data-estado="en-progreso" data-operador="andrea" data-prioridad="media">
+                      <td>
+                        <strong>Cambio de camas Galpón 4</strong><br>
+                        <span class="text-xs text-muted">Retirar viruta húmeda y reemplazar con material fresco.</span>
+                      </td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">A</div>
+                          Andrea Gómez
+                        </div>
+                      </td>
+                      <td>Galpón 4</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-minus"></i> Media</span></td>
+                      <td class="text-xs">2026-04-13</td>
+                      <td><span class="badge info-badge"><i class="fa-solid fa-spinner"></i> En Progreso</span></td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Marcar completada" onclick="completarTarea(this)"><i class="fa-solid fa-check"></i></button>
+                        <button class="icon-btn edit" title="Editar" onclick="editarTarea(this)"><i class="fa-solid fa-pen"></i></button>
+                      </td>
+                    </tr>
+                    <!-- Tarea 5: Pendiente / Baja -->
+                    <tr data-estado="pendiente" data-operador="carlos" data-prioridad="baja">
+                      <td>
+                        <strong>Verificar stock comederos</strong><br>
+                        <span class="text-xs text-muted">Revisar nivel de alimento en tolvas y reportar disponibilidad.</span>
+                      </td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">C</div>
+                          Carlos Pérez
+                        </div>
+                      </td>
+                      <td>Todos</td>
+                      <td><span class="badge optimal-badge"><i class="fa-solid fa-arrow-down"></i> Baja</span></td>
+                      <td class="text-xs">2026-04-15</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-hourglass-half"></i> Pendiente</span></td>
+                      <td class="action-buttons">
+                        <button class="icon-btn edit" title="Editar" onclick="editarTarea(this)"><i class="fa-solid fa-pen"></i></button>
+                        <button class="icon-btn delete" title="Eliminar" onclick="eliminarTarea(this)"><i class="fa-solid fa-trash"></i></button>
+                      </td>
+                    </tr>
+                    <!-- Tarea 6: En progreso / Alta -->
+                    <tr data-estado="en-progreso" data-operador="andrea" data-prioridad="alta">
+                      <td>
+                        <strong>Aplicación de vacuna Newcastle</strong><br>
+                        <span class="text-xs text-muted">Vacunación gota ocular a lote completo. Usar guantes y registrar.</span>
+                      </td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">A</div>
+                          Andrea Gómez
+                        </div>
+                      </td>
+                      <td>Galpón 3</td>
+                      <td><span class="badge critical-badge"><i class="fa-solid fa-arrow-up"></i> Alta</span></td>
+                      <td class="text-xs">2026-04-13</td>
+                      <td><span class="badge info-badge"><i class="fa-solid fa-spinner"></i> En Progreso</span></td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Marcar completada" onclick="completarTarea(this)"><i class="fa-solid fa-check"></i></button>
+                        <button class="icon-btn edit" title="Editar" onclick="editarTarea(this)"><i class="fa-solid fa-pen"></i></button>
+                      </td>
+                    </tr>
+                    <!-- Tarea 7: Pendiente / Jorge -->
+                    <tr data-estado="pendiente" data-operador="jorge" data-prioridad="media">
+                      <td>
+                        <strong>Ronda nocturna de verificación</strong><br>
+                        <span class="text-xs text-muted">Recorrer galpones, verificar temp y que equipos funcionen.</span>
+                      </td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#f97316,#ea580c);">J</div>
+                          Jorge Ramírez
+                        </div>
+                      </td>
+                      <td>Todos</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-minus"></i> Media</span></td>
+                      <td class="text-xs">2026-04-13</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-hourglass-half"></i> Pendiente</span></td>
+                      <td class="action-buttons">
+                        <button class="icon-btn edit" title="Editar" onclick="editarTarea(this)"><i class="fa-solid fa-pen"></i></button>
+                        <button class="icon-btn delete" title="Eliminar" onclick="eliminarTarea(this)"><i class="fa-solid fa-trash"></i></button>
+                      </td>
+                    </tr>
+                    <!-- Tarea 8: Completada -->
+                    <tr data-estado="completada" data-operador="carlos" data-prioridad="alta" style="opacity: 0.6;">
+                      <td>
+                        <strong style="text-decoration:line-through;">Revisar sensores Galpón 2</strong><br>
+                        <span class="text-xs text-muted">Calibración semanal de sensores de temperatura y humedad.</span>
+                      </td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">C</div>
+                          Carlos Pérez
+                        </div>
+                      </td>
+                      <td>Galpón 2</td>
+                      <td><span class="badge optimal-badge"><i class="fa-solid fa-arrow-up"></i> Alta</span></td>
+                      <td class="text-xs">2026-04-12</td>
+                      <td><span class="badge optimal-badge"><i class="fa-solid fa-circle-check"></i> Completada</span></td>
+                      <td class="action-buttons">
+                        <span class="text-xs text-muted">✅ 14:30</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="pagination-bar">
+                <span class="pagination-info">Mostrando 1-8 de 15 tareas</span>
+                <div class="pagination-controls">
+                  <button class="page-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                  <button class="page-btn active">1</button>
+                  <button class="page-btn">2</button>
+                  <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ======================== TAB 2: OPERADORES ======================== -->
+            <div id="tab-operadores" class="tab-content">
+
+              <div class="section-header" style="margin-bottom: 1rem;">
+                <h2 class="section-title"><i class="fa-solid fa-users" style="color:var(--status-info);"></i> Equipo de Operadores</h2>
+                <button class="btn-primary btn-sm" onclick="openModal('modal-nuevo-operador')">
+                  <i class="fa-solid fa-user-plus"></i> Nuevo Operador
+                </button>
+              </div>
+
+              <div class="operators-expanded-grid" id="operadores-grid">
+                <!-- Carlos Pérez -->
+                <div class="operator-card-expanded" data-operator="carlos">
+                  <div class="operator-card-top">
+                    <div class="operator-avatar-lg" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                      C
+                      <span class="operator-status online"></span>
+                    </div>
+                    <div class="operator-detail">
+                      <h4>Carlos Pérez <span class="perf-badge excellent"><i class="fa-solid fa-star"></i> Excelente</span></h4>
+                      <div class="operator-meta">
+                        <span><i class="fa-solid fa-clock"></i> Turno Día (6:00–14:00)</span>
+                        <span><i class="fa-solid fa-circle" style="color:var(--status-optimal); font-size:0.5rem;"></i> En línea</span>
+                      </div>
+                    </div>
+                    <div class="operator-actions-top">
+                      <button class="icon-btn edit" title="Gestionar galpones" onclick="abrirGestionGalpones('carlos')"><i class="fa-solid fa-warehouse"></i></button>
+                      <button class="icon-btn view" title="Ver perfil" onclick="verPerfilOperador('carlos')"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                  </div>
+                  <div class="galpon-assignment">
+                    <div class="galpon-assignment-label">Galpones Asignados</div>
+                    <div class="galpon-chips" id="chips-carlos">
+                      <span class="galpon-chip assigned"><i class="fa-solid fa-check-circle"></i> Galpón 1</span>
+                      <span class="galpon-chip assigned"><i class="fa-solid fa-check-circle"></i> Galpón 2</span>
+                      <span class="galpon-chip unassigned"><i class="fa-solid fa-circle-xmark"></i> Galpón 3</span>
+                      <span class="galpon-chip unassigned"><i class="fa-solid fa-circle-xmark"></i> Galpón 4</span>
+                    </div>
+                  </div>
+                  <div class="operator-stats-row">
+                    <div class="operator-stat-item">
+                      <span class="stat-num" style="color:var(--status-optimal);">23</span>
+                      <span class="stat-lbl">Completadas</span>
+                    </div>
+                    <div class="operator-stat-item">
+                      <span class="stat-num" style="color:var(--status-warning);">3</span>
+                      <span class="stat-lbl">Pendientes</span>
+                    </div>
+                    <div class="operator-stat-item">
+                      <span class="stat-num">156 h</span>
+                      <span class="stat-lbl">Horas Mes</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Andrea Gómez -->
+                <div class="operator-card-expanded" data-operator="andrea">
+                  <div class="operator-card-top">
+                    <div class="operator-avatar-lg" style="background: linear-gradient(135deg, #a855f7, #7c3aed);">
+                      A
+                      <span class="operator-status online"></span>
+                    </div>
+                    <div class="operator-detail">
+                      <h4>Andrea Gómez <span class="perf-badge good"><i class="fa-solid fa-thumbs-up"></i> Bueno</span></h4>
+                      <div class="operator-meta">
+                        <span><i class="fa-solid fa-clock"></i> Turno Día (6:00–14:00)</span>
+                        <span><i class="fa-solid fa-circle" style="color:var(--status-optimal); font-size:0.5rem;"></i> En línea</span>
+                      </div>
+                    </div>
+                    <div class="operator-actions-top">
+                      <button class="icon-btn edit" title="Gestionar galpones" onclick="abrirGestionGalpones('andrea')"><i class="fa-solid fa-warehouse"></i></button>
+                      <button class="icon-btn view" title="Ver perfil" onclick="verPerfilOperador('andrea')"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                  </div>
+                  <div class="galpon-assignment">
+                    <div class="galpon-assignment-label">Galpones Asignados</div>
+                    <div class="galpon-chips" id="chips-andrea">
+                      <span class="galpon-chip unassigned"><i class="fa-solid fa-circle-xmark"></i> Galpón 1</span>
+                      <span class="galpon-chip unassigned"><i class="fa-solid fa-circle-xmark"></i> Galpón 2</span>
+                      <span class="galpon-chip assigned"><i class="fa-solid fa-check-circle"></i> Galpón 3</span>
+                      <span class="galpon-chip assigned"><i class="fa-solid fa-check-circle"></i> Galpón 4</span>
+                    </div>
+                  </div>
+                  <div class="operator-stats-row">
+                    <div class="operator-stat-item">
+                      <span class="stat-num" style="color:var(--status-optimal);">19</span>
+                      <span class="stat-lbl">Completadas</span>
+                    </div>
+                    <div class="operator-stat-item">
+                      <span class="stat-num" style="color:var(--status-warning);">4</span>
+                      <span class="stat-lbl">Pendientes</span>
+                    </div>
+                    <div class="operator-stat-item">
+                      <span class="stat-num">148 h</span>
+                      <span class="stat-lbl">Horas Mes</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Jorge Ramírez -->
+                <div class="operator-card-expanded" data-operator="jorge">
+                  <div class="operator-card-top">
+                    <div class="operator-avatar-lg" style="background: linear-gradient(135deg, #f97316, #ea580c);">
+                      J
+                      <span class="operator-status offline"></span>
+                    </div>
+                    <div class="operator-detail">
+                      <h4>Jorge Ramírez <span class="perf-badge average"><i class="fa-solid fa-minus"></i> Regular</span></h4>
+                      <div class="operator-meta">
+                        <span><i class="fa-solid fa-clock"></i> Turno Noche (22:00–6:00)</span>
+                        <span><i class="fa-solid fa-circle" style="color:var(--text-muted); font-size:0.5rem;"></i> Desconectado</span>
+                      </div>
+                    </div>
+                    <div class="operator-actions-top">
+                      <button class="icon-btn edit" title="Gestionar galpones" onclick="abrirGestionGalpones('jorge')"><i class="fa-solid fa-warehouse"></i></button>
+                      <button class="icon-btn view" title="Ver perfil" onclick="verPerfilOperador('jorge')"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                  </div>
+                  <div class="galpon-assignment">
+                    <div class="galpon-assignment-label">Galpones Asignados</div>
+                    <div class="galpon-chips" id="chips-jorge">
+                      <span class="galpon-chip assigned"><i class="fa-solid fa-check-circle"></i> Galpón 1</span>
+                      <span class="galpon-chip assigned"><i class="fa-solid fa-check-circle"></i> Galpón 2</span>
+                      <span class="galpon-chip assigned"><i class="fa-solid fa-check-circle"></i> Galpón 3</span>
+                      <span class="galpon-chip assigned"><i class="fa-solid fa-check-circle"></i> Galpón 4</span>
+                    </div>
+                  </div>
+                  <div class="operator-stats-row">
+                    <div class="operator-stat-item">
+                      <span class="stat-num" style="color:var(--status-optimal);">11</span>
+                      <span class="stat-lbl">Completadas</span>
+                    </div>
+                    <div class="operator-stat-item">
+                      <span class="stat-num" style="color:var(--status-warning);">1</span>
+                      <span class="stat-lbl">Pendientes</span>
+                    </div>
+                    <div class="operator-stat-item">
+                      <span class="stat-num">120 h</span>
+                      <span class="stat-lbl">Horas Mes</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ======================== TAB 3: CONSUMOS ======================== -->
+            <div id="tab-consumos" class="tab-content">
+
+              <!-- Resumen consumos -->
+              <div class="consumption-summary-grid">
+                <div class="consumption-stat">
+                  <span class="cs-icon" style="color:var(--status-warning);"><i class="fa-solid fa-wheat-awn"></i></span>
+                  <span class="cs-value" id="total-alimento-hoy">285 kg</span>
+                  <span class="cs-label">Alimento Hoy</span>
+                </div>
+                <div class="consumption-stat">
+                  <span class="cs-icon" style="color:var(--status-info);"><i class="fa-solid fa-syringe"></i></span>
+                  <span class="cs-value" id="total-medicina-hoy">12 dosis</span>
+                  <span class="cs-label">Medicina Hoy</span>
+                </div>
+                <div class="consumption-stat">
+                  <span class="cs-icon" style="color:var(--status-optimal);"><i class="fa-solid fa-spray-can-sparkles"></i></span>
+                  <span class="cs-value" id="total-insumos-hoy">3 lts</span>
+                  <span class="cs-label">Desinfectante Hoy</span>
+                </div>
+                <div class="consumption-stat">
+                  <span class="cs-icon" style="color:var(--status-critical);"><i class="fa-solid fa-receipt"></i></span>
+                  <span class="cs-value" id="total-registros-hoy">8</span>
+                  <span class="cs-label">Registros Hoy</span>
+                </div>
+              </div>
+
+              <!-- Filtros consumos -->
+              <div class="filters-bar" style="margin-bottom:1rem;">
+                <div class="filter-group">
+                  <label>Operador</label>
+                  <select class="filter-select" id="filter-consumo-operador" onchange="aplicarFiltrosConsumo()">
+                    <option value="all">Todos</option>
+                    <option value="carlos">Carlos Pérez</option>
+                    <option value="andrea">Andrea Gómez</option>
+                    <option value="jorge">Jorge Ramírez</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label>Galpón</label>
+                  <select class="filter-select" id="filter-consumo-galpon" onchange="aplicarFiltrosConsumo()">
+                    <option value="all">Todos</option>
+                    <option value="Galpón 1">Galpón 1</option>
+                    <option value="Galpón 2">Galpón 2</option>
+                    <option value="Galpón 3">Galpón 3</option>
+                    <option value="Galpón 4">Galpón 4</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label>Producto</label>
+                  <select class="filter-select" id="filter-consumo-producto" onchange="aplicarFiltrosConsumo()">
+                    <option value="all">Todos</option>
+                    <option value="alimento">Alimento</option>
+                    <option value="medicina">Medicina/Vacuna</option>
+                    <option value="desinfectante">Desinfectante</option>
+                    <option value="viruta">Viruta/Cama</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+                <button class="btn-clear-filters" onclick="limpiarFiltrosConsumo()">
+                  <i class="fa-solid fa-rotate-left"></i> Limpiar
+                </button>
+              </div>
+
+              <div class="section-header" style="margin-bottom:1rem;">
+                <h2 class="section-title">Historial de Consumos</h2>
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                  <button class="btn-outline btn-sm" onclick="exportarConsumosCSV()">
+                    <i class="fa-solid fa-download"></i> Exportar
+                  </button>
+                  <button class="btn-primary btn-sm" onclick="openModal('modal-nuevo-consumo')">
+                    <i class="fa-solid fa-plus"></i> Registrar Consumo
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-container">
+                <table class="data-table" id="tabla-consumos">
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Operador</th>
+                      <th>Galpón</th>
+                      <th>Producto</th>
+                      <th>Cantidad</th>
+                      <th>Notas</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-consumos">
+                    <tr data-consumo-operador="carlos" data-consumo-galpon="Galpón 1" data-consumo-tipo="alimento">
+                      <td class="text-xs">2026-04-12 07:30</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">C</div>
+                          Carlos P.
+                        </div>
+                      </td>
+                      <td>Galpón 1</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-wheat-awn"></i> Alimento Crecimiento</span></td>
+                      <td><strong>75 kg</strong></td>
+                      <td class="text-xs text-muted">Comedero automático lleno, repartido en 3 tolvas</td>
+                    </tr>
+                    <tr data-consumo-operador="carlos" data-consumo-galpon="Galpón 2" data-consumo-tipo="alimento">
+                      <td class="text-xs">2026-04-12 07:45</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">C</div>
+                          Carlos P.
+                        </div>
+                      </td>
+                      <td>Galpón 2</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-wheat-awn"></i> Alimento Iniciador</span></td>
+                      <td><strong>60 kg</strong></td>
+                      <td class="text-xs text-muted">Lote nuevo, día 5. Granulometría fina.</td>
+                    </tr>
+                    <tr data-consumo-operador="andrea" data-consumo-galpon="Galpón 3" data-consumo-tipo="medicina">
+                      <td class="text-xs">2026-04-12 08:15</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">A</div>
+                          Andrea G.
+                        </div>
+                      </td>
+                      <td>Galpón 3</td>
+                      <td><span class="badge info-badge"><i class="fa-solid fa-syringe"></i> Vacuna Newcastle</span></td>
+                      <td><strong>500 dosis</strong></td>
+                      <td class="text-xs text-muted">Aplicación gota ocular completa. Lote B2024-N03.</td>
+                    </tr>
+                    <tr data-consumo-operador="andrea" data-consumo-galpon="Galpón 3" data-consumo-tipo="alimento">
+                      <td class="text-xs">2026-04-12 08:30</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">A</div>
+                          Andrea G.
+                        </div>
+                      </td>
+                      <td>Galpón 3</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-wheat-awn"></i> Alimento Engorde</span></td>
+                      <td><strong>80 kg</strong></td>
+                      <td class="text-xs text-muted">Aves en fase final, día 35.</td>
+                    </tr>
+                    <tr data-consumo-operador="andrea" data-consumo-galpon="Galpón 4" data-consumo-tipo="desinfectante">
+                      <td class="text-xs">2026-04-12 09:00</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">A</div>
+                          Andrea G.
+                        </div>
+                      </td>
+                      <td>Galpón 4</td>
+                      <td><span class="badge optimal-badge"><i class="fa-solid fa-spray-can-sparkles"></i> Desinfectante</span></td>
+                      <td><strong>3 lts</strong></td>
+                      <td class="text-xs text-muted">Desinfección de bebederos con peróxido de hidrógeno.</td>
+                    </tr>
+                    <tr data-consumo-operador="andrea" data-consumo-galpon="Galpón 4" data-consumo-tipo="alimento">
+                      <td class="text-xs">2026-04-12 09:15</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">A</div>
+                          Andrea G.
+                        </div>
+                      </td>
+                      <td>Galpón 4</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-wheat-awn"></i> Alimento Crecimiento</span></td>
+                      <td><strong>70 kg</strong></td>
+                      <td class="text-xs text-muted">Día 14, consumo normal para la edad.</td>
+                    </tr>
+                    <tr data-consumo-operador="carlos" data-consumo-galpon="Galpón 1" data-consumo-tipo="medicina">
+                      <td class="text-xs">2026-04-12 10:00</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">C</div>
+                          Carlos P.
+                        </div>
+                      </td>
+                      <td>Galpón 1</td>
+                      <td><span class="badge info-badge"><i class="fa-solid fa-syringe"></i> Vitaminas A+D+E</span></td>
+                      <td><strong>12 dosis</strong></td>
+                      <td class="text-xs text-muted">Suplemento vía agua. 1ml por litro.</td>
+                    </tr>
+                    <tr data-consumo-operador="jorge" data-consumo-galpon="Galpón 2" data-consumo-tipo="viruta">
+                      <td class="text-xs">2026-04-11 23:30</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#f97316,#ea580c);">J</div>
+                          Jorge R.
+                        </div>
+                      </td>
+                      <td>Galpón 2</td>
+                      <td><span class="badge neutral-badge"><i class="fa-solid fa-cubes-stacked"></i> Viruta</span></td>
+                      <td><strong>5 bultos</strong></td>
+                      <td class="text-xs text-muted">Reposición parcial. Zona húmeda del fondo.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </section>
+
+        </main>
+      </div>
+
+      <!-- BOTTOM NAV -->
+      <nav class="bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item"><i class="fa-solid fa-table-columns"></i><span>Inicio</span></a>
+        <a href="sensores.html" class="bottom-nav-item"><i class="fa-solid fa-temperature-half"></i><span>Sensores</span></a>
+        <a href="alertas.html" class="bottom-nav-item"><i class="fa-solid fa-bell"></i><span>Alertas</span></a>
+        <a href="operadores.html" class="bottom-nav-item active"><i class="fa-solid fa-clipboard-list"></i><span>Tareas</span></a>
+      </nav>
+    </div>
+
+    <!-- ===== MODAL: Nueva Tarea ===== -->
+    <div id="modal-nueva-tarea" class="modal-overlay hidden">
+      <div class="modal-content modal-success">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-plus-circle" style="color:var(--status-optimal);"></i> Asignar Nueva Tarea</h3>
+          <button class="icon-btn" onclick="closeModal('modal-nueva-tarea')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-nueva-tarea" onsubmit="guardarTarea(event)">
+            <div class="form-group">
+              <label>Título de la tarea <span class="required">*</span></label>
+              <input type="text" id="tarea-titulo" class="form-control" placeholder="Ej: Revisar bebederos Galpón 1" required>
+            </div>
+            <div class="form-group">
+              <label>Descripción detallada <span class="required">*</span></label>
+              <textarea id="tarea-descripcion" class="form-control" rows="3" placeholder="Describe claramente qué debe hacer el operador..." required minlength="10"></textarea>
+              <span class="form-hint">Sé específico: incluye ubicaciones, materiales necesarios y procedimientos.</span>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Asignar a <span class="required">*</span></label>
+                <select id="tarea-operador" class="form-control" required>
+                  <option value="">Seleccione un operador</option>
+                  <option value="carlos">Carlos Pérez (Galpón 1, 2)</option>
+                  <option value="andrea">Andrea Gómez (Galpón 3, 4)</option>
+                  <option value="jorge">Jorge Ramírez (Turno Noche)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Galpón</label>
+                <select id="tarea-galpon" class="form-control">
+                  <option value="Todos">Todos los galpones</option>
+                  <option value="Galpón 1">Galpón 1</option>
+                  <option value="Galpón 2">Galpón 2</option>
+                  <option value="Galpón 3">Galpón 3</option>
+                  <option value="Galpón 4">Galpón 4</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Prioridad <span class="required">*</span></label>
+                <select id="tarea-prioridad" class="form-control" required>
+                  <option value="alta">🔴 Alta - Urgente</option>
+                  <option value="media" selected>🟡 Media - Normal</option>
+                  <option value="baja">🟢 Baja - Cuando sea posible</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Fecha Límite <span class="required">*</span></label>
+                <input type="date" id="tarea-fecha" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Categoría</label>
+              <select id="tarea-categoria" class="form-control">
+                <option value="general">General</option>
+                <option value="limpieza">Limpieza / Desinfección</option>
+                <option value="alimentacion">Alimentación</option>
+                <option value="veterinaria">Veterinaria / Salud</option>
+                <option value="equipos">Revisión de Equipos</option>
+                <option value="pesaje">Pesaje / Registro</option>
+                <option value="inventario">Inventario / Insumos</option>
+              </select>
+            </div>
+
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" onclick="closeModal('modal-nueva-tarea')">Cancelar</button>
+              <button type="submit" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Asignar Tarea</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: Editar Tarea ===== -->
+    <div id="modal-editar-tarea" class="modal-overlay hidden">
+      <div class="modal-content modal-info">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-pen-to-square" style="color:var(--status-info);"></i> Editar Tarea</h3>
+          <button class="icon-btn" onclick="closeModal('modal-editar-tarea')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="editar-tarea-body">
+          <!-- Se llena dinámicamente -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: Gestionar Galpones ===== -->
+    <div id="modal-gestion-galpones" class="modal-overlay hidden">
+      <div class="modal-content modal-info">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-warehouse" style="color:var(--status-info);"></i> Asignar Galpones</h3>
+          <button class="icon-btn" onclick="closeModal('modal-gestion-galpones')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem;">
+            Operador: <strong id="galpon-modal-nombre" style="color:var(--text-primary);"></strong>
+          </p>
+          <div class="galpon-checkbox-grid" id="galpon-checkbox-container">
+            <!-- Se llena dinámicamente -->
+          </div>
+          <div class="modal-actions">
+            <button class="btn-secondary" onclick="closeModal('modal-gestion-galpones')">Cancelar</button>
+            <button class="btn-primary" onclick="guardarAsignacionGalpones()"><i class="fa-solid fa-check"></i> Guardar Asignaciones</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: Nuevo Operador ===== -->
+    <div id="modal-nuevo-operador" class="modal-overlay hidden">
+      <div class="modal-content modal-success">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-user-plus" style="color:var(--status-optimal);"></i> Agregar Operador</h3>
+          <button class="icon-btn" onclick="closeModal('modal-nuevo-operador')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-nuevo-operador" onsubmit="guardarNuevoOperador(event)">
+            <div class="form-group">
+              <label>Nombre completo <span class="required">*</span></label>
+              <input type="text" id="op-nombre" class="form-control" placeholder="Ej: Luis Martínez" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Turno <span class="required">*</span></label>
+                <select id="op-turno" class="form-control" required>
+                  <option value="dia">Día (6:00–14:00)</option>
+                  <option value="tarde">Tarde (14:00–22:00)</option>
+                  <option value="noche">Noche (22:00–6:00)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Color de avatar</label>
+                <select id="op-color" class="form-control">
+                  <option value="#10b981">🟢 Verde</option>
+                  <option value="#3b82f6">🔵 Azul</option>
+                  <option value="#a855f7">🟣 Morado</option>
+                  <option value="#f97316">🟠 Naranja</option>
+                  <option value="#ef4444">🔴 Rojo</option>
+                  <option value="#eab308">🟡 Amarillo</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Galpones asignados</label>
+              <div class="galpon-checkbox-grid">
+                <div class="galpon-checkbox-item">
+                  <input type="checkbox" id="new-op-g1" value="1">
+                  <label for="new-op-g1">Galpón 1</label>
+                </div>
+                <div class="galpon-checkbox-item">
+                  <input type="checkbox" id="new-op-g2" value="2">
+                  <label for="new-op-g2">Galpón 2</label>
+                </div>
+                <div class="galpon-checkbox-item">
+                  <input type="checkbox" id="new-op-g3" value="3">
+                  <label for="new-op-g3">Galpón 3</label>
+                </div>
+                <div class="galpon-checkbox-item">
+                  <input type="checkbox" id="new-op-g4" value="4">
+                  <label for="new-op-g4">Galpón 4</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" onclick="closeModal('modal-nuevo-operador')">Cancelar</button>
+              <button type="submit" class="btn-primary"><i class="fa-solid fa-user-plus"></i> Agregar Operador</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: Registrar Consumo ===== -->
+    <div id="modal-nuevo-consumo" class="modal-overlay hidden">
+      <div class="modal-content modal-warning">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-wheat-awn" style="color:var(--status-warning);"></i> Registrar Consumo</h3>
+          <button class="icon-btn" onclick="closeModal('modal-nuevo-consumo')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-nuevo-consumo" onsubmit="guardarConsumo(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Operador <span class="required">*</span></label>
+                <select id="consumo-operador" class="form-control" required>
+                  <option value="">Seleccione</option>
+                  <option value="carlos">Carlos Pérez</option>
+                  <option value="andrea">Andrea Gómez</option>
+                  <option value="jorge">Jorge Ramírez</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Galpón <span class="required">*</span></label>
+                <select id="consumo-galpon" class="form-control" required>
+                  <option value="">Seleccione</option>
+                  <option value="Galpón 1">Galpón 1</option>
+                  <option value="Galpón 2">Galpón 2</option>
+                  <option value="Galpón 3">Galpón 3</option>
+                  <option value="Galpón 4">Galpón 4</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Producto <span class="required">*</span></label>
+              <select id="consumo-producto" class="form-control" required>
+                <option value="">Seleccione el producto</option>
+                <optgroup label="🌾 Alimento">
+                  <option value="Alimento Iniciador" data-tipo="alimento">Alimento Iniciador</option>
+                  <option value="Alimento Crecimiento" data-tipo="alimento">Alimento Crecimiento</option>
+                  <option value="Alimento Engorde" data-tipo="alimento">Alimento Engorde</option>
+                  <option value="Alimento Pre-Inicio" data-tipo="alimento">Alimento Pre-Inicio</option>
+                </optgroup>
+                <optgroup label="💉 Medicina / Veterinaria">
+                  <option value="Vacuna Newcastle" data-tipo="medicina">Vacuna Newcastle</option>
+                  <option value="Vacuna Gumboro" data-tipo="medicina">Vacuna Gumboro</option>
+                  <option value="Vitaminas A+D+E" data-tipo="medicina">Vitaminas A+D+E</option>
+                  <option value="Antibiótico" data-tipo="medicina">Antibiótico</option>
+                  <option value="Electrolitos" data-tipo="medicina">Electrolitos</option>
+                </optgroup>
+                <optgroup label="🧹 Insumos">
+                  <option value="Desinfectante" data-tipo="desinfectante">Desinfectante</option>
+                  <option value="Viruta" data-tipo="viruta">Viruta / Cama</option>
+                  <option value="Cal" data-tipo="otro">Cal</option>
+                  <option value="Otro" data-tipo="otro">Otro</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Cantidad <span class="required">*</span></label>
+                <input type="number" id="consumo-cantidad" class="form-control" placeholder="Ej: 75" step="0.1" min="0.1" required>
+              </div>
+              <div class="form-group">
+                <label>Unidad <span class="required">*</span></label>
+                <select id="consumo-unidad" class="form-control" required>
+                  <option value="kg">Kilogramos (kg)</option>
+                  <option value="lts">Litros (lts)</option>
+                  <option value="dosis">Dosis</option>
+                  <option value="bultos">Bultos</option>
+                  <option value="unidades">Unidades</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Notas / Observaciones</label>
+              <textarea id="consumo-notas" class="form-control" rows="2" placeholder="Detalles adicionales: lote, ubicación específica, condiciones..."></textarea>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" onclick="closeModal('modal-nuevo-consumo')">Cancelar</button>
+              <button type="submit" class="btn-primary"><i class="fa-solid fa-check"></i> Registrar Consumo</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: Perfil Operador ===== -->
+    <div id="modal-perfil-operador" class="modal-overlay hidden">
+      <div class="modal-content modal-info modal-wide">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-id-card" style="color:var(--status-info);"></i> Perfil del Operador</h3>
+          <button class="icon-btn" onclick="closeModal('modal-perfil-operador')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="perfil-operador-body">
+          <!-- Se llena dinámicamente -->
+        </div>
+      </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/operadores.js"></script>
+</body>
+</html>

@@ -1,51 +1,30 @@
 <!doctype html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Avisens | Sensores Detalle</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <title>Avisens | Sensores - Supervisor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
+</head>
+<body>
     <div class="app-container">
+
+      <!-- SIDEBAR -->
       <aside class="sidebar">
         <div class="brand">
-          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
+          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo" onerror="this.outerHTML='🐔'"></div>
           <h1 class="brand-name">Avisens</h1>
         </div>
         <nav class="side-nav">
-          <a href="dashboard.html" class="nav-item">
-            <i class="fa-solid fa-table-cells-large"></i> Dashboard
-          </a>
-          <a href="sensores.html" class="nav-item active">
-            <i class="fa-solid fa-tower-broadcast"></i> Sensores
-          </a>
-          <a href="curvas.html" class="nav-item">
-            <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
-          </a>
-          <a href="alertas.html" class="nav-item">
-            <i class="fa-solid fa-triangle-exclamation"></i> Alertas
-          </a>
-          <a href="automatizacion.html" class="nav-item">
-            <i class="fa-solid fa-gear"></i> Automatización
-          </a>
-          <a href="inventario.html" class="nav-item">
-            <i class="fa-solid fa-box"></i> Inventario
-          </a>
-          <a href="mantenimiento.html" class="nav-item">
-            <i class="fa-solid fa-wrench"></i> Mantenimiento
-          </a>
-          <a href="#" class="nav-item">
-            <i class="fa-solid fa-user-group"></i> Usuarios
-          </a>
+          <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+          <a href="sensores.html" class="nav-item active"><i class="fa-solid fa-tower-broadcast"></i> Sensores</a>
+          <a href="curvas.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento</a>
+          <a href="alertas.html" class="nav-item"><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
+          <a href="automatizacion.html" class="nav-item"><i class="fa-solid fa-gear"></i> Automatización</a>
+          <a href="inventario.html" class="nav-item"><i class="fa-solid fa-box"></i> Inventario</a>
+          <a href="operadores.html" class="nav-item"><i class="fa-solid fa-clipboard-list"></i> Tareas / Operadores</a>
         </nav>
       </aside>
 
@@ -55,44 +34,74 @@
             <h2>Sensores</h2>
             <p class="subtitle">Análisis detallado por galpón</p>
           </div>
-          <a href="index.html" class="user-profile">
-            <div class="user-info">
-              <span class="user-name">Avisens Admin</span>
-              <span class="user-role">Acceso Total</span>
+          <div class="header-right">
+            <div class="user-profile">
+              <div class="user-info">
+                <span class="user-name">María López</span>
+                <span class="user-role">Encargado/Supervisor</span>
+              </div>
+              <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
             </div>
-            <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
-          </a>
+            <button class="btn-logout" onclick="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+          </div>
         </header>
 
         <main class="content-area">
+
+          <!-- FILTROS -->
           <section class="section-block fade-in">
-            <div class="shed-selector">
-              <h2 class="section-title">Galpón 3 (Estado Crítico)</h2>
-              <span
-                class="status-indicator pulse-animation"
-                style="
-                  background: var(--status-critical);
-                  box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
-                "
-              ></span>
+            <div class="filters-bar">
+              <div class="filter-group">
+                <label>Galpón</label>
+                <select class="filter-select" id="filter-galpon" onchange="aplicarFiltrosSensores()">
+                  <option value="all">Todos los galpones</option>
+                  <option value="3">Galpón 3</option>
+                  <option value="1">Galpón 1</option>
+                  <option value="2">Galpón 2</option>
+                  <option value="4">Galpón 4</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Parámetro</label>
+                <select class="filter-select" id="filter-param" onchange="aplicarFiltrosSensores()">
+                  <option value="all">Todos</option>
+                  <option value="temp">Temperatura</option>
+                  <option value="hum">Humedad</option>
+                  <option value="co2">CO₂</option>
+                  <option value="nh3">Amoníaco</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Período</label>
+                <select class="filter-select" id="filter-periodo">
+                  <option value="1h">Última hora</option>
+                  <option value="24h" selected>Últimas 24 horas</option>
+                  <option value="7d">Última semana</option>
+                  <option value="30d">Último mes</option>
+                </select>
+              </div>
+              <button class="btn-clear-filters" onclick="limpiarFiltrosSensores()">
+                <i class="fa-solid fa-rotate-left"></i> Limpiar
+              </button>
             </div>
           </section>
 
-          <section class="section-block fade-in" style="animation-delay: 0.1s">
+          <!-- METRIC CARDS -->
+          <section class="section-block fade-in" style="animation-delay: 0.05s">
             <div class="sensors-grid">
-              <article class="sensor-card" data-status="critical">
+              <article class="sensor-card" data-status="critical" id="card-temp">
                 <div class="sensor-top">
                   <div class="sensor-title">
                     <i class="fa-solid fa-temperature-high"></i>
-                    <h3>Temperatura</h3>
+                    <div>
+                      <h3>Temperatura</h3>
+                      <div class="sensor-trend trend-up">▲ +0.5°C <span style="color:var(--text-muted)">desde última lectura</span></div>
+                    </div>
                   </div>
                   <span class="sensor-value critical-text">35°C</span>
                 </div>
                 <div class="progress-container">
-                  <div
-                    class="progress-bar critical-bg"
-                    style="width: 90%"
-                  ></div>
+                  <div class="progress-bar critical-bg" style="width: 90%"></div>
                 </div>
                 <div class="sensor-limits">
                   <span>Mín: 28°C</span>
@@ -100,31 +109,14 @@
                 </div>
               </article>
 
-              <article class="sensor-card" data-status="critical">
-                <div class="sensor-top">
-                  <div class="sensor-title">
-                    <i class="fa-solid fa-biohazard"></i>
-                    <h3>Amoníaco (NH₃)</h3>
-                  </div>
-                  <span class="sensor-value critical-text">22 ppm</span>
-                </div>
-                <div class="progress-container">
-                  <div
-                    class="progress-bar critical-bg"
-                    style="width: 85%"
-                  ></div>
-                </div>
-                <div class="sensor-limits">
-                  <span>Óptimo: < 10 ppm</span>
-                  <span>Límite: 20 ppm</span>
-                </div>
-              </article>
-
-              <article class="sensor-card" data-status="optimal">
+              <article class="sensor-card" data-status="optimal" id="card-hum">
                 <div class="sensor-top">
                   <div class="sensor-title">
                     <i class="fa-solid fa-droplet"></i>
-                    <h3>Humedad</h3>
+                    <div>
+                      <h3>Humedad</h3>
+                      <div class="sensor-trend trend-stable">→ Estable</div>
+                    </div>
                   </div>
                   <span class="sensor-value">72%</span>
                 </div>
@@ -132,16 +124,19 @@
                   <div class="progress-bar optimal-bg" style="width: 72%"></div>
                 </div>
                 <div class="sensor-limits">
-                  <span>Mín: 60%</span>
-                  <span>Máx: 75%</span>
+                  <span>Mín: 50%</span>
+                  <span>Máx: 70%</span>
                 </div>
               </article>
 
-              <article class="sensor-card" data-status="warning">
+              <article class="sensor-card" data-status="warning" id="card-co2">
                 <div class="sensor-top">
                   <div class="sensor-title">
                     <i class="fa-solid fa-cloud"></i>
-                    <h3>Dióxido de Carbono (CO₂)</h3>
+                    <div>
+                      <h3>CO₂</h3>
+                      <div class="sensor-trend trend-up">▲ +50 ppm</div>
+                    </div>
                   </div>
                   <span class="sensor-value warning-text">1150 ppm</span>
                 </div>
@@ -150,35 +145,217 @@
                 </div>
                 <div class="sensor-limits">
                   <span>Óptimo: < 1000 ppm</span>
-                  <span>Límite: 2500 ppm</span>
+                  <span>Límite: 3000 ppm</span>
+                </div>
+              </article>
+
+              <article class="sensor-card" data-status="critical" id="card-nh3">
+                <div class="sensor-top">
+                  <div class="sensor-title">
+                    <i class="fa-solid fa-biohazard"></i>
+                    <div>
+                      <h3>Amoníaco (NH₃)</h3>
+                      <div class="sensor-trend trend-up">▲ +2 ppm</div>
+                    </div>
+                  </div>
+                  <span class="sensor-value critical-text">22 ppm</span>
+                </div>
+                <div class="progress-container">
+                  <div class="progress-bar critical-bg" style="width: 85%"></div>
+                </div>
+                <div class="sensor-limits">
+                  <span>Óptimo: < 10 ppm</span>
+                  <span>Límite: 20 ppm</span>
                 </div>
               </article>
             </div>
           </section>
+
+          <!-- TABLA DE LECTURAS -->
+          <section class="section-block fade-in" style="animation-delay: 0.1s">
+            <div class="section-header">
+              <h2 class="section-title">Lecturas de Sensores</h2>
+              <button class="btn-outline btn-sm" onclick="exportarSensoresCSV()">
+                <i class="fa-solid fa-download"></i> Exportar CSV
+              </button>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table" id="tabla-sensores">
+                <thead>
+                  <tr>
+                    <th>ID Sensor</th>
+                    <th>Galpón</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                    <th>Estado</th>
+                    <th>Timestamp</th>
+                    <th class="text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-sensores">
+                  <tr data-galpon="3" data-tipo="temp">
+                    <td>S001</td>
+                    <td>Galpón 3</td>
+                    <td><i class="fa-solid fa-temperature-high" style="color:var(--status-critical);"></i> Temperatura</td>
+                    <td><strong class="critical-text">35.2°C</strong></td>
+                    <td><span class="badge critical-badge">Crítico</span></td>
+                    <td class="text-muted text-xs">2026-03-17 10:45:32</td>
+                    <td class="action-buttons">
+                      <button class="icon-btn view" title="Ver histórico"><i class="fa-solid fa-chart-line"></i></button>
+                      <button class="icon-btn edit" title="Configurar umbrales" onclick="abrirConfigSensor('S001','Temperatura','Galpón 3')"><i class="fa-solid fa-sliders"></i></button>
+                    </td>
+                  </tr>
+                  <tr data-galpon="3" data-tipo="nh3">
+                    <td>S002</td>
+                    <td>Galpón 3</td>
+                    <td><i class="fa-solid fa-biohazard" style="color:var(--status-critical);"></i> Amoníaco</td>
+                    <td><strong class="critical-text">22 ppm</strong></td>
+                    <td><span class="badge critical-badge">Crítico</span></td>
+                    <td class="text-muted text-xs">2026-03-17 10:44:18</td>
+                    <td class="action-buttons">
+                      <button class="icon-btn view" title="Ver histórico"><i class="fa-solid fa-chart-line"></i></button>
+                      <button class="icon-btn edit" title="Configurar umbrales" onclick="abrirConfigSensor('S002','Amoníaco','Galpón 3')"><i class="fa-solid fa-sliders"></i></button>
+                    </td>
+                  </tr>
+                  <tr data-galpon="3" data-tipo="co2">
+                    <td>S003</td>
+                    <td>Galpón 3</td>
+                    <td><i class="fa-solid fa-cloud" style="color:var(--status-warning);"></i> CO₂</td>
+                    <td><strong class="warning-text">1150 ppm</strong></td>
+                    <td><span class="badge warning-badge">Advertencia</span></td>
+                    <td class="text-muted text-xs">2026-03-17 10:43:55</td>
+                    <td class="action-buttons">
+                      <button class="icon-btn view" title="Ver histórico"><i class="fa-solid fa-chart-line"></i></button>
+                      <button class="icon-btn edit" title="Configurar umbrales" onclick="abrirConfigSensor('S003','CO₂','Galpón 3')"><i class="fa-solid fa-sliders"></i></button>
+                    </td>
+                  </tr>
+                  <tr data-galpon="3" data-tipo="hum">
+                    <td>S004</td>
+                    <td>Galpón 3</td>
+                    <td><i class="fa-solid fa-droplet" style="color:var(--status-optimal);"></i> Humedad</td>
+                    <td><strong>72%</strong></td>
+                    <td><span class="badge optimal-badge">Óptimo</span></td>
+                    <td class="text-muted text-xs">2026-03-17 10:43:12</td>
+                    <td class="action-buttons">
+                      <button class="icon-btn view" title="Ver histórico"><i class="fa-solid fa-chart-line"></i></button>
+                      <button class="icon-btn edit" title="Configurar umbrales" onclick="abrirConfigSensor('S004','Humedad','Galpón 3')"><i class="fa-solid fa-sliders"></i></button>
+                    </td>
+                  </tr>
+                  <tr data-galpon="1" data-tipo="temp">
+                    <td>S005</td>
+                    <td>Galpón 1</td>
+                    <td><i class="fa-solid fa-temperature-high" style="color:var(--status-optimal);"></i> Temperatura</td>
+                    <td><strong>32°C</strong></td>
+                    <td><span class="badge optimal-badge">Óptimo</span></td>
+                    <td class="text-muted text-xs">2026-03-17 10:42:08</td>
+                    <td class="action-buttons">
+                      <button class="icon-btn view" title="Ver histórico"><i class="fa-solid fa-chart-line"></i></button>
+                      <button class="icon-btn edit" title="Configurar umbrales" onclick="abrirConfigSensor('S005','Temperatura','Galpón 1')"><i class="fa-solid fa-sliders"></i></button>
+                    </td>
+                  </tr>
+                  <tr data-galpon="2" data-tipo="co2">
+                    <td>S006</td>
+                    <td>Galpón 2</td>
+                    <td><i class="fa-solid fa-cloud" style="color:var(--status-warning);"></i> CO₂</td>
+                    <td><strong class="warning-text">920 ppm</strong></td>
+                    <td><span class="badge warning-badge">Advertencia</span></td>
+                    <td class="text-muted text-xs">2026-03-17 10:41:44</td>
+                    <td class="action-buttons">
+                      <button class="icon-btn view" title="Ver histórico"><i class="fa-solid fa-chart-line"></i></button>
+                      <button class="icon-btn edit" title="Configurar umbrales" onclick="abrirConfigSensor('S006','CO₂','Galpón 2')"><i class="fa-solid fa-sliders"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Paginación -->
+            <div class="pagination-bar">
+              <span class="pagination-info">Mostrando 1-6 de 24 sensores</span>
+              <div class="pagination-controls">
+                <button class="page-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </section>
+
         </main>
       </div>
 
+      <!-- BOTTOM NAV -->
       <nav class="bottom-nav">
-        <a href="index.html" class="bottom-nav-item">
-          <i class="fa-solid fa-table-columns"></i><span>Inicio</span>
-        </a>
-        <a href="sensores.html" class="bottom-nav-item active">
-          <i class="fa-solid fa-temperature-half"></i><span>Sensores</span>
-        </a>
-        <a href="alertas.html" class="bottom-nav-item">
-          <i class="fa-solid fa-bell"></i><span>Alertas</span>
-        </a>
-        <a href="#" class="bottom-nav-item">
-          <i class="fa-solid fa-gear"></i><span>Ajustes</span>
-        </a>
+        <a href="dashboard.html" class="bottom-nav-item"><i class="fa-solid fa-table-columns"></i><span>Inicio</span></a>
+        <a href="sensores.html" class="bottom-nav-item active"><i class="fa-solid fa-temperature-half"></i><span>Sensores</span></a>
+        <a href="alertas.html" class="bottom-nav-item"><i class="fa-solid fa-bell"></i><span>Alertas</span></a>
+        <a href="automatizacion.html" class="bottom-nav-item"><i class="fa-solid fa-gear"></i><span>Sistemas</span></a>
       </nav>
     </div>
-  </body>
+
+    <!-- MODAL: Configurar Umbrales -->
+    <div id="modal-config-sensor" class="modal-overlay hidden">
+      <div class="modal-content modal-info">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-sliders" style="color:var(--status-info);"></i> Configurar Umbrales</h3>
+          <button class="icon-btn" onclick="closeModal('modal-config-sensor')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row" style="margin-bottom:1rem;">
+            <div class="form-group">
+              <label>Sensor</label>
+              <input type="text" id="cfg-sensor-id" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+              <label>Galpón</label>
+              <input type="text" id="cfg-sensor-galpon" class="form-control" readonly>
+            </div>
+          </div>
+          <p style="color:var(--text-muted); font-size:0.8rem; margin-bottom:1rem;" id="cfg-tipo-label">Parámetro: Temperatura</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Óptimo Mínimo</label>
+              <input type="number" id="cfg-opt-min" class="form-control" value="28" step="0.5">
+            </div>
+            <div class="form-group">
+              <label>Óptimo Máximo</label>
+              <input type="number" id="cfg-opt-max" class="form-control" value="32" step="0.5">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Advertencia Mínimo</label>
+              <input type="number" id="cfg-warn-min" class="form-control" value="24" step="0.5">
+            </div>
+            <div class="form-group">
+              <label>Advertencia Máximo</label>
+              <input type="number" id="cfg-warn-max" class="form-control" value="34" step="0.5">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Crítico Mínimo</label>
+              <input type="number" id="cfg-crit-min" class="form-control" value="20" step="0.5">
+            </div>
+            <div class="form-group">
+              <label>Crítico Máximo</label>
+              <input type="number" id="cfg-crit-max" class="form-control" value="36" step="0.5">
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-secondary" onclick="closeModal('modal-config-sensor')">Cancelar</button>
+            <button class="btn-primary" onclick="guardarConfigSensor()"><i class="fa-solid fa-check"></i> Guardar Umbrales</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/sensores.js"></script>
+</body>
 </html>
-
-
-
-
-
-
-

@@ -1,157 +1,841 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avisens | Inventario</title>
+    <title>Avisens | Inventario - Supervisor</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <div class="app-container">
-        <aside class="sidebar">
-            <div class="brand">
-                <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
-                <h1 class="brand-name">Avisens</h1>
-            </div>
-            <nav class="side-nav"> <a href="dashboard.html" class="nav-item"> <i
-                        class="fa-solid fa-table-cells-large"></i> Dashboard </a> <a href="sensores.html"
-                    class="nav-item"> <i class="fa-solid fa-tower-broadcast"></i> Sensores </a> <a href="curvas.html"
-                    class="nav-item"> <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento </a> <a
-                    href="alertas.html" class="nav-item"> <i class="fa-solid fa-triangle-exclamation"></i> Alertas </a>
-                <a href="automatizacion.html" class="nav-item"> <i class="fa-solid fa-gear"></i> Automatización </a> <a
-                    href="inventario.html" class="nav-item active"> <i class="fa-solid fa-box"></i> Inventario </a> <a
-                    href="mantenimiento.html" class="nav-item"> <i class="fa-solid fa-wrench"></i> Mantenimiento </a> <a
-                    href="usuarios.html" class="nav-item"> <i class="fa-solid fa-user-group"></i> Usuarios </a> </nav>
-        </aside>
-        <div class="main-wrapper">
-            <header class="top-header">
-                <div class="header-titles">
-                    <h2>Inventario</h2>
-                    <p class="subtitle">Gestión de insumos y suministros</p>
-                </div> <a href="index.html" class="user-profile">
-                    <div class="user-info"> <span class="user-name">Avisens Admin</span> <span
-                            class="user-role">Encargado/Supervisor</span> </div>
-                    <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
-                </a>
-            </header>
-            <main class="content-area">
-                <section class="section-block fade-in">
-                    <div class="alerts-summary-grid">
-                        <div class="summary-card optimal-summary">
-                            <div class="summary-icon"><i class="fa-solid fa-wheat-awn"></i></div>
-                            <div class="summary-data">
-                                <h3>Alimento</h3> <span>5,400 kg en bodega</span>
-                            </div>
-                        </div>
-                        <div class="summary-card warning-summary">
-                            <div class="summary-icon"><i class="fa-solid fa-syringe"></i></div>
-                            <div class="summary-data">
-                                <h3>Medicamentos</h3> <span>1 producto por agotarse</span>
-                            </div>
-                        </div>
-                        <div class="summary-card optimal-summary">
-                            <div class="summary-icon"><i class="fa-solid fa-box-open"></i></div>
-                            <div class="summary-data">
-                                <h3>Suministros</h3> <span>Stock adecuado</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="section-block fade-in" style="animation-delay: 0.1s;">
-                    <div class="section-header">
-                        <h2 class="section-title">Detalle de Insumos</h2> <a href="#formIngreso" class="btn-outline"> <i
-                                class="fa-solid fa-plus"></i> Nuevo Ingreso </a>
-                    </div>
-                    <div class="table-container">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Categoría</th>
-                                    <th>Stock Actual</th>
-                                    <th>Capacidad de Bodega</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Bultos Iniciación (40kg)</strong><br><span
-                                            class="text-xs text-muted">Marca: Purina</span></td>
-                                    <td>Alimento</td>
-                                    <td>135 bultos</td>
-                                    <td>
-                                        <div class="mini-progress-container">
-                                            <div class="mini-progress-bar optimal-bg" style="width: 80%;"></div>
-                                        </div> <span class="text-xs text-muted">80% lleno</span>
-                                    </td>
-                                    <td><span class="badge optimal-badge">Suficiente</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Bultos Engorde (40kg)</strong><br><span
-                                            class="text-xs text-muted">Marca: Purina</span></td>
-                                    <td>Alimento</td>
-                                    <td>80 bultos</td>
-                                    <td>
-                                        <div class="mini-progress-container">
-                                            <div class="mini-progress-bar optimal-bg" style="width: 50%;"></div>
-                                        </div> <span class="text-xs text-muted">50% lleno</span>
-                                    </td>
-                                    <td><span class="badge optimal-badge">Suficiente</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Vacuna Gumboro</strong><br><span class="text-xs text-muted">Lote:
-                                            L-8492</span></td>
-                                    <td>Medicamento</td>
-                                    <td>2 frascos</td>
-                                    <td>
-                                        <div class="mini-progress-container">
-                                            <div class="mini-progress-bar critical-bg" style="width: 10%;"></div>
-                                        </div> <span class="text-xs text-muted">10% lleno</span>
-                                    </td>
-                                    <td><span class="badge critical-badge">Crítico</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Viruta de madera</strong><br><span class="text-xs text-muted">Para
-                                            camas</span></td>
-                                    <td>Suministros</td>
-                                    <td>15 pacas</td>
-                                    <td>
-                                        <div class="mini-progress-container">
-                                            <div class="mini-progress-bar warning-bg" style="width: 30%;"></div>
-                                        </div> <span class="text-xs text-muted">30% lleno</span>
-                                    </td>
-                                    <td><span class="badge warning-badge">Por reabastecer</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section> <!-- FORMULARIO NUEVO INGRESO -->
-                <div id="formIngreso" class="modal">
-                    <div class="modal-content"> <a href="#" class="close-btn">&times;</a>
-                        <h2>Nuevo Producto</h2>
-                        <form class="form-grid"> <label>ID del producto</label> <input type="text">
-                            <label>Producto</label> <input type="text"> <label>Categoría</label> <select>
-                                <option value="">Seleccione una categoría</option>
-                                <option value="alimento">Alimento</option>
-                                <option value="medicamentos">Medicamentos</option>
-                                <option value="suministros">Suministros</option>
-                            </select> <label>Proveedor</label> <input type="text"> <label>Precio de compra</label>
-                            <input type="number"> <button type="submit" class="btn-primary">Guardar</button> </form>
-                    </div>
-                </div>
-            </main>
-        </div>
-        <nav class="bottom-nav"> <a href="index.html" class="bottom-nav-item"> <i
-                    class="fa-solid fa-table-cells-large"></i><span>Inicio</span> </a> <a href="sensores.html"
-                class="bottom-nav-item"> <i class="fa-solid fa-tower-broadcast"></i><span>Sensores</span> </a> <a
-                href="alertas.html" class="bottom-nav-item"> <i
-                    class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span> </a> <a href="inventario.html"
-                class="bottom-nav-item active"> <i class="fa-solid fa-box"></i><span>Inventario</span> </a> </nav>
-    </div>
-</body>
 
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo" onerror="this.outerHTML='🐔'"></div>
+          <h1 class="brand-name">Avisens</h1>
+        </div>
+        <nav class="side-nav">
+          <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+          <a href="sensores.html" class="nav-item"><i class="fa-solid fa-tower-broadcast"></i> Sensores</a>
+          <a href="curvas.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento</a>
+          <a href="alertas.html" class="nav-item"><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
+          <a href="automatizacion.html" class="nav-item"><i class="fa-solid fa-gear"></i> Automatización</a>
+          <a href="inventario.html" class="nav-item active"><i class="fa-solid fa-box"></i> Inventario</a>
+          <a href="operadores.html" class="nav-item"><i class="fa-solid fa-clipboard-list"></i> Tareas / Operadores</a>
+        </nav>
+      </aside>
+
+      <div class="main-wrapper">
+        <header class="top-header">
+          <div class="header-titles">
+            <h2>Inventario</h2>
+            <p class="subtitle">Gestión de insumos, suministros y requisiciones</p>
+          </div>
+          <div class="header-right">
+            <div class="user-profile">
+              <div class="user-info">
+                <span class="user-name">María López</span>
+                <span class="user-role">Encargado/Supervisor</span>
+              </div>
+              <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+            </div>
+            <button class="btn-logout" onclick="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+          </div>
+        </header>
+
+        <main class="content-area">
+
+          <!-- RESUMEN -->
+          <section class="section-block fade-in">
+            <div class="alerts-summary-grid">
+              <div class="summary-card optimal-summary">
+                <div class="summary-icon"><i class="fa-solid fa-cubes-stacked"></i></div>
+                <div class="summary-data">
+                  <h3 id="summary-total">9 productos</h3>
+                  <span>Total en inventario</span>
+                </div>
+              </div>
+              <div class="summary-card warning-summary">
+                <div class="summary-icon"><i class="fa-solid fa-box-open"></i></div>
+                <div class="summary-data">
+                  <h3 id="summary-bajo">2 productos</h3>
+                  <span>Por reabastecer</span>
+                </div>
+              </div>
+              <div class="summary-card critical-summary">
+                <div class="summary-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <div class="summary-data">
+                  <h3 id="summary-critico">1 producto</h3>
+                  <span>Stock crítico</span>
+                </div>
+              </div>
+              <div class="summary-card info-summary">
+                <div class="summary-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                <div class="summary-data">
+                  <h3 id="summary-requisiciones">2 pendientes</h3>
+                  <span>Requisiciones abiertas</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TABS -->
+          <section class="section-block fade-in" style="animation-delay: 0.05s">
+            <div class="tabs-container">
+              <button class="tab-btn active" onclick="cambiarTabInv('tab-stock', this)">
+                <i class="fa-solid fa-boxes-stacked"></i> Stock de Insumos
+              </button>
+              <button class="tab-btn" onclick="cambiarTabInv('tab-requisiciones', this)">
+                <i class="fa-solid fa-file-invoice"></i> Requisiciones
+              </button>
+              <button class="tab-btn" onclick="cambiarTabInv('tab-movimientos', this)">
+                <i class="fa-solid fa-right-left"></i> Historial Movimientos
+              </button>
+            </div>
+
+            <!-- ======================== TAB 1: STOCK ======================== -->
+            <div id="tab-stock" class="tab-content active">
+
+              <!-- FILTROS -->
+              <div class="filters-bar" style="margin-bottom:1rem;">
+                <div class="filter-group">
+                  <label>Categoría</label>
+                  <select class="filter-select" id="filter-inv-cat" onchange="aplicarFiltrosInventario()">
+                    <option value="all">Todas</option>
+                    <option value="alimento">Alimento</option>
+                    <option value="medicamento">Medicamento</option>
+                    <option value="suministros">Suministros</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label>Estado</label>
+                  <select class="filter-select" id="filter-inv-estado" onchange="aplicarFiltrosInventario()">
+                    <option value="all">Todos</option>
+                    <option value="suficiente">Suficiente</option>
+                    <option value="bajo">Por reabastecer</option>
+                    <option value="critico">Crítico</option>
+                  </select>
+                </div>
+                <div class="search-wrapper">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input type="text" class="filter-input" id="search-inv" placeholder="Buscar producto..." oninput="aplicarFiltrosInventario()">
+                </div>
+                <button class="btn-clear-filters" onclick="limpiarFiltrosInventario()">
+                  <i class="fa-solid fa-rotate-left"></i> Limpiar
+                </button>
+              </div>
+
+              <div class="section-header" style="margin-bottom: 1rem;">
+                <h2 class="section-title">Detalle de Insumos</h2>
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                  <button class="btn-outline btn-sm" onclick="exportarInventarioCSV()">
+                    <i class="fa-solid fa-download"></i> Exportar
+                  </button>
+                  <button class="btn-primary btn-sm" onclick="openModal('modal-nuevo-producto')">
+                    <i class="fa-solid fa-plus"></i> Registrar Producto
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Producto</th>
+                      <th>Categoría</th>
+                      <th>Stock Actual</th>
+                      <th>Stock Mínimo</th>
+                      <th>Ubicación</th>
+                      <th>Estado</th>
+                      <th>Actualizado</th>
+                      <th class="text-center">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabla-inventario-body">
+                    <!-- Alimentos -->
+                    <tr data-cat="alimento" data-estado="suficiente">
+                      <td>
+                        <strong>Alimento Iniciación (40kg)</strong><br>
+                        <span class="text-xs text-muted">Marca: Purina | Lote: L-4210</span>
+                      </td>
+                      <td><i class="fa-solid fa-wheat-awn" style="color:var(--status-optimal);"></i> Alimento</td>
+                      <td class="stock-ok"><strong>135 bultos</strong></td>
+                      <td class="text-muted">50 bultos</td>
+                      <td class="text-muted">Bodega A</td>
+                      <td><span class="badge optimal-badge">Suficiente</span></td>
+                      <td class="text-xs text-muted">Hace 2 días</td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Agregar Stock" onclick="abrirModalIngreso('Alimento Iniciación (40kg)', 'Alimento', 'bultos')"><i class="fa-solid fa-plus-circle"></i></button>
+                        <button class="icon-btn delete" title="Retirar / Asignar" onclick="abrirModalConsumo('Alimento Iniciación (40kg)', '135 bultos', 'Alimento')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button class="icon-btn view" title="Ver historial" onclick="verHistorial('Alimento Iniciación (40kg)')"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                      </td>
+                    </tr>
+                    <tr data-cat="alimento" data-estado="suficiente">
+                      <td>
+                        <strong>Alimento Crecimiento (40kg)</strong><br>
+                        <span class="text-xs text-muted">Marca: Purina | Lote: L-4211</span>
+                      </td>
+                      <td><i class="fa-solid fa-wheat-awn" style="color:var(--status-optimal);"></i> Alimento</td>
+                      <td class="stock-ok"><strong>98 bultos</strong></td>
+                      <td class="text-muted">40 bultos</td>
+                      <td class="text-muted">Bodega A</td>
+                      <td><span class="badge optimal-badge">Suficiente</span></td>
+                      <td class="text-xs text-muted">Hace 1 día</td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Agregar Stock" onclick="abrirModalIngreso('Alimento Crecimiento (40kg)', 'Alimento', 'bultos')"><i class="fa-solid fa-plus-circle"></i></button>
+                        <button class="icon-btn delete" title="Retirar / Asignar" onclick="abrirModalConsumo('Alimento Crecimiento (40kg)', '98 bultos', 'Alimento')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button class="icon-btn view" title="Ver historial" onclick="verHistorial('Alimento Crecimiento (40kg)')"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                      </td>
+                    </tr>
+                    <tr data-cat="alimento" data-estado="bajo">
+                      <td>
+                        <strong>Alimento Engorde (40kg)</strong><br>
+                        <span class="text-xs text-muted">Marca: Purina | Lote: L-4209</span>
+                      </td>
+                      <td><i class="fa-solid fa-wheat-awn" style="color:var(--status-warning);"></i> Alimento</td>
+                      <td class="stock-low"><strong>32 bultos</strong></td>
+                      <td class="text-muted">40 bultos</td>
+                      <td class="text-muted">Bodega A</td>
+                      <td><span class="badge warning-badge">Por reabastecer</span></td>
+                      <td class="text-xs text-muted">Hace 3 días</td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Agregar Stock" onclick="abrirModalIngreso('Alimento Engorde (40kg)', 'Alimento', 'bultos')"><i class="fa-solid fa-plus-circle"></i></button>
+                        <button class="icon-btn delete" title="Retirar / Asignar" onclick="abrirModalConsumo('Alimento Engorde (40kg)', '32 bultos', 'Alimento')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button class="icon-btn view" title="Ver historial" onclick="verHistorial('Alimento Engorde (40kg)')"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                      </td>
+                    </tr>
+                    <!-- Medicamentos -->
+                    <tr data-cat="medicamento" data-estado="critico">
+                      <td>
+                        <strong>Vacuna Gumboro</strong><br>
+                        <span class="text-xs text-muted">Lote: L-8492 | Vence: 2026-06-15</span>
+                      </td>
+                      <td><i class="fa-solid fa-syringe" style="color:var(--status-critical);"></i> Medicamento</td>
+                      <td class="stock-critical"><strong>2 frascos</strong></td>
+                      <td class="text-muted">5 frascos</td>
+                      <td class="text-muted">Refrigerador</td>
+                      <td><span class="badge critical-badge"><i class="fa-solid fa-exclamation"></i> Crítico</span></td>
+                      <td class="text-xs text-muted">Hace 5 días</td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Agregar Stock" onclick="abrirModalIngreso('Vacuna Gumboro', 'Medicamento', 'frascos')"><i class="fa-solid fa-plus-circle"></i></button>
+                        <button class="icon-btn delete" title="Retirar / Asignar" onclick="abrirModalConsumo('Vacuna Gumboro', '2 frascos', 'Medicamento')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button class="icon-btn view" title="Ver historial" onclick="verHistorial('Vacuna Gumboro')"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                      </td>
+                    </tr>
+                    <tr data-cat="medicamento" data-estado="suficiente">
+                      <td>
+                        <strong>Vacuna Newcastle</strong><br>
+                        <span class="text-xs text-muted">Lote: L-7831 | Vence: 2026-08-20</span>
+                      </td>
+                      <td><i class="fa-solid fa-syringe" style="color:var(--status-optimal);"></i> Medicamento</td>
+                      <td class="stock-ok"><strong>12 frascos</strong></td>
+                      <td class="text-muted">5 frascos</td>
+                      <td class="text-muted">Refrigerador</td>
+                      <td><span class="badge optimal-badge">Suficiente</span></td>
+                      <td class="text-xs text-muted">Hace 1 día</td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Agregar Stock" onclick="abrirModalIngreso('Vacuna Newcastle', 'Medicamento', 'frascos')"><i class="fa-solid fa-plus-circle"></i></button>
+                        <button class="icon-btn delete" title="Retirar / Asignar" onclick="abrirModalConsumo('Vacuna Newcastle', '12 frascos', 'Medicamento')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button class="icon-btn view" title="Ver historial" onclick="verHistorial('Vacuna Newcastle')"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                      </td>
+                    </tr>
+                    <tr data-cat="medicamento" data-estado="suficiente">
+                      <td>
+                        <strong>Antibiótico Enrofloxacina 10%</strong><br>
+                        <span class="text-xs text-muted">Oral | Lote: L-9921</span>
+                      </td>
+                      <td><i class="fa-solid fa-syringe" style="color:var(--status-optimal);"></i> Medicamento</td>
+                      <td class="stock-ok"><strong>8 litros</strong></td>
+                      <td class="text-muted">3 litros</td>
+                      <td class="text-muted">Refrigerador</td>
+                      <td><span class="badge optimal-badge">Suficiente</span></td>
+                      <td class="text-xs text-muted">Hace 7 días</td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Agregar Stock" onclick="abrirModalIngreso('Antibiótico Enrofloxacina 10%', 'Medicamento', 'litros')"><i class="fa-solid fa-plus-circle"></i></button>
+                        <button class="icon-btn delete" title="Retirar / Asignar" onclick="abrirModalConsumo('Antibiótico Enrofloxacina 10%', '8 litros', 'Medicamento')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button class="icon-btn view" title="Ver historial" onclick="verHistorial('Antibiótico Enrofloxacina 10%')"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                      </td>
+                    </tr>
+                    <tr data-cat="medicamento" data-estado="suficiente">
+                      <td>
+                        <strong>Vitaminas A+D+E</strong><br>
+                        <span class="text-xs text-muted">Suplemento vía agua | Lote: V-3312</span>
+                      </td>
+                      <td><i class="fa-solid fa-syringe" style="color:var(--status-optimal);"></i> Medicamento</td>
+                      <td class="stock-ok"><strong>5 litros</strong></td>
+                      <td class="text-muted">2 litros</td>
+                      <td class="text-muted">Refrigerador</td>
+                      <td><span class="badge optimal-badge">Suficiente</span></td>
+                      <td class="text-xs text-muted">Hace 4 días</td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Agregar Stock" onclick="abrirModalIngreso('Vitaminas A+D+E', 'Medicamento', 'litros')"><i class="fa-solid fa-plus-circle"></i></button>
+                        <button class="icon-btn delete" title="Retirar / Asignar" onclick="abrirModalConsumo('Vitaminas A+D+E', '5 litros', 'Medicamento')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button class="icon-btn view" title="Ver historial" onclick="verHistorial('Vitaminas A+D+E')"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                      </td>
+                    </tr>
+                    <!-- Suministros -->
+                    <tr data-cat="suministros" data-estado="bajo">
+                      <td>
+                        <strong>Viruta de madera (pacas)</strong><br>
+                        <span class="text-xs text-muted">Para camas de galpones</span>
+                      </td>
+                      <td><i class="fa-solid fa-cubes-stacked" style="color:var(--status-warning);"></i> Suministros</td>
+                      <td class="stock-low"><strong>15 pacas</strong></td>
+                      <td class="text-muted">20 pacas</td>
+                      <td class="text-muted">Bodega B</td>
+                      <td><span class="badge warning-badge">Por reabastecer</span></td>
+                      <td class="text-xs text-muted">Hace 1 día</td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Agregar Stock" onclick="abrirModalIngreso('Viruta de madera (pacas)', 'Suministros', 'pacas')"><i class="fa-solid fa-plus-circle"></i></button>
+                        <button class="icon-btn delete" title="Retirar / Asignar" onclick="abrirModalConsumo('Viruta de madera (pacas)', '15 pacas', 'Suministros')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button class="icon-btn view" title="Ver historial" onclick="verHistorial('Viruta de madera (pacas)')"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                      </td>
+                    </tr>
+                    <tr data-cat="suministros" data-estado="suficiente">
+                      <td>
+                        <strong>Desinfectante (galones)</strong><br>
+                        <span class="text-xs text-muted">Peróxido de hidrógeno 3%</span>
+                      </td>
+                      <td><i class="fa-solid fa-spray-can-sparkles" style="color:var(--status-optimal);"></i> Suministros</td>
+                      <td class="stock-ok"><strong>10 galones</strong></td>
+                      <td class="text-muted">4 galones</td>
+                      <td class="text-muted">Bodega B</td>
+                      <td><span class="badge optimal-badge">Suficiente</span></td>
+                      <td class="text-xs text-muted">Hace 6 días</td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Agregar Stock" onclick="abrirModalIngreso('Desinfectante (galones)', 'Suministros', 'galones')"><i class="fa-solid fa-plus-circle"></i></button>
+                        <button class="icon-btn delete" title="Retirar / Asignar" onclick="abrirModalConsumo('Desinfectante (galones)', '10 galones', 'Suministros')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                        <button class="icon-btn view" title="Ver historial" onclick="verHistorial('Desinfectante (galones)')"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="pagination-bar">
+                <span class="pagination-info" id="inv-pagination-info">Mostrando 9 de 9 productos</span>
+              </div>
+            </div>
+
+            <!-- ======================== TAB 2: REQUISICIONES ======================== -->
+            <div id="tab-requisiciones" class="tab-content">
+              <div class="section-header" style="margin-bottom:1rem;">
+                <h2 class="section-title"><i class="fa-solid fa-file-invoice" style="color:var(--status-info);"></i> Suministros Requeridos para Producción</h2>
+                <button class="btn-primary btn-sm" onclick="openModal('modal-nueva-requisicion')">
+                  <i class="fa-solid fa-plus"></i> Nueva Requisición
+                </button>
+              </div>
+
+              <div class="table-container">
+                <table class="data-table" id="tabla-requisiciones">
+                  <thead>
+                    <tr>
+                      <th>Producto Requerido</th>
+                      <th>Cantidad</th>
+                      <th>Urgencia</th>
+                      <th>Motivo</th>
+                      <th>Solicitado</th>
+                      <th>Estado</th>
+                      <th class="text-center">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-requisiciones">
+                    <tr data-req-estado="pendiente">
+                      <td>
+                        <strong>Alimento Engorde (40kg)</strong><br>
+                        <span class="text-xs text-muted">Stock actual: 32 bultos | Mínimo: 40</span>
+                      </td>
+                      <td><strong>50 bultos</strong></td>
+                      <td><span class="badge critical-badge"><i class="fa-solid fa-arrow-up"></i> Urgente</span></td>
+                      <td class="text-xs text-muted">Stock bajo mínimo. Galpón 3 en fase engorde (día 35).</td>
+                      <td class="text-xs text-muted">2026-04-12</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-hourglass-half"></i> Pendiente</span></td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Marcar recibida" onclick="completarRequisicion(this)"><i class="fa-solid fa-check"></i></button>
+                        <button class="icon-btn delete" title="Cancelar" onclick="cancelarRequisicion(this)"><i class="fa-solid fa-xmark"></i></button>
+                      </td>
+                    </tr>
+                    <tr data-req-estado="pendiente">
+                      <td>
+                        <strong>Vacuna Gumboro</strong><br>
+                        <span class="text-xs text-muted">Stock actual: 2 frascos | Mínimo: 5</span>
+                      </td>
+                      <td><strong>10 frascos</strong></td>
+                      <td><span class="badge critical-badge"><i class="fa-solid fa-arrow-up"></i> Urgente</span></td>
+                      <td class="text-xs text-muted">Stock crítico. Refuerzo programado para semana 16.</td>
+                      <td class="text-xs text-muted">2026-04-12</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-hourglass-half"></i> Pendiente</span></td>
+                      <td class="action-buttons">
+                        <button class="icon-btn resolve" title="Marcar recibida" onclick="completarRequisicion(this)"><i class="fa-solid fa-check"></i></button>
+                        <button class="icon-btn delete" title="Cancelar" onclick="cancelarRequisicion(this)"><i class="fa-solid fa-xmark"></i></button>
+                      </td>
+                    </tr>
+                    <tr data-req-estado="recibida" style="opacity:0.6;">
+                      <td>
+                        <strong>Viruta de madera (pacas)</strong><br>
+                        <span class="text-xs text-muted">Stock actual: 15 pacas | Mínimo: 20</span>
+                      </td>
+                      <td><strong>30 pacas</strong></td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-minus"></i> Normal</span></td>
+                      <td class="text-xs text-muted">Cambio de camas programado para Galpón 2 y 4.</td>
+                      <td class="text-xs text-muted">2026-04-10</td>
+                      <td><span class="badge optimal-badge"><i class="fa-solid fa-circle-check"></i> Recibida</span></td>
+                      <td class="action-buttons">
+                        <span class="text-xs text-muted">✅ 2026-04-11</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- ======================== TAB 3: HISTORIAL MOVIMIENTOS ======================== -->
+            <div id="tab-movimientos" class="tab-content">
+              <div class="section-header" style="margin-bottom:1rem;">
+                <h2 class="section-title"><i class="fa-solid fa-right-left" style="color:var(--status-warning);"></i> Historial de Movimientos</h2>
+                <button class="btn-outline btn-sm" onclick="exportarMovimientosCSV()">
+                  <i class="fa-solid fa-download"></i> Exportar
+                </button>
+              </div>
+
+              <div class="filters-bar" style="margin-bottom:1rem;">
+                <div class="filter-group">
+                  <label>Tipo</label>
+                  <select class="filter-select" id="filter-mov-tipo" onchange="aplicarFiltrosMovimientos()">
+                    <option value="all">Todos</option>
+                    <option value="ingreso">Ingresos</option>
+                    <option value="salida">Salidas / Asignaciones</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label>Operador</label>
+                  <select class="filter-select" id="filter-mov-operador" onchange="aplicarFiltrosMovimientos()">
+                    <option value="all">Todos</option>
+                    <option value="carlos">Carlos Pérez</option>
+                    <option value="andrea">Andrea Gómez</option>
+                    <option value="jorge">Jorge Ramírez</option>
+                    <option value="supervisor">Supervisor (María)</option>
+                  </select>
+                </div>
+                <button class="btn-clear-filters" onclick="limpiarFiltrosMovimientos()">
+                  <i class="fa-solid fa-rotate-left"></i> Limpiar
+                </button>
+              </div>
+
+              <div class="table-container">
+                <table class="data-table" id="tabla-movimientos">
+                  <thead>
+                    <tr>
+                      <th>Fecha/Hora</th>
+                      <th>Tipo</th>
+                      <th>Producto</th>
+                      <th>Cantidad</th>
+                      <th>Operador</th>
+                      <th>Galpón</th>
+                      <th>Motivo</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-movimientos">
+                    <tr data-mov-tipo="salida" data-mov-operador="carlos">
+                      <td class="text-xs">2026-04-12 07:15</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-arrow-up"></i> Salida</span></td>
+                      <td><strong>Alimento Iniciación (40kg)</strong></td>
+                      <td style="color:var(--status-warning); font-weight:600;">-3 bultos</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.4rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">C</div>
+                          Carlos P.
+                        </div>
+                      </td>
+                      <td>Galpón 1</td>
+                      <td class="text-xs text-muted">Alimentación diaria</td>
+                    </tr>
+                    <tr data-mov-tipo="salida" data-mov-operador="carlos">
+                      <td class="text-xs">2026-04-12 07:30</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-arrow-up"></i> Salida</span></td>
+                      <td><strong>Alimento Crecimiento (40kg)</strong></td>
+                      <td style="color:var(--status-warning); font-weight:600;">-2 bultos</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.4rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">C</div>
+                          Carlos P.
+                        </div>
+                      </td>
+                      <td>Galpón 2</td>
+                      <td class="text-xs text-muted">Alimentación diaria</td>
+                    </tr>
+                    <tr data-mov-tipo="salida" data-mov-operador="andrea">
+                      <td class="text-xs">2026-04-12 08:00</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-arrow-up"></i> Salida</span></td>
+                      <td><strong>Vacuna Newcastle</strong></td>
+                      <td style="color:var(--status-warning); font-weight:600;">-1 frasco</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.4rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">A</div>
+                          Andrea G.
+                        </div>
+                      </td>
+                      <td>Galpón 3</td>
+                      <td class="text-xs text-muted">Vacunación programada</td>
+                    </tr>
+                    <tr data-mov-tipo="ingreso" data-mov-operador="supervisor">
+                      <td class="text-xs">2026-04-11 14:00</td>
+                      <td><span class="badge optimal-badge"><i class="fa-solid fa-arrow-down"></i> Ingreso</span></td>
+                      <td><strong>Alimento Crecimiento (40kg)</strong></td>
+                      <td style="color:var(--status-optimal); font-weight:600;">+50 bultos</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.4rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#10b981,#059669);">M</div>
+                          María L. (Sup.)
+                        </div>
+                      </td>
+                      <td>—</td>
+                      <td class="text-xs text-muted">Compra mensual Purina</td>
+                    </tr>
+                    <tr data-mov-tipo="salida" data-mov-operador="andrea">
+                      <td class="text-xs">2026-04-11 09:30</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-arrow-up"></i> Salida</span></td>
+                      <td><strong>Desinfectante (galones)</strong></td>
+                      <td style="color:var(--status-warning); font-weight:600;">-1 galón</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.4rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">A</div>
+                          Andrea G.
+                        </div>
+                      </td>
+                      <td>Galpón 4</td>
+                      <td class="text-xs text-muted">Desinfección bebederos</td>
+                    </tr>
+                    <tr data-mov-tipo="salida" data-mov-operador="jorge">
+                      <td class="text-xs">2026-04-10 23:00</td>
+                      <td><span class="badge warning-badge"><i class="fa-solid fa-arrow-up"></i> Salida</span></td>
+                      <td><strong>Viruta de madera (pacas)</strong></td>
+                      <td style="color:var(--status-warning); font-weight:600;">-5 pacas</td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.4rem;">
+                          <div class="mini-avatar" style="background:linear-gradient(135deg,#f97316,#ea580c);">J</div>
+                          Jorge R.
+                        </div>
+                      </td>
+                      <td>Galpón 2</td>
+                      <td class="text-xs text-muted">Reposición zona húmeda</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </section>
+
+        </main>
+      </div>
+
+      <!-- BOTTOM NAV -->
+      <nav class="bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item"><i class="fa-solid fa-table-columns"></i><span>Inicio</span></a>
+        <a href="sensores.html" class="bottom-nav-item"><i class="fa-solid fa-temperature-half"></i><span>Sensores</span></a>
+        <a href="alertas.html" class="bottom-nav-item"><i class="fa-solid fa-bell"></i><span>Alertas</span></a>
+        <a href="inventario.html" class="bottom-nav-item active"><i class="fa-solid fa-box"></i><span>Inventario</span></a>
+      </nav>
+    </div>
+
+    <!-- ===== MODAL: Registrar Nuevo Producto ===== -->
+    <div id="modal-nuevo-producto" class="modal-overlay hidden">
+      <div class="modal-content modal-success">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-plus-circle" style="color:var(--status-optimal);"></i> Registrar Nuevo Producto</h3>
+          <button class="icon-btn" onclick="closeModal('modal-nuevo-producto')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-nuevo-producto" onsubmit="submitNuevoProducto(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nombre del Producto <span class="required">*</span></label>
+                <input type="text" id="np-nombre" class="form-control" placeholder="Ej. Alimento Pre-Inicio (40kg)" required>
+              </div>
+              <div class="form-group">
+                <label>Categoría <span class="required">*</span></label>
+                <select id="np-categoria" class="form-control" required>
+                  <option value="">Seleccione</option>
+                  <option value="Alimento">🌾 Alimento</option>
+                  <option value="Medicamento">💉 Medicamento</option>
+                  <option value="Suministros">📦 Suministros</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Cantidad Inicial <span class="required">*</span></label>
+                <input type="number" id="np-cantidad" class="form-control" placeholder="Ej. 50" required min="1">
+              </div>
+              <div class="form-group">
+                <label>Unidad <span class="required">*</span></label>
+                <select id="np-unidad" class="form-control" required>
+                  <option value="bultos">Bultos</option>
+                  <option value="frascos">Frascos</option>
+                  <option value="litros">Litros</option>
+                  <option value="pacas">Pacas</option>
+                  <option value="galones">Galones</option>
+                  <option value="kg">Kilogramos</option>
+                  <option value="dosis">Dosis</option>
+                  <option value="unidades">Unidades</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Stock Mínimo <span class="required">*</span></label>
+                <input type="number" id="np-minimo" class="form-control" placeholder="Ej. 20" required min="0">
+                <span class="form-hint">Se enviará alerta cuando el stock baje de este nivel.</span>
+              </div>
+              <div class="form-group">
+                <label>Ubicación</label>
+                <select id="np-ubicacion" class="form-control">
+                  <option value="Bodega A">Bodega A</option>
+                  <option value="Bodega B">Bodega B</option>
+                  <option value="Refrigerador">Refrigerador</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Proveedor</label>
+                <input type="text" id="np-proveedor" class="form-control" placeholder="Ej. Purina Colombia">
+              </div>
+              <div class="form-group">
+                <label>Nro. Factura / Lote</label>
+                <input type="text" id="np-lote" class="form-control" placeholder="Ej. L-4215 / FAC-20260413">
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" onclick="closeModal('modal-nuevo-producto')">Cancelar</button>
+              <button type="submit" class="btn-primary"><i class="fa-solid fa-check"></i> Registrar Producto</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: Agregar Stock (Ingreso) ===== -->
+    <div id="modal-ingreso" class="modal-overlay hidden">
+      <div class="modal-content modal-success">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-plus-circle" style="color:var(--status-optimal);"></i> Agregar Stock</h3>
+          <button class="icon-btn" onclick="closeModal('modal-ingreso')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-ingreso" onsubmit="submitIngreso(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Producto</label>
+                <input type="text" id="ing-nombre" class="form-control" readonly>
+              </div>
+              <div class="form-group">
+                <label>Categoría</label>
+                <input type="text" id="ing-categoria" class="form-control" readonly>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Cantidad a Agregar <span class="required">*</span></label>
+                <input type="number" id="ing-cantidad" class="form-control" placeholder="Ej. 50" required min="1">
+              </div>
+              <div class="form-group">
+                <label>Unidad</label>
+                <input type="text" id="ing-unidad" class="form-control" readonly>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Proveedor</label>
+                <input type="text" id="ing-proveedor" class="form-control" placeholder="Ej. Purina Colombia">
+              </div>
+              <div class="form-group">
+                <label>Nro. Factura</label>
+                <input type="text" id="ing-factura" class="form-control" placeholder="Ej. FAC-20260413">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Notas</label>
+              <input type="text" id="ing-notas" class="form-control" placeholder="Ej. Lote nuevo, fecha vencimiento...">
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" onclick="closeModal('modal-ingreso')">Cancelar</button>
+              <button type="submit" class="btn-primary"><i class="fa-solid fa-plus"></i> Registrar Ingreso</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: Retirar / Asignar a Operador ===== -->
+    <div id="modal-consumir" class="modal-overlay hidden">
+      <div class="modal-content modal-warning">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-arrow-right-from-bracket" style="color:var(--status-warning);"></i> Retirar y Asignar Insumo</h3>
+          <button class="icon-btn" onclick="closeModal('modal-consumir')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-consumir" onsubmit="submitConsumo(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Producto</label>
+                <input type="text" id="cons-producto-nombre" class="form-control" readonly>
+              </div>
+              <div class="form-group">
+                <label>Stock Disponible</label>
+                <input type="text" id="cons-producto-stock" class="form-control" style="color:var(--status-warning); font-weight:bold;" readonly>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Cantidad a Retirar <span class="required">*</span></label>
+                <input type="number" id="cons-cantidad" class="form-control" placeholder="Ej. 3" required min="1">
+              </div>
+              <div class="form-group">
+                <label>Unidad</label>
+                <input type="text" id="cons-unidad" class="form-control" readonly>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Asignar a Operador <span class="required">*</span></label>
+                <select id="cons-operador" class="form-control" required>
+                  <option value="">¿Quién recibe el insumo?</option>
+                  <option value="carlos">Carlos Pérez</option>
+                  <option value="andrea">Andrea Gómez</option>
+                  <option value="jorge">Jorge Ramírez</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Galpón Destino <span class="required">*</span></label>
+                <select id="cons-galpon" class="form-control" required>
+                  <option value="">¿A qué galpón va?</option>
+                  <option value="Galpón 1">Galpón 1</option>
+                  <option value="Galpón 2">Galpón 2</option>
+                  <option value="Galpón 3">Galpón 3</option>
+                  <option value="Galpón 4">Galpón 4</option>
+                  <option value="General">General / Bodega</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Motivo / Destino <span class="required">*</span></label>
+              <select id="cons-motivo" class="form-control" required>
+                <option value="">Seleccione un motivo</option>
+                <option value="Alimentación diaria">🌾 Alimentación diaria</option>
+                <option value="Vacunación programada">💉 Vacunación programada</option>
+                <option value="Tratamiento veterinario">🩺 Tratamiento veterinario</option>
+                <option value="Desinfección/Bioseguridad">🧹 Desinfección / Bioseguridad</option>
+                <option value="Cambio de camas">🪵 Cambio de camas</option>
+                <option value="Mantenimiento equipos">🔧 Mantenimiento de equipos</option>
+                <option value="Merma/Pérdida">⚠️ Merma / Pérdida</option>
+                <option value="Otro">📝 Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Notas</label>
+              <input type="text" id="cons-notas" class="form-control" placeholder="Detalles adicionales...">
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" onclick="closeModal('modal-consumir')">Cancelar</button>
+              <button type="submit" class="btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Registrar Salida</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: Nueva Requisición ===== -->
+    <div id="modal-nueva-requisicion" class="modal-overlay hidden">
+      <div class="modal-content modal-info">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-file-circle-plus" style="color:var(--status-info);"></i> Nueva Requisición de Suministro</h3>
+          <button class="icon-btn" onclick="closeModal('modal-nueva-requisicion')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-nueva-requisicion" onsubmit="submitRequisicion(event)">
+            <div class="form-group">
+              <label>Producto Requerido <span class="required">*</span></label>
+              <select id="req-producto" class="form-control" required>
+                <option value="">Seleccione el insumo que necesita</option>
+                <optgroup label="🌾 Alimentos">
+                  <option value="Alimento Iniciación (40kg)">Alimento Iniciación (40kg)</option>
+                  <option value="Alimento Crecimiento (40kg)">Alimento Crecimiento (40kg)</option>
+                  <option value="Alimento Engorde (40kg)">Alimento Engorde (40kg)</option>
+                  <option value="Alimento Pre-Inicio">Alimento Pre-Inicio</option>
+                </optgroup>
+                <optgroup label="💉 Medicamentos">
+                  <option value="Vacuna Gumboro">Vacuna Gumboro</option>
+                  <option value="Vacuna Newcastle">Vacuna Newcastle</option>
+                  <option value="Antibiótico Enrofloxacina">Antibiótico Enrofloxacina</option>
+                  <option value="Vitaminas A+D+E">Vitaminas A+D+E</option>
+                </optgroup>
+                <optgroup label="📦 Suministros">
+                  <option value="Viruta de madera (pacas)">Viruta de madera (pacas)</option>
+                  <option value="Desinfectante (galones)">Desinfectante (galones)</option>
+                  <option value="Cal viva">Cal viva</option>
+                </optgroup>
+                <option value="Otro">📝 Otro (especificar en notas)</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Cantidad Requerida <span class="required">*</span></label>
+                <input type="number" id="req-cantidad" class="form-control" placeholder="Ej. 50" required min="1">
+              </div>
+              <div class="form-group">
+                <label>Unidad</label>
+                <select id="req-unidad" class="form-control">
+                  <option value="bultos">Bultos</option>
+                  <option value="frascos">Frascos</option>
+                  <option value="litros">Litros</option>
+                  <option value="pacas">Pacas</option>
+                  <option value="galones">Galones</option>
+                  <option value="kg">Kilogramos</option>
+                  <option value="unidades">Unidades</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Urgencia <span class="required">*</span></label>
+              <select id="req-urgencia" class="form-control" required>
+                <option value="urgente">🔴 Urgente — Necesario esta semana</option>
+                <option value="normal" selected>🟡 Normal — Próxima compra programada</option>
+                <option value="baja">🟢 Baja — Cuando sea posible</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Justificación / Motivo <span class="required">*</span></label>
+              <textarea id="req-motivo" class="form-control" rows="2" placeholder="Ej. Stock bajo mínimo, próxima vacunación, cambio de camas..." required></textarea>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" onclick="closeModal('modal-nueva-requisicion')">Cancelar</button>
+              <button type="submit" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Enviar Requisición</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: Historial de un producto ===== -->
+    <div id="modal-historial" class="modal-overlay hidden">
+      <div class="modal-content modal-info" style="max-width: 640px;">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-clock-rotate-left" style="color:var(--status-info);"></i> Historial de Movimientos</h3>
+          <button class="icon-btn" onclick="closeModal('modal-historial')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="historial-body">
+          <!-- Se llena dinámicamente -->
+        </div>
+      </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/inventario.js"></script>
+</body>
 </html>

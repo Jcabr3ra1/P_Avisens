@@ -3,190 +3,495 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avisens | Centro de Alertas</title>
+    <title>Avisens | Centro de Alertas - Supervisor</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <div class="app-container">
-        
-        <aside class="sidebar">
-            <div class="brand">
-                <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
-                <h1 class="brand-name">Avisens</h1>
-            </div>
-            
-            <nav class="side-nav">
-                <a href="dashboard.html" class="nav-item">
-                    <i class="fa-solid fa-table-cells-large"></i> Dashboard
-                </a>
-                <a href="sensores.html" class="nav-item">
-                    <i class="fa-solid fa-tower-broadcast"></i> Sensores
-                </a>
-                <a href="curvas.html" class="nav-item">
-                    <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
-                </a>
-                <a href="alertas.html" class="nav-item active">
-                    <i class="fa-solid fa-triangle-exclamation"></i> Alertas
-                </a>
-                <a href="automatizacion.html" class="nav-item">
-                    <i class="fa-solid fa-gear"></i> Automatización
-                </a>
-                <a href="inventario.html" class="nav-item">
-                    <i class="fa-solid fa-box"></i> Inventario
-                </a>
-                <a href="mantenimiento.html" class="nav-item">
-                    <i class="fa-solid fa-wrench"></i> Mantenimiento
-                </a>
-                <a href="usuarios.html" class="nav-item">
-                    <i class="fa-solid fa-user-group"></i> Usuarios
-                </a>
-            </nav>
-        </aside>
 
-        <div class="main-wrapper">
-            <header class="top-header">
-                <div class="header-titles">
-                    <h2>Centro de Alertas</h2>
-                    <p class="subtitle">Historial y notificaciones del sistema</p>
-                </div>
-                <a href="index.html" class="user-profile">
-                    <div class="user-info">
-                        <span class="user-name">Avisens Admin</span>
-                        <span class="user-role">Acceso Total</span>
-                    </div>
-                    <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
-                </a>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo" onerror="this.outerHTML='🐔'"></div>
+          <h1 class="brand-name">Avisens</h1>
+        </div>
+        <nav class="side-nav">
+          <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+          <a href="sensores.html" class="nav-item"><i class="fa-solid fa-tower-broadcast"></i> Sensores</a>
+          <a href="curvas.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento</a>
+          <a href="alertas.html" class="nav-item active"><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
+          <a href="automatizacion.html" class="nav-item"><i class="fa-solid fa-gear"></i> Automatización</a>
+          <a href="inventario.html" class="nav-item"><i class="fa-solid fa-box"></i> Inventario</a>
+          <a href="operadores.html" class="nav-item"><i class="fa-solid fa-clipboard-list"></i> Tareas / Operadores</a>
+        </nav>
+      </aside>
+
+      <div class="main-wrapper">
+        <header class="top-header">
+          <div class="header-titles">
+            <h2>Centro de Alertas</h2>
+            <p class="subtitle">Gestión y resolución de alertas</p>
+          </div>
+          <div class="header-right">
+            <div class="user-profile">
+              <div class="user-info">
+                <span class="user-name">María López</span>
+                <span class="user-role">Encargado/Supervisor</span>
+              </div>
+              <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+            </div>
+            <button class="btn-logout" onclick="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+          </div>
         </header>
 
-            <main class="content-area">
-                
-                <section class="section-block fade-in">
-                    <div class="alerts-summary-grid">
-                        <div class="summary-card critical-summary">
-                            <div class="summary-icon"><i class="fa-solid fa-fire"></i></div>
-                            <div class="summary-data">
-                                <h3>Críticas</h3>
-                                <span>2 sin resolver</span>
-                            </div>
-                        </div>
-                        <div class="summary-card warning-summary">
-                            <div class="summary-icon"><i class="fa-solid fa-bolt"></i></div>
-                            <div class="summary-data">
-                                <h3>Advertencias</h3>
-                                <span>1 en revisión</span>
-                            </div>
-                        </div>
-                        <div class="summary-card optimal-summary">
-                            <div class="summary-icon"><i class="fa-solid fa-shield-check"></i></div>
-                            <div class="summary-data">
-                                <h3>Sistema</h3>
-                                <span>Operando Normal</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+        <main class="content-area">
 
-                <section class="section-block fade-in" style="animation-delay: 0.1s;">
-                    <div class="section-header">
-                        <h2 class="section-title">Hoy</h2>
-                        <button class="btn-outline">Marcar todas como leídas</button>
-                    </div>
+          <!-- RESUMEN -->
+          <section class="section-block fade-in">
+            <div class="alerts-summary-grid">
+              <div class="summary-card critical-summary" onclick="filtrarPorSeveridad('critical')">
+                <div class="summary-icon"><i class="fa-solid fa-fire"></i></div>
+                <div class="summary-data">
+                  <h3 id="count-criticas">2</h3>
+                  <span>Alertas Críticas</span>
+                </div>
+              </div>
+              <div class="summary-card warning-summary" onclick="filtrarPorSeveridad('warning')">
+                <div class="summary-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="summary-data">
+                  <h3 id="count-warnings">5</h3>
+                  <span>Advertencias</span>
+                </div>
+              </div>
+              <div class="summary-card optimal-summary" onclick="filtrarPorSeveridad('info')">
+                <div class="summary-icon"><i class="fa-solid fa-circle-info"></i></div>
+                <div class="summary-data">
+                  <h3 id="count-info">12</h3>
+                  <span>Informativas Hoy</span>
+                </div>
+              </div>
+            </div>
+          </section>
 
-                    <div class="detailed-alerts-list">
-                        
-                        <article class="detailed-alert-card unread" data-status="critical">
-                            <div class="alert-icon-large pulse-animation"><i class="fa-solid fa-temperature-arrow-up"></i></div>
-                            <div class="alert-info">
-                                <div class="alert-header">
-                                    <h4>Temperatura Crítica detectada</h4>
-                                    <span class="time-badge">Hace 5 min</span>
-                                </div>
-                                <p class="alert-desc">El <strong>Galpón 3</strong> ha registrado una temperatura de <strong>35°C</strong>, superando el límite máximo de 32°C. Los extractores han sido encendidos al 100%.</p>
-                                <div class="alert-actions">
-                                    <a href="#" class="btn-action primary-action">Ver Sensores</a>
-                                    <a href="#" class="btn-action secondary-action">Ignorar</a>
-                                </div>
-                            </div>
-                        </article>
+          <!-- FILTROS -->
+          <section class="section-block fade-in" style="animation-delay: 0.05s">
+            <div class="filters-bar">
+              <div class="filter-group">
+                <label>Estado</label>
+                <select class="filter-select" id="filter-estado" onchange="aplicarFiltrosAlertas()">
+                  <option value="all">Todas</option>
+                  <option value="activa" selected>Activas</option>
+                  <option value="resuelta">Resueltas</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Severidad</label>
+                <select class="filter-select" id="filter-severidad" onchange="aplicarFiltrosAlertas()">
+                  <option value="all">Todas</option>
+                  <option value="critical">Solo Críticas</option>
+                  <option value="warning">Solo Advertencias</option>
+                  <option value="info">Solo Informativas</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Galpón</label>
+                <select class="filter-select" id="filter-galpon-alerta" onchange="aplicarFiltrosAlertas()">
+                  <option value="all">Todos</option>
+                  <option value="1">Galpón 1</option>
+                  <option value="2">Galpón 2</option>
+                  <option value="3">Galpón 3</option>
+                  <option value="4">Galpón 4</option>
+                </select>
+              </div>
+              <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="filter-input" id="search-alertas" placeholder="Buscar alertas..." oninput="aplicarFiltrosAlertas()">
+              </div>
+              <button class="btn-clear-filters" onclick="limpiarFiltrosAlertas()">
+                <i class="fa-solid fa-rotate-left"></i> Limpiar
+              </button>
+            </div>
+          </section>
 
-                        <article class="detailed-alert-card unread" data-status="critical">
-                            <div class="alert-icon-large pulse-animation"><i class="fa-solid fa-biohazard"></i></div>
-                            <div class="alert-info">
-                                <div class="alert-header">
-                                    <h4>Niveles de Amoníaco peligrosos</h4>
-                                    <span class="time-badge">Hace 12 min</span>
-                                </div>
-                                <p class="alert-desc">El sensor de calidad del aire en el <strong>Galpón 3</strong> indica <strong>22 ppm de NH₃</strong>. Se requiere revisión inmediata de la ventilación y la cama.</p>
-                                <div class="alert-actions">
-                                    <a href="#" class="btn-action primary-action">Ver Sensores</a>
-                                    <a href="#" class="btn-action secondary-action">Ignorar</a>
-                                </div>
-                            </div>
-                        </article>
+          <!-- TABS -->
+          <div class="tabs-container">
+            <button class="tab-btn active" onclick="cambiarTab('alertas-list', this)">
+              <i class="fa-solid fa-bell"></i> Alertas
+            </button>
+            <button class="tab-btn" onclick="cambiarTab('reglas-alertas', this)">
+              <i class="fa-solid fa-list-check"></i> Reglas de Alertas
+            </button>
+          </div>
 
-                        <article class="detailed-alert-card" data-status="warning">
-                            <div class="alert-icon-large"><i class="fa-solid fa-cloud"></i></div>
-                            <div class="alert-info">
-                                <div class="alert-header">
-                                    <h4>CO₂ Elevado</h4>
-                                    <span class="time-badge">Hace 25 min</span>
-                                </div>
-                                <p class="alert-desc">El <strong>Galpón 2</strong> presenta <strong>920 ppm de CO₂</strong>. El sistema automático de ventilación ha incrementado su potencia al 60%.</p>
-                                <div class="alert-actions">
-                                    <a href="#" class="btn-action secondary-action">Marcar como leído</a>
-                                </div>
-                            </div>
-                        </article>
+          <!-- TAB 1: Lista de Alertas -->
+          <div id="alertas-list" class="tab-content active">
+            <div class="detailed-alerts-list" id="alertas-container">
 
-                    </div>
-                </section>
+              <!-- Alerta 1 - Crítica -->
+              <article class="detailed-alert-card unread" data-status="critical" data-id="A-001" data-galpon="3">
+                <div class="alert-icon-large pulse-animation"><i class="fa-solid fa-temperature-arrow-up"></i></div>
+                <div class="alert-info">
+                  <div class="alert-header">
+                    <h4>Temperatura Crítica detectada</h4>
+                    <span class="time-badge">Hace 5 min</span>
+                  </div>
+                  <p class="alert-desc">El <strong>Galpón 3</strong> ha registrado una temperatura de <strong>35°C</strong>, superando el umbral crítico de 34°C.</p>
+                  <div class="alert-meta">
+                    <span class="alert-meta-item"><i class="fa-solid fa-gauge-high"></i> Valor: 35.2°C</span>
+                    <span class="alert-meta-item"><i class="fa-solid fa-clock"></i> Duración: 15 min</span>
+                    <span class="alert-meta-item"><i class="fa-solid fa-crosshairs"></i> Umbral: >34°C</span>
+                  </div>
+                  <div class="alert-actions">
+                    <button class="btn-action resolve-action" onclick="abrirResolverAlerta('A-001','Temperatura Crítica','Galpón 3')">
+                      <i class="fa-solid fa-check"></i> Resolver
+                    </button>
+                    <button class="btn-action primary-action" onclick="abrirDetalleAlerta('A-001')">
+                      <i class="fa-solid fa-eye"></i> Ver Detalle
+                    </button>
+                    <a href="sensores.html" class="btn-action secondary-action">
+                      <i class="fa-solid fa-arrow-right"></i> Ir a Sensores
+                    </a>
+                  </div>
+                </div>
+              </article>
 
-                <section class="section-block fade-in" style="animation-delay: 0.2s;">
-                    <div class="section-header">
-                        <h2 class="section-title">Ayer</h2>
-                    </div>
-                    <div class="detailed-alerts-list opacity-muted">
-                        <article class="detailed-alert-card" data-status="optimal">
-                            <div class="alert-icon-large"><i class="fa-solid fa-check"></i></div>
-                            <div class="alert-info">
-                                <div class="alert-header">
-                                    <h4>Mantenimiento completado</h4>
-                                    <span class="time-badge">16 Mar, 14:30</span>
-                                </div>
-                                <p class="alert-desc">El técnico "Carlos Ruiz" ha finalizado la limpieza de bebederos en el <strong>Galpón 1</strong>.</p>
-                            </div>
-                        </article>
-                    </div>
-                </section>
+              <!-- Alerta 2 - Crítica -->
+              <article class="detailed-alert-card unread" data-status="critical" data-id="A-002" data-galpon="3">
+                <div class="alert-icon-large pulse-animation"><i class="fa-solid fa-biohazard"></i></div>
+                <div class="alert-info">
+                  <div class="alert-header">
+                    <h4>Niveles de Amoníaco peligrosos</h4>
+                    <span class="time-badge">Hace 12 min</span>
+                  </div>
+                  <p class="alert-desc">El sensor de calidad del aire en <strong>Galpón 3</strong> indica <strong>22 ppm de NH₃</strong>. Se requiere revisión inmediata.</p>
+                  <div class="alert-meta">
+                    <span class="alert-meta-item"><i class="fa-solid fa-gauge-high"></i> Valor: 22 ppm</span>
+                    <span class="alert-meta-item"><i class="fa-solid fa-clock"></i> Duración: 25 min</span>
+                    <span class="alert-meta-item"><i class="fa-solid fa-crosshairs"></i> Umbral: >20 ppm</span>
+                  </div>
+                  <div class="alert-actions">
+                    <button class="btn-action resolve-action" onclick="abrirResolverAlerta('A-002','Amoníaco peligroso','Galpón 3')">
+                      <i class="fa-solid fa-check"></i> Resolver
+                    </button>
+                    <button class="btn-action primary-action" onclick="abrirDetalleAlerta('A-002')">
+                      <i class="fa-solid fa-eye"></i> Ver Detalle
+                    </button>
+                  </div>
+                </div>
+              </article>
 
-            </main>
-        </div>
+              <!-- Alerta 3 - Warning -->
+              <article class="detailed-alert-card unread" data-status="warning" data-id="A-003" data-galpon="2">
+                <div class="alert-icon-large"><i class="fa-solid fa-cloud"></i></div>
+                <div class="alert-info">
+                  <div class="alert-header">
+                    <h4>CO₂ Elevado</h4>
+                    <span class="time-badge">Hace 25 min</span>
+                  </div>
+                  <p class="alert-desc">El <strong>Galpón 2</strong> presenta <strong>920 ppm de CO₂</strong>. Ventilación incrementada al 60%.</p>
+                  <div class="alert-meta">
+                    <span class="alert-meta-item"><i class="fa-solid fa-gauge-high"></i> Valor: 920 ppm</span>
+                    <span class="alert-meta-item"><i class="fa-solid fa-crosshairs"></i> Umbral: >900 ppm</span>
+                  </div>
+                  <div class="alert-actions">
+                    <button class="btn-action resolve-action" onclick="abrirResolverAlerta('A-003','CO₂ Elevado','Galpón 2')">
+                      <i class="fa-solid fa-check"></i> Resolver
+                    </button>
+                    <button class="btn-action primary-action" onclick="abrirDetalleAlerta('A-003')">
+                      <i class="fa-solid fa-eye"></i> Ver Detalle
+                    </button>
+                  </div>
+                </div>
+              </article>
 
-        <nav class="bottom-nav">
-            <a href="index.html" class="bottom-nav-item">
-                <i class="fa-solid fa-table-cells-large"></i><span>Inicio</span>
-            </a>
-            <a href="sensores.html" class="bottom-nav-item">
-                <i class="fa-solid fa-tower-broadcast"></i><span>Sensores</span>
-            </a>
-            <a href="alertas.html" class="bottom-nav-item active">
-                <i class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span>
-            </a>
-            <a href="#" class="bottom-nav-item">
-                <i class="fa-solid fa-gear"></i><span>Ajustes</span>
-            </a>
-        </nav>
+              <!-- Alerta 4 - Warning Stock -->
+              <article class="detailed-alert-card" data-status="warning" data-id="A-004" data-galpon="0">
+                <div class="alert-icon-large"><i class="fa-solid fa-box-open"></i></div>
+                <div class="alert-info">
+                  <div class="alert-header">
+                    <h4>Stock bajo: Vacuna Gumboro</h4>
+                    <span class="time-badge">Hace 2 hr</span>
+                  </div>
+                  <p class="alert-desc">Quedan solo <strong>2 frascos</strong> de Vacuna Gumboro. Stock mínimo recomendado: 5 frascos.</p>
+                  <div class="alert-actions">
+                    <button class="btn-action resolve-action" onclick="abrirResolverAlerta('A-004','Stock Vacuna Gumboro','Almacén')">
+                      <i class="fa-solid fa-check"></i> Resolver
+                    </button>
+                    <a href="inventario.html" class="btn-action secondary-action">
+                      <i class="fa-solid fa-arrow-right"></i> Ir a Inventario
+                    </a>
+                  </div>
+                </div>
+              </article>
 
+              <!-- Alerta 5 - Resuelta -->
+              <article class="detailed-alert-card resolved" data-status="optimal" data-id="A-005" data-galpon="1">
+                <div class="alert-icon-large"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="alert-info">
+                  <div class="alert-header">
+                    <h4>Temperatura normalizada - Galpón 1</h4>
+                    <span class="time-badge">Hace 3 hr</span>
+                  </div>
+                  <p class="alert-desc">Temperatura volvió a rango normal (31°C). Resuelta por María López.</p>
+                  <div class="alert-meta">
+                    <span class="alert-meta-item"><i class="fa-solid fa-user-check"></i> Resuelta por: María López</span>
+                    <span class="alert-meta-item"><i class="fa-solid fa-clock"></i> Duración total: 18 min</span>
+                  </div>
+                  <div class="alert-actions">
+                    <span class="badge optimal-badge"><i class="fa-solid fa-check"></i> Resuelta</span>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+
+            <!-- Paginación -->
+            <div class="pagination-bar">
+              <span class="pagination-info">Mostrando 1-5 de 19 alertas</span>
+              <div class="pagination-controls">
+                <button class="page-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: Reglas de Alertas -->
+          <div id="reglas-alertas" class="tab-content">
+            <div class="section-header">
+              <h2 class="section-title">Reglas de Alertas Configuradas</h2>
+              <button class="btn-primary btn-sm" onclick="openModal('modal-nueva-regla-alerta')">
+                <i class="fa-solid fa-plus"></i> Nueva Regla
+              </button>
+            </div>
+
+            <div class="rules-list">
+              <div class="rule-card">
+                <div class="rule-info">
+                  <div class="rule-name">🌡️ Temperatura crítica</div>
+                  <div class="rule-condition">Si Temperatura > 34°C → Alerta Crítica</div>
+                  <div class="rule-meta">
+                    <span>Todos los galpones</span>
+                    <span>Activa</span>
+                    <span>Sistema</span>
+                  </div>
+                </div>
+                <div class="rule-actions">
+                  <span class="badge optimal-badge">Activa</span>
+                </div>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-info">
+                  <div class="rule-name">💨 Amoníaco peligroso</div>
+                  <div class="rule-condition">Si NH₃ > 20 ppm → Alerta Crítica</div>
+                  <div class="rule-meta">
+                    <span>Todos los galpones</span>
+                    <span>Activa</span>
+                    <span>Sistema</span>
+                  </div>
+                </div>
+                <div class="rule-actions">
+                  <span class="badge optimal-badge">Activa</span>
+                </div>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-info">
+                  <div class="rule-name">🌫️ CO₂ alto</div>
+                  <div class="rule-condition">Si CO₂ > 900 ppm por 10 min → Advertencia</div>
+                  <div class="rule-meta">
+                    <span>Galpón 2, 3</span>
+                    <span>Activa</span>
+                    <span>María López</span>
+                  </div>
+                </div>
+                <div class="rule-actions">
+                  <button class="icon-btn edit" title="Editar"><i class="fa-solid fa-pen"></i></button>
+                  <button class="icon-btn delete" title="Desactivar"><i class="fa-solid fa-toggle-off"></i></button>
+                </div>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-info">
+                  <div class="rule-name">📦 Stock bajo de inventario</div>
+                  <div class="rule-condition">Si stock < 20% del mínimo → Advertencia</div>
+                  <div class="rule-meta">
+                    <span>Global</span>
+                    <span>Activa</span>
+                    <span>Sistema</span>
+                  </div>
+                </div>
+                <div class="rule-actions">
+                  <span class="badge optimal-badge">Activa</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </main>
+      </div>
+
+      <!-- BOTTOM NAV -->
+      <nav class="bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item"><i class="fa-solid fa-table-columns"></i><span>Inicio</span></a>
+        <a href="sensores.html" class="bottom-nav-item"><i class="fa-solid fa-temperature-half"></i><span>Sensores</span></a>
+        <a href="alertas.html" class="bottom-nav-item active"><i class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span></a>
+        <a href="automatizacion.html" class="bottom-nav-item"><i class="fa-solid fa-gear"></i><span>Sistemas</span></a>
+      </nav>
     </div>
+
+    <!-- MODAL: Resolver Alerta -->
+    <div id="modal-resolver" class="modal-overlay hidden">
+      <div class="modal-content modal-success">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-circle-check" style="color:var(--status-optimal);"></i> Resolver Alerta</h3>
+          <button class="icon-btn" onclick="closeModal('modal-resolver')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row" style="margin-bottom: 0.5rem;">
+            <div class="form-group">
+              <label>ID Alerta</label>
+              <input type="text" id="resolver-id" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+              <label>Ubicación</label>
+              <input type="text" id="resolver-galpon" class="form-control" readonly>
+            </div>
+          </div>
+          <p id="resolver-titulo" style="color:var(--text-primary); font-weight:600; margin-bottom: 1rem;"></p>
+
+          <div class="form-group">
+            <label>Acción tomada <span class="required">*</span></label>
+            <select id="resolver-accion" class="form-control" required>
+              <option value="">Seleccione una acción</option>
+              <option value="ventiladores">Activación manual de ventiladores</option>
+              <option value="calefactores">Activación manual de calefactores</option>
+              <option value="config_sensor">Ajuste de configuración de sensores</option>
+              <option value="inventario">Reposición de inventario</option>
+              <option value="veterinario">Llamada a veterinario</option>
+              <option value="reparacion">Reparación de equipo</option>
+              <option value="falsa_alarma">Falsa alarma</option>
+              <option value="otra">Otra acción</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Notas detalladas <span class="required">*</span></label>
+            <textarea id="resolver-notas" class="form-control" minlength="20" maxlength="1000" placeholder="Describe las acciones específicas que tomaste (mínimo 20 caracteres)..." required></textarea>
+            <span class="form-hint" id="resolver-chars">0 / 1000 caracteres</span>
+          </div>
+          <div class="form-group">
+            <label>Estado del problema</label>
+            <select id="resolver-estado" class="form-control">
+              <option value="resuelto">✅ Problema completamente resuelto</option>
+              <option value="parcial">⚠️ Parcialmente resuelto - Requiere seguimiento</option>
+              <option value="escalar">🔺 Requiere escalamiento a mantenimiento</option>
+            </select>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-secondary" onclick="closeModal('modal-resolver')">Cancelar</button>
+            <button class="btn-primary" onclick="confirmarResolucion()"><i class="fa-solid fa-check-double"></i> Resolver Alerta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: Detalle de Alerta -->
+    <div id="modal-detalle-alerta" class="modal-overlay hidden">
+      <div class="modal-content modal-info" style="max-width: 600px;">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-circle-info" style="color:var(--status-info);"></i> Detalle de Alerta</h3>
+          <button class="icon-btn" onclick="closeModal('modal-detalle-alerta')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="detalle-alerta-body">
+          <!-- Se llena dinámicamente -->
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: Nueva Regla de Alerta -->
+    <div id="modal-nueva-regla-alerta" class="modal-overlay hidden">
+      <div class="modal-content modal-wide modal-info">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-plus-circle" style="color:var(--status-info);"></i> Nueva Regla de Alerta</h3>
+          <button class="icon-btn" onclick="closeModal('modal-nueva-regla-alerta')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nombre de la regla <span class="required">*</span></label>
+            <input type="text" id="regla-nombre" class="form-control" placeholder="Ej: Temperatura alta nocturna Galpón 1">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Aplicar a</label>
+              <select id="regla-galpon" class="form-control">
+                <option value="all">Todos los galpones</option>
+                <option value="1">Galpón 1</option>
+                <option value="2">Galpón 2</option>
+                <option value="3">Galpón 3</option>
+                <option value="4">Galpón 4</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Parámetro</label>
+              <select id="regla-param" class="form-control">
+                <option value="temp">Temperatura</option>
+                <option value="hum">Humedad</option>
+                <option value="co2">CO₂</option>
+                <option value="nh3">Amoníaco</option>
+                <option value="peso">Peso promedio</option>
+                <option value="mortalidad">Mortalidad</option>
+                <option value="stock">Stock inventario</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Condición</label>
+              <select id="regla-operador" class="form-control">
+                <option value=">">Mayor que (>)</option>
+                <option value="<">Menor que (<)</option>
+                <option value="=">Igual a (=)</option>
+                <option value="between">Entre (rango)</option>
+                <option value="outside">Fuera de rango</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Valor</label>
+              <input type="number" id="regla-valor" class="form-control" placeholder="Ej: 34" step="0.5">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Severidad</label>
+              <select id="regla-severidad" class="form-control">
+                <option value="critical">🔴 Crítica</option>
+                <option value="warning">🟡 Advertencia</option>
+                <option value="info">🟢 Informativa</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Persistir por (min)</label>
+              <input type="number" id="regla-duracion" class="form-control" placeholder="0 = inmediato" min="0" value="0">
+              <span class="form-hint">Evita falsas alarmas por picos</span>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-secondary" onclick="closeModal('modal-nueva-regla-alerta')">Cancelar</button>
+            <button class="btn-primary" onclick="guardarReglaAlerta()"><i class="fa-solid fa-floppy-disk"></i> Guardar Regla</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/alertas.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-

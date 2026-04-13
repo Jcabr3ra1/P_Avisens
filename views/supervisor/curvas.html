@@ -3,192 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avisens | Curvas de Crecimiento</title>
+    <title>Avisens | Curvas de Crecimiento - Supervisor</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <div class="app-container">
-        
-        <aside class="sidebar">
-            <div class="brand">
-                <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo"></div>
-                <h1 class="brand-name">Avisens</h1>
-            </div>
-            
-            <nav class="side-nav">
-                <a href="dashboard.html" class="nav-item">
-                    <i class="fa-solid fa-table-cells-large"></i> Dashboard
-                </a>
-                <a href="sensores.html" class="nav-item">
-                    <i class="fa-solid fa-tower-broadcast"></i> Sensores
-                </a>
-                <a href="curvas.html" class="nav-item active">
-                    <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
-                </a>
-                <a href="alertas.html" class="nav-item">
-                    <i class="fa-solid fa-triangle-exclamation"></i> Alertas
-                </a>
-                <a href="automatizacion.html" class="nav-item">
-                    <i class="fa-solid fa-gear"></i> Automatización
-                </a>
-                <a href="inventario.html" class="nav-item">
-                    <i class="fa-solid fa-box"></i> Inventario
-                </a>
-                <a href="mantenimiento.html" class="nav-item">
-                    <i class="fa-solid fa-wrench"></i> Mantenimiento
-                </a>
-                <a href="usuarios.html" class="nav-item">
-                    <i class="fa-solid fa-user-group"></i> Usuarios
-                </a>
-            </nav>
-        </aside>
 
-        <div class="main-wrapper">
-            <header class="top-header">
-                <div class="header-titles">
-                    <h2>Curvas de Crecimiento</h2>
-                    <p class="subtitle">Análisis de peso: Galpón 1</p>
-                </div>
-                <a href="index.html" class="user-profile">
-                    <div class="user-info">
-                        <span class="user-name">Avisens Admin</span>
-                        <span class="user-role">Acceso Total</span>
-                    </div>
-                    <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
-                </a>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo" onerror="this.outerHTML='🐔'"></div>
+          <h1 class="brand-name">Avisens</h1>
+        </div>
+        <nav class="side-nav">
+          <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+          <a href="sensores.html" class="nav-item"><i class="fa-solid fa-tower-broadcast"></i> Sensores</a>
+          <a href="curvas.html" class="nav-item active"><i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento</a>
+          <a href="alertas.html" class="nav-item"><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
+          <a href="automatizacion.html" class="nav-item"><i class="fa-solid fa-gear"></i> Automatización</a>
+          <a href="inventario.html" class="nav-item"><i class="fa-solid fa-box"></i> Inventario</a>
+          <a href="operadores.html" class="nav-item"><i class="fa-solid fa-clipboard-list"></i> Tareas / Operadores</a>
+        </nav>
+      </aside>
+
+      <div class="main-wrapper">
+        <header class="top-header">
+          <div class="header-titles">
+            <h2>Curvas de Crecimiento</h2>
+            <p class="subtitle">Seguimiento de peso por lote</p>
+          </div>
+          <div class="header-right">
+            <div class="user-profile">
+              <div class="user-info">
+                <span class="user-name">María López</span>
+                <span class="user-role">Encargado/Supervisor</span>
+              </div>
+              <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+            </div>
+            <button class="btn-logout" onclick="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+          </div>
         </header>
 
-            <main class="content-area">
-                
-                <section class="section-block fade-in">
-                    <div class="section-header">
-                        <h2 class="section-title">Evolución de Peso (Gramos)</h2>
-                        <div class="chart-legend">
-                            <span class="legend-item"><div class="box expected-box"></div> Esperado (Guía)</span>
-                            <span class="legend-item"><div class="box actual-box"></div> Real (Medido)</span>
-                        </div>
+        <main class="content-area">
+
+          <!-- FILTROS -->
+          <section class="section-block fade-in">
+            <div class="filters-bar">
+              <div class="filter-group">
+                <label>Galpón</label>
+                <select class="filter-select" id="filter-galpon-curva">
+                  <option value="1" selected>Galpón 1</option>
+                  <option value="2">Galpón 2</option>
+                  <option value="3">Galpón 3</option>
+                  <option value="4">Galpón 4</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Raza</label>
+                <select class="filter-select" id="filter-raza">
+                  <option value="ross308" selected>Ross 308</option>
+                  <option value="cobb500">Cobb 500</option>
+                  <option value="hubbard">Hubbard Classic</option>
+                  <option value="generic">Otra (genérica)</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Período</label>
+                <select class="filter-select" id="filter-ciclo">
+                  <option value="actual" selected>Ciclo actual</option>
+                  <option value="3ciclos">Últimos 3 ciclos</option>
+                  <option value="historico">Todos los ciclos</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- KPIs -->
+          <section class="section-block fade-in" style="animation-delay: 0.05s">
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <div class="kpi-label">Peso Promedio</div>
+                <div class="kpi-value">2.45 kg</div>
+                <div class="kpi-sub" style="color:var(--status-optimal);">
+                  <i class="fa-solid fa-circle-check"></i> En rango (+0.05 kg vs estándar)
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">Edad del Lote</div>
+                <div class="kpi-value">35 días</div>
+                <div class="kpi-sub">
+                  <i class="fa-solid fa-clock"></i> Faena en 7 días (Día 42)
+                </div>
+                <div class="kpi-bar">
+                  <div class="progress-container">
+                    <div class="progress-bar optimal-bg" style="width: 83%"></div>
+                  </div>
+                  <div class="sensor-limits">
+                    <span>Día 0</span>
+                    <span>83%</span>
+                    <span>Día 42</span>
+                  </div>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">Mortalidad Acumulada</div>
+                <div class="kpi-value" style="color:var(--status-warning);">2.3%</div>
+                <div class="kpi-sub" style="color:var(--status-warning);">
+                  <i class="fa-solid fa-triangle-exclamation"></i> +0.5% vs estándar (345 aves)
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- GRÁFICO -->
+          <section class="section-block fade-in" style="animation-delay: 0.1s">
+            <div class="section-header">
+              <h2 class="section-title">Evolución de Peso (Gramos)</h2>
+              <div class="chart-legend">
+                <span class="legend-item"><div class="box expected-box"></div> Esperado (Guía)</span>
+                <span class="legend-item"><div class="box actual-box"></div> Real (Medido)</span>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="css-chart">
+                <div class="y-axis">
+                  <span>3000g</span>
+                  <span>2000g</span>
+                  <span>1000g</span>
+                  <span>0g</span>
+                </div>
+                <div class="chart-bars">
+                  <div class="bar-group">
+                    <div class="bars">
+                      <div class="bar expected-bar" style="height: 6%;"></div>
+                      <div class="bar actual-bar" style="height: 6.5%;"></div>
                     </div>
-
-                    <div class="chart-card">
-                        <div class="css-chart">
-                            <div class="y-axis">
-                                <span>3000g</span>
-                                <span>2000g</span>
-                                <span>1000g</span>
-                                <span>0g</span>
-                            </div>
-                            
-                            <div class="chart-bars">
-                                <div class="bar-group">
-                                    <div class="bars">
-                                        <div class="bar expected-bar" style="height: 6%;"></div>
-                                        <div class="bar actual-bar" style="height: 6.5%;"></div>
-                                    </div>
-                                    <span class="x-label">Sem 1</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bars">
-                                        <div class="bar expected-bar" style="height: 15%;"></div>
-                                        <div class="bar actual-bar" style="height: 14%;"></div>
-                                    </div>
-                                    <span class="x-label">Sem 2</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bars">
-                                        <div class="bar expected-bar" style="height: 30%;"></div>
-                                        <div class="bar actual-bar" style="height: 32%;"></div>
-                                    </div>
-                                    <span class="x-label">Sem 3</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bars">
-                                        <div class="bar expected-bar" style="height: 50%;"></div>
-                                        <div class="bar actual-bar" style="height: 53%;"></div>
-                                    </div>
-                                    <span class="x-label">Sem 4</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bars">
-                                        <div class="bar expected-bar" style="height: 75%;"></div>
-                                        <div class="bar actual-bar warning-bar" style="height: 68%;"></div> </div>
-                                    <span class="x-label">Sem 5</span>
-                                </div>
-                                <div class="bar-group">
-                                    <div class="bars">
-                                        <div class="bar expected-bar" style="height: 95%;"></div>
-                                        <div class="bar actual-bar" style="height: 98%;"></div>
-                                    </div>
-                                    <span class="x-label">Sem 6</span>
-                                </div>
-                            </div>
-                        </div>
+                    <span class="x-label">Sem 1</span>
+                  </div>
+                  <div class="bar-group">
+                    <div class="bars">
+                      <div class="bar expected-bar" style="height: 15%;"></div>
+                      <div class="bar actual-bar" style="height: 14%;"></div>
                     </div>
-                </section>
-
-                <section class="section-block fade-in" style="animation-delay: 0.1s;">
-                    <h2 class="section-title">Registro Detallado</h2>
-                    <div class="table-container">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Edad</th>
-                                    <th>Peso Esperado</th>
-                                    <th>Peso Real</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Semana 4</td>
-                                    <td>1500 g</td>
-                                    <td>1590 g</td>
-                                    <td><span class="badge optimal-badge">Excelente</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Semana 5</td>
-                                    <td>2250 g</td>
-                                    <td>2040 g</td>
-                                    <td><span class="badge warning-badge">Bajo peso</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Semana 6</td>
-                                    <td>2850 g</td>
-                                    <td>2940 g</td>
-                                    <td><span class="badge optimal-badge">Excelente</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <span class="x-label">Sem 2</span>
+                  </div>
+                  <div class="bar-group">
+                    <div class="bars">
+                      <div class="bar expected-bar" style="height: 30%;"></div>
+                      <div class="bar actual-bar" style="height: 32%;"></div>
                     </div>
-                </section>
+                    <span class="x-label">Sem 3</span>
+                  </div>
+                  <div class="bar-group">
+                    <div class="bars">
+                      <div class="bar expected-bar" style="height: 50%;"></div>
+                      <div class="bar actual-bar" style="height: 53%;"></div>
+                    </div>
+                    <span class="x-label">Sem 4</span>
+                  </div>
+                  <div class="bar-group">
+                    <div class="bars">
+                      <div class="bar expected-bar" style="height: 75%;"></div>
+                      <div class="bar actual-bar warning-bar" style="height: 68%;"></div>
+                    </div>
+                    <span class="x-label">Sem 5</span>
+                  </div>
+                  <div class="bar-group">
+                    <div class="bars">
+                      <div class="bar expected-bar" style="height: 95%;"></div>
+                      <div class="bar actual-bar" style="height: 98%;"></div>
+                    </div>
+                    <span class="x-label">Sem 6</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-            </main>
-        </div>
+          <!-- TABLA DE PESAJES -->
+          <section class="section-block fade-in" style="animation-delay: 0.15s">
+            <div class="section-header">
+              <h2 class="section-title">Registro de Pesajes</h2>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <button class="btn-outline btn-sm" onclick="exportarCurvasCSV()">
+                  <i class="fa-solid fa-download"></i> Exportar
+                </button>
+                <button class="btn-primary btn-sm" onclick="openModal('modal-nuevo-pesaje')">
+                  <i class="fa-solid fa-plus"></i> Nuevo Registro
+                </button>
+              </div>
+            </div>
 
-        <nav class="bottom-nav">
-            <a href="index.html" class="bottom-nav-item">
-                <i class="fa-solid fa-table-cells-large"></i><span>Inicio</span>
-            </a>
-            <a href="sensores.html" class="bottom-nav-item">
-                <i class="fa-solid fa-tower-broadcast"></i><span>Sensores</span>
-            </a>
-            <a href="alertas.html" class="bottom-nav-item">
-                <i class="fa-solid fa-triangle-exclamation"></i><span>Alertas</span>
-            </a>
-            <a href="#" class="bottom-nav-item">
-                <i class="fa-solid fa-gear"></i><span>Ajustes</span>
-            </a>
-        </nav>
+            <div class="table-container">
+              <table class="data-table" id="tabla-pesajes">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Edad</th>
+                    <th>Peso Prom.</th>
+                    <th>Muestra</th>
+                    <th>Mortalidad</th>
+                    <th>Notas</th>
+                    <th>Registrado por</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-pesajes">
+                  <tr>
+                    <td>2026-03-17</td>
+                    <td>35 días</td>
+                    <td><strong>2.45 kg</strong></td>
+                    <td>50 aves</td>
+                    <td>3</td>
+                    <td class="truncate" style="max-width:150px;" title="Lote uniforme, buen aspecto">Lote uniforme, buen aspecto</td>
+                    <td class="text-muted text-xs">María López</td>
+                    <td><span class="badge optimal-badge">En rango</span></td>
+                  </tr>
+                  <tr>
+                    <td>2026-03-10</td>
+                    <td>28 días</td>
+                    <td><strong>1.59 kg</strong></td>
+                    <td>50 aves</td>
+                    <td>2</td>
+                    <td class="truncate" style="max-width:150px;" title="Buen crecimiento. Sin novedades.">Buen crecimiento</td>
+                    <td class="text-muted text-xs">María López</td>
+                    <td><span class="badge optimal-badge">Excelente</span></td>
+                  </tr>
+                  <tr>
+                    <td>2026-03-03</td>
+                    <td>21 días</td>
+                    <td><strong class="warning-text">0.82 kg</strong></td>
+                    <td>45 aves</td>
+                    <td>5</td>
+                    <td class="truncate" style="max-width:150px;" title="Algunos pollos con problemas de patas">Problemas de patas</td>
+                    <td class="text-muted text-xs">María López</td>
+                    <td><span class="badge warning-badge">Bajo peso</span></td>
+                  </tr>
+                  <tr>
+                    <td>2026-02-24</td>
+                    <td>14 días</td>
+                    <td><strong>0.42 kg</strong></td>
+                    <td>50 aves</td>
+                    <td>1</td>
+                    <td class="truncate" style="max-width:150px;" title="Cambio alimento a crecimiento">Cambio alimento a crecimiento</td>
+                    <td class="text-muted text-xs">María López</td>
+                    <td><span class="badge optimal-badge">En rango</span></td>
+                  </tr>
+                  <tr>
+                    <td>2026-02-17</td>
+                    <td>7 días</td>
+                    <td><strong>0.19 kg</strong></td>
+                    <td>30 aves</td>
+                    <td>8</td>
+                    <td class="truncate" style="max-width:150px;" title="Primer pesaje del lote">Primer pesaje del lote</td>
+                    <td class="text-muted text-xs">Admin</td>
+                    <td><span class="badge optimal-badge">En rango</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
 
+        </main>
+      </div>
+
+      <!-- BOTTOM NAV -->
+      <nav class="bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item"><i class="fa-solid fa-table-columns"></i><span>Inicio</span></a>
+        <a href="sensores.html" class="bottom-nav-item"><i class="fa-solid fa-temperature-half"></i><span>Sensores</span></a>
+        <a href="alertas.html" class="bottom-nav-item"><i class="fa-solid fa-bell"></i><span>Alertas</span></a>
+        <a href="automatizacion.html" class="bottom-nav-item"><i class="fa-solid fa-gear"></i><span>Sistemas</span></a>
+      </nav>
     </div>
+
+    <!-- MODAL: Nuevo Registro de Pesaje -->
+    <div id="modal-nuevo-pesaje" class="modal-overlay hidden">
+      <div class="modal-content modal-success">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-weight-scale" style="color:var(--status-optimal);"></i> Nuevo Registro de Pesaje</h3>
+          <button class="icon-btn" onclick="closeModal('modal-nuevo-pesaje')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-pesaje" onsubmit="guardarPesaje(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Galpón <span class="required">*</span></label>
+                <select id="pesaje-galpon" class="form-control" required>
+                  <option value="1" selected>Galpón 1</option>
+                  <option value="2">Galpón 2</option>
+                  <option value="3">Galpón 3</option>
+                  <option value="4">Galpón 4</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Fecha de Pesaje <span class="required">*</span></label>
+                <input type="date" id="pesaje-fecha" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Peso Promedio (kg) <span class="required">*</span></label>
+                <input type="number" id="pesaje-peso" class="form-control" step="0.01" min="0.1" max="5.0" placeholder="2.45" required>
+                <span class="form-hint">Rango válido: 0.1 - 5.0 kg</span>
+              </div>
+              <div class="form-group">
+                <label>Tamaño de Muestra <span class="required">*</span></label>
+                <input type="number" id="pesaje-muestra" class="form-control" min="10" max="500" placeholder="50" required>
+                <span class="form-hint">Mínimo 30 para confiabilidad</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Mortalidad del Día</label>
+              <input type="number" id="pesaje-mortalidad" class="form-control" min="0" value="0" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label>Notas</label>
+              <textarea id="pesaje-notas" class="form-control" maxlength="500" placeholder="Ej: Lote muy uniforme, buen aspecto general..."></textarea>
+              <span class="form-hint">Máximo 500 caracteres</span>
+            </div>
+
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" onclick="closeModal('modal-nuevo-pesaje')">Cancelar</button>
+              <button type="submit" class="btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar Registro</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/curvas.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
