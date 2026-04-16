@@ -43,7 +43,7 @@ Each page in `views/usuario/` follows the same pattern:
 | Page | JS file | Responsibility |
 |------|---------|----------------|
 | `dashboard.html` | *(none, only utils.js)* | KPI cards, galpón status grid, recent alerts |
-| `sensores.html` | `sensores.js` | Sensors + Alerts + Automation (3 unified tabs) |
+| `monitoreo.html` | `monitoreo.js` | Sensors + Alerts + Automation (3 unified tabs) |
 | `curvas.html` | `curvas.js` | Growth-curve weight logging |
 | `inventario.html` | `inventario.js` | Stock / Requisitions / Movement history (3 tabs) |
 | `operadores.html` | `operadores.js` | Tasks / Operators / Consumptions (3 tabs) |
