@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Avisens | Dashboard - Supervisor</title>
+    <title>Avisens | Dashboard - Usuario</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -22,7 +22,7 @@
             <i class="fa-solid fa-table-cells-large"></i> Dashboard
           </a>
           <a href="sensores.html" class="nav-item">
-            <i class="fa-solid fa-tower-broadcast"></i> Notificaciones Y Atomatizacion
+            <i class="fa-solid fa-tower-broadcast"></i> Sensores & Alertas
           </a>
           <a href="curvas.html" class="nav-item">
             <i class="fa-solid fa-chart-line"></i> Curvas de Crecimiento
@@ -32,8 +32,6 @@
           </a>
           <a href="operadores.html" class="nav-item">
             <i class="fa-solid fa-clipboard-list"></i> Tareas / Operadores
-          </a>
-           <a href="registro.html" class="nav-item">
           </a>
         </nav>
       </aside>
@@ -49,8 +47,8 @@
           <div class="header-right">
             <div class="user-profile">
               <div class="user-info">
-                <span class="user-name">María López</span>
-                <span class="user-role">Encargado/Supervisor</span>
+                <span class="user-name">Juan Martínez</span>
+                <span class="user-role">Administrador</span>
               </div>
               <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
             </div>
@@ -67,7 +65,7 @@
             <div class="section-header">
               <h2 class="section-title">Galpones Activos (4)</h2>
               <div class="system-mode">
-                <span class="status-indicator pulse-animation" style="background: var(--status-optimal); box-shadow: 0 0 10px rgba(34,197,94,0.5);"></span>
+                <span class="status-indicator pulse-animation" style="background: var(--status-optimal); box-shadow: 0 0 10px rgba(16,185,129,0.5);"></span>
                 Automático
               </div>
             </div>
@@ -81,7 +79,7 @@
                 <div class="shed-metrics">
                   <div class="metric">
                     <span class="metric-label">Temp:</span>
-                    <span class="metric-value">32°C</span>
+                    <span class="metric-value">22°C</span>
                   </div>
                   <div class="metric">
                     <span class="metric-label">Hum:</span>
@@ -89,11 +87,11 @@
                   </div>
                   <div class="metric">
                     <span class="metric-label">CO₂:</span>
-                    <span class="metric-value">850 ppm</span>
+                    <span class="metric-value">2,200 ppm</span>
                   </div>
                   <div class="metric">
                     <span class="metric-label">NH₃:</span>
-                    <span class="metric-value">12 ppm</span>
+                    <span class="metric-value">18 ppm</span>
                   </div>
                 </div>
                 <div class="shed-footer">
@@ -110,36 +108,36 @@
                 <div class="shed-metrics">
                   <div class="metric">
                     <span class="metric-label">Temp:</span>
-                    <span class="metric-value">29°C</span>
+                    <span class="metric-value warning-text">26°C</span>
                   </div>
                   <div class="metric">
                     <span class="metric-label">Hum:</span>
-                    <span class="metric-value">62%</span>
+                    <span class="metric-value">58%</span>
                   </div>
                   <div class="metric">
                     <span class="metric-label">CO₂:</span>
-                    <span class="metric-value warning-text">920 ppm</span>
+                    <span class="metric-value warning-text">2,800 ppm</span>
                   </div>
                   <div class="metric">
                     <span class="metric-label">NH₃:</span>
-                    <span class="metric-value warning-text">15 ppm</span>
+                    <span class="metric-value warning-text">22 ppm</span>
                   </div>
                 </div>
                 <div class="shed-footer">
                   <span><i class="fa-solid fa-kiwi-bird"></i> 14,500 aves</span>
-                  <span>Día 21</span>
+                  <span>Día 35</span>
                 </div>
               </article>
 
-              <article class="shed-card" data-status="critical">
+              <article class="shed-card" data-status="optimal">
                 <div class="shed-header">
                   <h3 class="shed-name">Galpón 3</h3>
-                  <span class="status-indicator pulse-animation"></span>
+                  <span class="status-indicator"></span>
                 </div>
                 <div class="shed-metrics">
                   <div class="metric">
                     <span class="metric-label">Temp:</span>
-                    <span class="metric-value critical-text">35°C</span>
+                    <span class="metric-value">20°C</span>
                   </div>
                   <div class="metric">
                     <span class="metric-label">Hum:</span>
@@ -147,45 +145,45 @@
                   </div>
                   <div class="metric">
                     <span class="metric-label">CO₂:</span>
-                    <span class="metric-value critical-text">1150 ppm</span>
+                    <span class="metric-value">1,800 ppm</span>
                   </div>
                   <div class="metric">
                     <span class="metric-label">NH₃:</span>
-                    <span class="metric-value critical-text">22 ppm</span>
-                  </div>
-                </div>
-                <div class="shed-footer">
-                  <span><i class="fa-solid fa-kiwi-bird"></i> 14,800 aves</span>
-                  <span>Día 35</span>
-                </div>
-              </article>
-
-              <article class="shed-card" data-status="optimal">
-                <div class="shed-header">
-                  <h3 class="shed-name">Galpón 4</h3>
-                  <span class="status-indicator"></span>
-                </div>
-                <div class="shed-metrics">
-                  <div class="metric">
-                    <span class="metric-label">Temp:</span>
-                    <span class="metric-value">31°C</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">Hum:</span>
-                    <span class="metric-value">64%</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">CO₂:</span>
-                    <span class="metric-value">880 ppm</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">NH₃:</span>
-                    <span class="metric-value">13 ppm</span>
+                    <span class="metric-value">15 ppm</span>
                   </div>
                 </div>
                 <div class="shed-footer">
                   <span><i class="fa-solid fa-kiwi-bird"></i> 15,200 aves</span>
-                  <span>Día 14</span>
+                  <span>Día 21</span>
+                </div>
+              </article>
+
+              <article class="shed-card" data-status="critical">
+                <div class="shed-header">
+                  <h3 class="shed-name">Galpón 4</h3>
+                  <span class="status-indicator pulse-animation"></span>
+                </div>
+                <div class="shed-metrics">
+                  <div class="metric">
+                    <span class="metric-label">Temp:</span>
+                    <span class="metric-value critical-text">28°C</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">Hum:</span>
+                    <span class="metric-value critical-text">48%</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">CO₂:</span>
+                    <span class="metric-value critical-text">3,200 ppm</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">NH₃:</span>
+                    <span class="metric-value critical-text">28 ppm</span>
+                  </div>
+                </div>
+                <div class="shed-footer">
+                  <span><i class="fa-solid fa-kiwi-bird"></i> 14,800 aves</span>
+                  <span>Día 42</span>
                 </div>
               </article>
             </div>
@@ -232,48 +230,48 @@
           <section class="section-block fade-in" style="animation-delay: 0.2s">
             <div class="section-header">
               <h2 class="section-title">Alertas Recientes</h2>
-              <a href="alertas.html" class="btn-outline btn-sm">
+              <a href="sensores.html" class="btn-outline btn-sm">
                 <i class="fa-solid fa-arrow-right"></i> Ver todas
               </a>
             </div>
 
             <div class="alerts-list">
-              <div class="alert-item" data-type="critical" onclick="window.location.href='alertas.html'">
+              <div class="alert-item" data-type="critical" onclick="window.location.href='sensores.html'">
                 <div class="alert-icon">
                   <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
                 <div class="alert-content">
                   <div class="alert-top">
-                    <strong>Galpón 3</strong>
+                    <strong>Galpón 4</strong>
                     <span class="alert-time">Hace 5 min</span>
                   </div>
-                  <p>Temperatura crítica: 35°C</p>
+                  <p>CO₂ crítico: 3,200 ppm</p>
                 </div>
               </div>
 
-              <div class="alert-item" data-type="critical" onclick="window.location.href='alertas.html'">
+              <div class="alert-item" data-type="critical" onclick="window.location.href='sensores.html'">
                 <div class="alert-icon">
                   <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
                 <div class="alert-content">
                   <div class="alert-top">
-                    <strong>Galpón 3</strong>
-                    <span class="alert-time">Hace 12 min</span>
+                    <strong>Galpón 4</strong>
+                    <span class="alert-time">Hace 18 min</span>
                   </div>
-                  <p>Amoníaco alto: 22 ppm</p>
+                  <p>Amoníaco alto: 28 ppm</p>
                 </div>
               </div>
 
-              <div class="alert-item" data-type="warning" onclick="window.location.href='alertas.html'">
+              <div class="alert-item" data-type="warning" onclick="window.location.href='sensores.html'">
                 <div class="alert-icon">
                   <i class="fa-solid fa-circle-exclamation"></i>
                 </div>
                 <div class="alert-content">
                   <div class="alert-top">
                     <strong>Galpón 2</strong>
-                    <span class="alert-time">Hace 25 min</span>
+                    <span class="alert-time">Hace 30 min</span>
                   </div>
-                  <p>CO₂ elevado: 920 ppm</p>
+                  <p>Temperatura en límite: 26°C</p>
                 </div>
               </div>
 
@@ -302,16 +300,16 @@
           <span>Inicio</span>
         </a>
         <a href="sensores.html" class="bottom-nav-item">
-          <i class="fa-solid fa-temperature-half"></i>
+          <i class="fa-solid fa-tower-broadcast"></i>
           <span>Sensores</span>
         </a>
-        <a href="alertas.html" class="bottom-nav-item">
-          <i class="fa-solid fa-bell"></i>
-          <span>Alertas</span>
+        <a href="inventario.html" class="bottom-nav-item">
+          <i class="fa-solid fa-box"></i>
+          <span>Inventario</span>
         </a>
-        <a href="automatizacion.html" class="bottom-nav-item">
-          <i class="fa-solid fa-gear"></i>
-          <span>Sistemas</span>
+        <a href="operadores.html" class="bottom-nav-item">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span>Tareas</span>
         </a>
       </nav>
     </div>

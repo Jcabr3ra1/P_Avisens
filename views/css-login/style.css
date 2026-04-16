@@ -4,22 +4,22 @@
 :root {
   /* Backgrounds */
   --bg-primary: #0a1612;
-  --bg-secondary: #0d1f1a;
-  --bg-card: #111f1b;
-  --bg-card-hover: #152822;
+  --bg-secondary: #0d1a16;
+  --bg-card: #0f1e19;
+  --bg-card-hover: #152e24;
 
   /* Status Colors */
-  --status-optimal: #22c55e;
-  --status-warning: #fb923c;
+  --status-optimal: #10b981;
+  --status-warning: #f59e0b;
   --status-critical: #ef4444;
 
   /* Text Colors */
   --text-primary: #e8f5f1;
-  --text-secondary: #9ca3af;
+  --text-secondary: #9db3ab;
   --text-muted: #6b7280;
 
   /* Borders */
-  --border-color: #1e3a32;
+  --border-color: #1a2e26;
 
   /* Layout */
   --bottom-nav-height: 70px;

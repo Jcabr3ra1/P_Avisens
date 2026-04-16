@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     carlos: { nombre: 'Carlos Pérez', corto: 'Carlos P.', color: 'linear-gradient(135deg,#3b82f6,#2563eb)', letra: 'C' },
     andrea: { nombre: 'Andrea Gómez', corto: 'Andrea G.', color: 'linear-gradient(135deg,#a855f7,#7c3aed)', letra: 'A' },
     jorge:  { nombre: 'Jorge Ramírez', corto: 'Jorge R.', color: 'linear-gradient(135deg,#f97316,#ea580c)', letra: 'J' },
-    supervisor: { nombre: 'María López', corto: 'María L. (Sup.)', color: 'linear-gradient(135deg,#10b981,#059669)', letra: 'M' }
+    supervisor: { nombre: 'Juan Martínez', corto: 'Juan M. (Admin)', color: 'linear-gradient(135deg,#10b981,#059669)', letra: 'M' }
   };
 
   const historialData = {
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fila.setAttribute('data-req-estado', 'pendiente');
     fila.style.animation = 'fadeIn 0.5s ease forwards';
     fila.innerHTML = `
-      <td><strong>${producto}</strong><br><span class="text-xs text-muted">Solicitado por: María López (Supervisor)</span></td>
+      <td><strong>${producto}</strong><br><span class="text-xs text-muted">Solicitado por: Juan Martínez (Supervisor)</span></td>
       <td><strong>${cantidad} ${unidad}</strong></td>
       <td><span class="badge ${urgBadge}"><i class="fa-solid ${urgIcon}"></i> ${urgLabel}</span></td>
       <td class="text-xs text-muted">${motivo}</td>

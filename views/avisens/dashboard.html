@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avisens | Panel Super Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo" onerror="this.outerHTML='🐔'"></div>
+          <h1 class="brand-name">Avisens</h1>
+        </div>
+        <nav class="side-nav">
+          <a href="dashboard.html" class="nav-item active">
+            <i class="fa-solid fa-crown"></i> Panel General
+          </a>
+          <a href="#" class="nav-item" onclick="showToast('info','Próximamente','Módulo en construcción.')">
+            <i class="fa-solid fa-building"></i> Granjas Clientes
+          </a>
+          <a href="#" class="nav-item" onclick="showToast('info','Próximamente','Módulo en construcción.')">
+            <i class="fa-solid fa-users-gear"></i> Gestión de Usuarios
+          </a>
+          <a href="#" class="nav-item" onclick="showToast('info','Próximamente','Módulo en construcción.')">
+            <i class="fa-solid fa-screwdriver-wrench"></i> Mantenimiento
+          </a>
+          <a href="#" class="nav-item" onclick="showToast('info','Próximamente','Módulo en construcción.')">
+            <i class="fa-solid fa-chart-bar"></i> Panel Financiero
+          </a>
+          <a href="#" class="nav-item" onclick="showToast('info','Próximamente','Módulo en construcción.')">
+            <i class="fa-solid fa-file-pdf"></i> Reportes
+          </a>
+        </nav>
+        <div style="padding: 1rem; border-top: 1px solid var(--border-color); margin-top: auto;">
+          <div style="font-size: 0.7rem; color: var(--text-muted); text-align: center; letter-spacing: 0.5px;">
+            AVISENS ADMIN v1.0
+          </div>
+        </div>
+      </aside>
+
+      <!-- ===== MAIN CONTENT ===== -->
+      <div class="main-wrapper">
+
+        <header class="top-header">
+          <div class="header-titles">
+            <h2>Panel de Control AVISENS</h2>
+            <p class="subtitle">Administración global de granjas — Acceso total</p>
+          </div>
+          <div class="header-right">
+            <div class="user-profile">
+              <div class="user-info">
+                <span class="user-name">Avisens Admin</span>
+                <span class="user-role" style="color: var(--status-warning);">
+                  <i class="fa-solid fa-crown" style="font-size:0.65rem;"></i> Super Admin
+                </span>
+              </div>
+              <div class="user-avatar" style="background: linear-gradient(135deg, var(--status-warning), #d97706);">
+                <i class="fa-solid fa-crown"></i>
+              </div>
+            </div>
+            <button class="btn-logout" onclick="cerrarSesion()">
+              <i class="fa-solid fa-right-from-bracket"></i> Salir
+            </button>
+          </div>
+        </header>
+
+        <main class="content-area">
+
+          <!-- KPIs GLOBALES -->
+          <section class="section-block fade-in">
+            <h2 class="section-title" style="margin-bottom: 1rem;">Resumen Global</h2>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-icon" style="color: var(--status-info);">
+                  <i class="fa-solid fa-building"></i>
+                </span>
+                <span class="stat-value">3</span>
+                <span class="stat-label">Granjas Activas</span>
+                <span class="stat-delta positive">+1 este mes</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-icon" style="color: var(--status-optimal);">
+                  <i class="fa-solid fa-kiwi-bird"></i>
+                </span>
+                <span class="stat-value">178,500</span>
+                <span class="stat-label">Aves Totales</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-icon" style="color: var(--status-critical);">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </span>
+                <span class="stat-value">3</span>
+                <span class="stat-label">Alertas Críticas</span>
+                <span class="stat-delta negative">+1 vs ayer</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-icon" style="color: var(--status-warning);">
+                  <i class="fa-solid fa-dollar-sign"></i>
+                </span>
+                <span class="stat-value">$4,850</span>
+                <span class="stat-label">MRR (USD)</span>
+                <span class="stat-delta positive">+12% vs mes ant.</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- GRANJAS ACTIVAS -->
+          <section class="section-block fade-in" style="animation-delay: 0.1s">
+            <div class="section-header">
+              <h2 class="section-title">Granjas bajo Gestión</h2>
+              <button class="btn-primary btn-sm" onclick="showToast('info','Próximamente','Agregar granja en construcción.')">
+                <i class="fa-solid fa-plus"></i> Nueva Granja
+              </button>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Granja</th>
+                    <th>Propietario</th>
+                    <th>Plan</th>
+                    <th>Galpones</th>
+                    <th>Aves Totales</th>
+                    <th>Alertas</th>
+                    <th>Estado</th>
+                    <th class="text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Granja El Progreso</strong><br>
+                      <span class="text-xs text-muted">Cundinamarca, Colombia</span>
+                    </td>
+                    <td>
+                      <div style="display:flex; align-items:center; gap:0.4rem;">
+                        <div class="mini-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">J</div>
+                        Juan Martínez
+                      </div>
+                    </td>
+                    <td><span class="badge info-badge"><i class="fa-solid fa-star"></i> Professional</span></td>
+                    <td class="text-center">4</td>
+                    <td class="text-center">59,500</td>
+                    <td class="text-center"><span class="badge critical-badge">1 crítica</span></td>
+                    <td><span class="badge optimal-badge"><i class="fa-solid fa-circle"></i> Activa</span></td>
+                    <td class="action-buttons">
+                      <button class="icon-btn view" title="Ver granja" onclick="abrirGranja('El Progreso')"><i class="fa-solid fa-eye"></i></button>
+                      <button class="icon-btn edit" title="Configurar" onclick="showToast('info','Próximamente','Configuración de granja en construcción.')"><i class="fa-solid fa-gear"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Avícola San Pedro</strong><br>
+                      <span class="text-xs text-muted">Boyacá, Colombia</span>
+                    </td>
+                    <td>
+                      <div style="display:flex; align-items:center; gap:0.4rem;">
+                        <div class="mini-avatar" style="background:linear-gradient(135deg,#a855f7,#7c3aed);">L</div>
+                        Luis Ramírez
+                      </div>
+                    </td>
+                    <td><span class="badge warning-badge"><i class="fa-solid fa-seedling"></i> Starter</span></td>
+                    <td class="text-center">2</td>
+                    <td class="text-center">28,000</td>
+                    <td class="text-center"><span class="badge warning-badge">2 aviso</span></td>
+                    <td><span class="badge optimal-badge"><i class="fa-solid fa-circle"></i> Activa</span></td>
+                    <td class="action-buttons">
+                      <button class="icon-btn view" title="Ver granja" onclick="showToast('info','Granja','Módulo en construcción.')"><i class="fa-solid fa-eye"></i></button>
+                      <button class="icon-btn edit" title="Configurar" onclick="showToast('info','Próximamente','Configuración en construcción.')"><i class="fa-solid fa-gear"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Granja La Esperanza</strong><br>
+                      <span class="text-xs text-muted">Antioquia, Colombia</span>
+                    </td>
+                    <td>
+                      <div style="display:flex; align-items:center; gap:0.4rem;">
+                        <div class="mini-avatar" style="background:linear-gradient(135deg,#f97316,#ea580c);">C</div>
+                        Carlos Herrera
+                      </div>
+                    </td>
+                    <td><span class="badge" style="background:linear-gradient(135deg,#10b981,#059669); color:#fff; padding:0.25rem 0.5rem; border-radius:0.375rem; font-size:0.7rem;"><i class="fa-solid fa-building"></i> Enterprise</span></td>
+                    <td class="text-center">8</td>
+                    <td class="text-center">91,000</td>
+                    <td class="text-center"><span class="badge optimal-badge">Sin alertas</span></td>
+                    <td><span class="badge optimal-badge"><i class="fa-solid fa-circle"></i> Activa</span></td>
+                    <td class="action-buttons">
+                      <button class="icon-btn view" title="Ver granja" onclick="showToast('info','Granja','Módulo en construcción.')"><i class="fa-solid fa-eye"></i></button>
+                      <button class="icon-btn edit" title="Configurar" onclick="showToast('info','Próximamente','Configuración en construcción.')"><i class="fa-solid fa-gear"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- ALERTAS GLOBALES RECIENTES -->
+          <section class="section-block fade-in" style="animation-delay: 0.2s">
+            <div class="section-header">
+              <h2 class="section-title">Alertas Recientes — Todas las Granjas</h2>
+            </div>
+            <div class="alerts-list">
+              <div class="alert-item" data-type="critical" onclick="abrirGranja('El Progreso')">
+                <div class="alert-icon">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="alert-content">
+                  <div class="alert-top">
+                    <strong>Granja El Progreso · Galpón 4</strong>
+                    <span class="alert-time">Hace 5 min</span>
+                  </div>
+                  <p>CO₂ crítico: 3,200 ppm — NH₃: 28 ppm</p>
+                </div>
+              </div>
+              <div class="alert-item" data-type="warning">
+                <div class="alert-icon">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+                <div class="alert-content">
+                  <div class="alert-top">
+                    <strong>Avícola San Pedro · Galpón 1</strong>
+                    <span class="alert-time">Hace 22 min</span>
+                  </div>
+                  <p>Temperatura en advertencia: 27°C</p>
+                </div>
+              </div>
+              <div class="alert-item" data-type="warning">
+                <div class="alert-icon">
+                  <i class="fa-solid fa-box-open"></i>
+                </div>
+                <div class="alert-content">
+                  <div class="alert-top">
+                    <strong>Avícola San Pedro · Inventario</strong>
+                    <span class="alert-time">Hace 1 hr</span>
+                  </div>
+                  <p>Stock bajo: Vacuna Gumboro — 2 frascos restantes</p>
+                </div>
+              </div>
+              <div class="alert-item" data-type="optimal">
+                <div class="alert-icon">
+                  <i class="fa-solid fa-check-circle"></i>
+                </div>
+                <div class="alert-content">
+                  <div class="alert-top">
+                    <strong>Granja La Esperanza — Todos los galpones</strong>
+                    <span class="alert-time">Hace 2 hr</span>
+                  </div>
+                  <p>Sistemas operando en rango óptimo</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </main>
+      </div>
+
+      <!-- BOTTOM NAV (Mobile) -->
+      <nav class="bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item active">
+          <i class="fa-solid fa-crown"></i>
+          <span>Panel</span>
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="showToast('info','Próximamente','En construcción.')">
+          <i class="fa-solid fa-building"></i>
+          <span>Granjas</span>
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="showToast('info','Próximamente','En construcción.')">
+          <i class="fa-solid fa-users-gear"></i>
+          <span>Usuarios</span>
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="showToast('info','Próximamente','En construcción.')">
+          <i class="fa-solid fa-chart-bar"></i>
+          <span>Finanzas</span>
+        </a>
+      </nav>
+    </div>
+
+    <script src="utils.js"></script>
+    <script>
+      window.abrirGranja = function(nombre) {
+        showConfirm(
+          'Acceder a Granja',
+          `¿Deseas acceder al panel de la granja "${nombre}"?`,
+          () => {
+            showToast('info', 'Redirigiendo', 'Cargando vista de granja...');
+            setTimeout(() => { window.location.href = '../usuario/dashboard.html'; }, 800);
+          }
+        );
+      };
+    </script>
+  </body>
+</html>

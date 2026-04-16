@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avisens | Control Manual — Operario</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo" onerror="this.outerHTML='🐔'"></div>
+          <h1 class="brand-name">Avisens</h1>
+        </div>
+        <nav class="side-nav">
+          <a href="dashboard.html" class="nav-item">
+            <i class="fa-solid fa-house"></i> Mi Panel
+          </a>
+          <a href="alertas.html" class="nav-item">
+            <i class="fa-solid fa-bell"></i> Alertas
+          </a>
+          <a href="control.html" class="nav-item active">
+            <i class="fa-solid fa-sliders"></i> Control Manual
+          </a>
+        </nav>
+      </aside>
+
+      <!-- ===== MAIN CONTENT ===== -->
+      <div class="main-wrapper">
+
+        <header class="top-header">
+          <div class="header-titles">
+            <h2>Control Manual</h2>
+            <p class="subtitle">Ajuste de equipos en tus galpones asignados</p>
+          </div>
+          <div class="header-right">
+            <div class="user-profile">
+              <div class="user-info">
+                <span class="user-name">Carlos Ruiz</span>
+                <span class="user-role">Operario</span>
+              </div>
+              <div class="user-avatar"><i class="fa-solid fa-hard-hat"></i></div>
+            </div>
+            <button class="btn-logout" onclick="cerrarSesion()">
+              <i class="fa-solid fa-right-from-bracket"></i> Salir
+            </button>
+          </div>
+        </header>
+
+        <main class="content-area">
+
+          <!-- AVISO DE ACCESO LIMITADO -->
+          <section class="section-block fade-in">
+            <div style="display:flex; align-items:center; gap:0.75rem; padding: 0.875rem 1rem; background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.25); border-radius: 0.75rem; border-left: 3px solid var(--status-warning);">
+              <i class="fa-solid fa-shield-halved" style="color:var(--status-warning); font-size:1.2rem; flex-shrink:0;"></i>
+              <div>
+                <div style="font-weight:600; color:var(--text-primary); font-size:0.88rem;">Modo Operario — Control limitado</div>
+                <div style="font-size:0.78rem; color:var(--text-muted);">Solo puedes ajustar ventilación y dispensar alimento. Los cambios quedan registrados con tu nombre.</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SELECTOR DE GALPÓN -->
+          <section class="section-block fade-in" style="animation-delay:0.05s">
+            <div class="galpon-selector">
+              <div>
+                <div style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; font-weight:600; margin-bottom:0.4rem;">Galpón activo</div>
+                <select class="filter-select" id="galponSelect" onchange="cambiarGalpon(this.value)" style="min-width:160px;">
+                  <option value="1">Galpón 1 — Óptimo</option>
+                  <option value="2" selected>Galpón 2 — Advertencia</option>
+                </select>
+              </div>
+              <div class="galpon-metrics" id="galponMetrics">
+                <!-- rellenado por JS -->
+              </div>
+            </div>
+          </section>
+
+          <!-- CONTROLES -->
+          <section class="section-block fade-in" style="animation-delay:0.1s">
+            <div class="automation-grid">
+
+              <!-- VENTILACIÓN -->
+              <div class="control-card">
+                <div class="control-header">
+                  <div class="control-title">
+                    <div class="control-icon"><i class="fa-solid fa-wind"></i></div>
+                    <div>
+                      <h3>Ventilación</h3>
+                      <div style="font-size:0.75rem; color:var(--text-muted);">Velocidad de ventiladores</div>
+                    </div>
+                  </div>
+                  <label class="css-switch">
+                    <input type="checkbox" id="switchVent" checked onchange="toggleVentilacion(this.checked)">
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+                <div class="control-body" id="bodyVent">
+                  <div class="slider-header">
+                    <span>Velocidad</span>
+                    <span class="slider-value" id="ventValor">75%</span>
+                  </div>
+                  <input type="range" class="css-range" id="ventSlider" min="0" max="100" value="75"
+                    oninput="document.getElementById('ventValor').textContent = this.value + '%'">
+                  <div class="slider-limits"><span>0% (Apagado)</span><span>100% (Máx)</span></div>
+                  <button class="btn-primary btn-sm" style="margin-top:1rem; width:100%;" onclick="aplicarCambio('Ventilación', 'ventSlider', '%')">
+                    <i class="fa-solid fa-check"></i> Aplicar
+                  </button>
+                </div>
+              </div>
+
+              <!-- NEBULIZADOR -->
+              <div class="control-card">
+                <div class="control-header">
+                  <div class="control-title">
+                    <div class="control-icon"><i class="fa-solid fa-droplet"></i></div>
+                    <div>
+                      <h3>Nebulizador</h3>
+                      <div style="font-size:0.75rem; color:var(--text-muted);">Control de humedad</div>
+                    </div>
+                  </div>
+                  <label class="css-switch">
+                    <input type="checkbox" id="switchNeb" onchange="toggleDispositivo('nebulizador', this.checked)">
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+                <div class="control-body" id="bodyNeb">
+                  <div class="feed-info">
+                    <strong>Estado:</strong> <span id="nebEstado">Apagado</span><br>
+                    <span style="margin-top:0.25rem; display:block;">Humedad actual: <strong>58%</strong> — Óptimo: 60–70%</span>
+                  </div>
+                  <button class="btn-primary btn-sm" style="margin-top:1rem; width:100%;" onclick="activarNebulizador()">
+                    <i class="fa-solid fa-power-off"></i> <span id="btnNebLabel">Activar 5 min</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- DISPENSADOR DE ALIMENTO -->
+              <div class="control-card">
+                <div class="control-header">
+                  <div class="control-title">
+                    <div class="control-icon"><i class="fa-solid fa-wheat-awn"></i></div>
+                    <div>
+                      <h3>Dispensador Alimento</h3>
+                      <div style="font-size:0.75rem; color:var(--text-muted);">Despacho manual de ración</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="control-body">
+                  <div class="slider-header">
+                    <span>Ración a dispensar</span>
+                    <span class="slider-value" id="feedValor">50 kg</span>
+                  </div>
+                  <input type="range" class="css-range" id="feedSlider" min="10" max="200" step="10" value="50"
+                    oninput="document.getElementById('feedValor').textContent = this.value + ' kg'">
+                  <div class="slider-limits"><span>10 kg</span><span>200 kg</span></div>
+                  <div class="feed-info" style="margin-top:0.75rem;">
+                    Stock disponible: <strong>1,250 kg</strong> · Último despacho: <strong>hace 4 h</strong>
+                  </div>
+                  <button class="btn-primary btn-sm" style="margin-top:1rem; width:100%;" onclick="dispensarAlimento()">
+                    <i class="fa-solid fa-play"></i> Dispensar ahora
+                  </button>
+                </div>
+              </div>
+
+              <!-- CALEFACCIÓN (solo lectura para operario) -->
+              <div class="control-card">
+                <div class="control-header">
+                  <div class="control-title">
+                    <div class="control-icon"><i class="fa-solid fa-fire"></i></div>
+                    <div>
+                      <h3>Calefacción</h3>
+                      <div style="font-size:0.75rem; color:var(--text-muted);">Control de temperatura</div>
+                    </div>
+                  </div>
+                  <span class="badge neutral-badge" style="font-size:0.68rem;">
+                    <i class="fa-solid fa-lock"></i> Solo lectura
+                  </span>
+                </div>
+                <div class="control-body control-disabled">
+                  <div class="slider-header">
+                    <span>Temperatura objetivo</span>
+                    <span class="slider-value">24°C</span>
+                  </div>
+                  <input type="range" class="css-range" min="18" max="35" value="24" disabled>
+                  <div class="slider-limits"><span>18°C</span><span>35°C</span></div>
+                  <div class="feed-info" style="margin-top:0.75rem;">
+                    <span style="color:var(--status-warning);"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                    Solo el usuario puede modificar umbrales de temperatura.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- LOG DE ACTIVIDAD -->
+          <section class="section-block fade-in" style="animation-delay:0.15s">
+            <h2 class="section-title" style="margin-bottom:1rem;">Registro de Acciones — Turno actual</h2>
+            <div class="activity-log" id="activityLog">
+              <div class="log-entry">
+                <span class="log-time">06:10</span>
+                <span class="log-device">Ventilación G1</span>
+                <span class="log-action">Velocidad ajustada a 60%</span>
+                <span class="log-mode manual">Manual</span>
+                <span class="log-user">C. Ruiz</span>
+              </div>
+              <div class="log-entry">
+                <span class="log-time">06:45</span>
+                <span class="log-device">Alimento G1</span>
+                <span class="log-action">Dispensados 80 kg</span>
+                <span class="log-mode manual">Manual</span>
+                <span class="log-user">C. Ruiz</span>
+              </div>
+            </div>
+          </section>
+
+        </main>
+      </div>
+
+      <!-- BOTTOM NAV (Mobile) -->
+      <nav class="bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Panel</span>
+        </a>
+        <a href="alertas.html" class="bottom-nav-item">
+          <i class="fa-solid fa-bell"></i>
+          <span>Alertas</span>
+        </a>
+        <a href="control.html" class="bottom-nav-item active">
+          <i class="fa-solid fa-sliders"></i>
+          <span>Control</span>
+        </a>
+      </nav>
+    </div>
+
+    <script src="utils.js"></script>
+    <script>
+      // ===== DATOS POR GALPÓN =====
+      const galpones = {
+        '1': { temp: '22°C', hum: '65%', co2: '2,200 ppm', status: 'Óptimo', statusColor: 'var(--status-optimal)' },
+        '2': { temp: '26°C', hum: '58%', co2: '2,800 ppm', status: 'Advertencia', statusColor: 'var(--status-warning)' },
+      };
+
+      let galponActual = '2';
+      let nebActivo = false;
+
+      function renderMetricas(id) {
+        const g = galpones[id];
+        document.getElementById('galponMetrics').innerHTML = `
+          <div class="galpon-metric"><span>Temp</span><span class="gm-value">${g.temp}</span></div>
+          <div class="galpon-metric"><span>Hum</span><span class="gm-value">${g.hum}</span></div>
+          <div class="galpon-metric"><span>CO₂</span><span class="gm-value">${g.co2}</span></div>
+          <div class="galpon-metric"><span>Estado</span><span class="gm-value" style="color:${g.statusColor}">${g.status}</span></div>
+        `;
+      }
+
+      window.cambiarGalpon = function(id) {
+        galponActual = id;
+        renderMetricas(id);
+        showToast('info', 'Galpón cambiado', `Controlando Galpón ${id}`);
+      };
+
+      window.toggleVentilacion = function(activo) {
+        const body = document.getElementById('bodyVent');
+        body.classList.toggle('control-disabled', !activo);
+        agregarLog(`Ventilación G${galponActual}`, activo ? 'Encendida' : 'Apagada');
+        showToast(activo ? 'success' : 'warning', 'Ventilación', `Galpón ${galponActual}: ${activo ? 'encendida' : 'apagada'}`);
+      };
+
+      window.toggleDispositivo = function(nombre, activo) {
+        if (nombre === 'nebulizador') {
+          nebActivo = activo;
+          document.getElementById('nebEstado').textContent = activo ? 'Activo' : 'Apagado';
+          document.getElementById('btnNebLabel').textContent = activo ? 'Apagar' : 'Activar 5 min';
+          agregarLog(`Nebulizador G${galponActual}`, activo ? 'Encendido' : 'Apagado');
+        }
+      };
+
+      window.activarNebulizador = function() {
+        const chk = document.getElementById('switchNeb');
+        chk.checked = !chk.checked;
+        nebActivo = chk.checked;
+        document.getElementById('nebEstado').textContent = nebActivo ? 'Activo' : 'Apagado';
+        document.getElementById('btnNebLabel').textContent = nebActivo ? 'Apagar' : 'Activar 5 min';
+        agregarLog(`Nebulizador G${galponActual}`, nebActivo ? 'Activado 5 min' : 'Apagado manualmente');
+        showToast(nebActivo ? 'success' : 'info', 'Nebulizador', `Galpón ${galponActual}: ${nebActivo ? 'activo por 5 minutos' : 'apagado'}`);
+      };
+
+      window.aplicarCambio = function(nombre, sliderId, unidad) {
+        const val = document.getElementById(sliderId).value;
+        showConfirm(
+          `Aplicar ${nombre}`,
+          `¿Confirmar ajuste de ${nombre} a <strong>${val}${unidad}</strong> en Galpón ${galponActual}?`,
+          () => {
+            agregarLog(`${nombre} G${galponActual}`, `Ajustado a ${val}${unidad}`);
+            showToast('success', nombre, `Galpón ${galponActual}: ajustado a ${val}${unidad}`);
+          }
+        );
+      };
+
+      window.dispensarAlimento = function() {
+        const kg = document.getElementById('feedSlider').value;
+        showConfirm(
+          'Dispensar Alimento',
+          `¿Dispensar <strong>${kg} kg</strong> de alimento en Galpón ${galponActual}?`,
+          () => {
+            agregarLog(`Alimento G${galponActual}`, `Dispensados ${kg} kg`);
+            showToast('success', 'Alimento dispensado', `${kg} kg en Galpón ${galponActual}`);
+          }
+        );
+      };
+
+      function agregarLog(dispositivo, accion) {
+        const log = document.getElementById('activityLog');
+        const ahora = new Date();
+        const hora = `${String(ahora.getHours()).padStart(2,'0')}:${String(ahora.getMinutes()).padStart(2,'0')}`;
+        const entrada = document.createElement('div');
+        entrada.className = 'log-entry';
+        entrada.style.animation = 'fadeIn 0.3s ease forwards';
+        entrada.innerHTML = `
+          <span class="log-time">${hora}</span>
+          <span class="log-device">${dispositivo}</span>
+          <span class="log-action">${accion}</span>
+          <span class="log-mode manual">Manual</span>
+          <span class="log-user">C. Ruiz</span>
+        `;
+        log.insertBefore(entrada, log.firstChild);
+      }
+
+      // Inicializar
+      renderMetricas(galponActual);
+    </script>
+  </body>
+</html>

@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <td>${muestra} aves</td>
       <td>${mortalidad}</td>
       <td class="truncate" style="max-width:150px;" title="${notas || 'Sin notas'}">${notas || '—'}</td>
-      <td class="text-muted text-xs">María López</td>
+      <td class="text-muted text-xs">Juan Martínez</td>
       <td><span class="badge ${badgeClass}">${estado}</span></td>
     `;
     tbody.insertBefore(fila, tbody.firstChild);

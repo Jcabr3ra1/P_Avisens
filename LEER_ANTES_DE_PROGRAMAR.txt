@@ -1,4 +1,19 @@
-POR FAVOR PONER SUS ARCHIVOS EN LOS ROLES CORRESPONDIENTES
-LA CARPETA CSS-LOGIN NO TOCAR 
-EN CADA CARPETA CUENTA CON SUS ESTILO PARA QUE NO SE ESTRESEN Y TODOS TENGAN LOS MISMOS ESTILOS 
-LOS QUIERO CUALQUIER INQUIETUD COMUNICARSE AL SIGUIENTE CORREO zleon@sena.edu.co 
+AVISENS — INSTRUCCIONES PARA EL EQUIPO
+=======================================
+
+ESTRUCTURA DE ROLES (3 roles):
+  - avisens/    → Super Admin de AVISENS (nosotros) — acceso total a todas las granjas
+  - usuario/    → Cliente (dueño de la granja) — gestión operativa completa
+  - operario/   → Trabajador de campo — acceso limitado (lectura + control manual)
+
+CREDENCIALES DEMO:
+  Avisens:   avisens  / admin123
+  Usuario:   usuario  / admin123
+  Operario:  operario / oper123
+
+CADA CARPETA TIENE SUS PROPIOS ARCHIVOS CSS Y JS.
+  - No mezclar estilos entre roles.
+  - El CSS de login está en css-login/ — no modificar sin coordinación.
+  - views/usuario/js/utils.js contiene helpers globales (toast, modal, CSV, logout).
+
+CONSULTAS: zleon@sena.edu.co
