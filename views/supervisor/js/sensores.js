@@ -43,6 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModal('modal-config-sensor');
     showToast('success', 'Umbrales actualizados', `Los umbrales del sensor ${sensorId} han sido configurados correctamente.`);
   };
+  // ===== TABS =====
+  window.cambiarTab = function(tabId, btn) {
+    // Desactivar todos los tabs y contenidos
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    // Activar el seleccionado
+    btn.classList.add('active');
+    const tab = document.getElementById(tabId);
+    if (tab) tab.classList.add('active');
+  };
 
   // ===== FILTROS =====
   window.aplicarFiltrosSensores = function() {
@@ -89,5 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     exportToCSV('avisens_sensores_' + new Date().toISOString().slice(0,10) + '.csv', headers, rows);
   };
+
 
 });
