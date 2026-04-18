@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novedades y Mortalidad - AVISENS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css"> <style>
+        .counter-group {
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--bg-input); border: 1px solid var(--border-color);
+            border-radius: 0.5rem; padding: 0.5rem;
+        }
+        .btn-counter {
+            background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color);
+            width: 3rem; height: 3rem; border-radius: 0.5rem; font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;
+        }
+        .btn-counter:active { background: var(--brand-green); color: #fff; }
+        .counter-value { font-size: 1.5rem; font-weight: 700; width: 3rem; text-align: center; border: none; background: transparent; color: var(--text-primary); }
+        
+        .file-upload {
+            border: 2px dashed var(--border-color); border-radius: 0.5rem;
+            padding: 2rem; text-align: center; cursor: pointer; transition: 0.3s;
+            background: var(--bg-input);
+        }
+        .file-upload:hover { border-color: var(--brand-green); }
+        .file-upload i { font-size: 2.5rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        
+        .history-card {
+            background: var(--bg-card); padding: 1rem; border-radius: 0.5rem;
+            border-left: 4px solid var(--status-critical); margin-bottom: 1rem; transition: all 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon" style="color: var(--brand-green);"><i class="fa-solid fa-kiwi-bird"></i></div>
+                <div class="brand-name">Avisens</div>
+            </div>
+            <ul class="side-nav">
+                <li><a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-columns"></i><span>Dashboard</span></a></li>
+                <li><a href="novedades.html" class="nav-item active"><i class="fa-solid fa-skull-crossbones"></i><span>Mortalidad</span></a></li>
+                <li><a href="consumos.html" class="nav-item"><i class="fa-solid fa-wheat-awn"></i><span>Consumos</span></a></li>
+                <li><a href="#" class="nav-item"><i class="fa-solid fa-clipboard-list"></i><span>Mis Tareas</span></a></li>
+            </ul>
+        </aside>
+
+        <nav class="bottom-nav">
+            <a href="dashboard.html" class="bottom-nav-item"><i class="fa-solid fa-table-columns"></i><span>Inicio</span></a>
+            <a href="novedades.html" class="bottom-nav-item active"><i class="fa-solid fa-skull-crossbones"></i><span>Mortalidad</span></a>
+            <a href="consumos.html" class="bottom-nav-item"><i class="fa-solid fa-wheat-awn"></i><span>Consumos</span></a>
+            <a href="../../login.html" class="bottom-nav-item"><i class="fa-solid fa-right-from-bracket"></i><span>Salir</span></a>
+        </nav>
+
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div class="header-titles">
+                    <h2>Novedades Diarias</h2>
+                    <span class="subtitle">Galpón Norte - Lote A</span>
+                </div>
+            </header>
+
+            <main class="content-area">
+                <div class="section-block fade-in">
+                    <h3 class="section-title">Registrar Mortalidad</h3>
+                    <form id="formMortalidad">
+                        <div class="form-group" style="margin-bottom: 1.5rem;">
+                            <label>Cantidad de Aves</label>
+                            <div class="counter-group">
+                                <button type="button" class="btn-counter" onclick="updateCounter(-1)">-</button>
+                                <input type="number" id="cantidadAves" class="counter-value" value="0" readonly>
+                                <button type="button" class="btn-counter" onclick="updateCounter(1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 1.5rem;">
+                            <label>Causa Probable</label>
+                            <select id="causaProbable" class="form-control">
+                                <option value="Desconocida / Muerte Súbita">Desconocida / Muerte Súbita</option>
+                                <option value="Estrés Calórico">Estrés Calórico</option>
+                                <option value="Enfermedad Respiratoria">Enfermedad Respiratoria</option>
+                                <option value="Traumatismo">Traumatismo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 1.5rem;">
+                            <label>Evidencia Fotográfica (Opcional)</label>
+                            <div class="file-upload" onclick="document.getElementById('fotoUpload').click()">
+                                <i class="fa-solid fa-camera"></i>
+                                <p>Tocar para abrir cámara o galería</p>
+                                <input type="file" id="fotoUpload" accept="image/*" capture="environment" style="display: none;">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
+                            <i class="fa-solid fa-check-circle"></i> Guardar Registro
+                        </button>
+                    </form>
+                </div>
+
+                <div class="section-block fade-in" style="margin-top: 2rem;">
+                    <h3 class="section-title">Últimos Registros (Hoy)</h3>
+                    <div id="historialRegistros">
+                        <div class="history-card">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <strong>3 Aves</strong>
+                                <span style="color: var(--text-secondary); font-size: 0.8rem;">Hace 2 horas</span>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Estrés Calórico - Sin observaciones.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/novedades.js"></script>
+</body>
+</html>

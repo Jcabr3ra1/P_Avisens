@@ -1,273 +1,130 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Avisens | Panel Operario</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Operario - AVISENS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        .dashboard-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem; margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 1rem; padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem; transition: transform 0.3s ease;
+        }
+        .summary-card:hover { transform: translateY(-5px); border-color: var(--brand-green); }
+        .summary-icon {
+            font-size: 2.5rem; color: var(--brand-green); background: rgba(16, 185, 129, 0.1);
+            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem;
+        }
+        .summary-info h4 { color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
+        .summary-info h2 { color: var(--text-primary); font-size: 1.5rem; font-weight: 700; }
+
+        .alert-item {
+            background: var(--bg-input); border-left: 4px solid var(--status-critical);
+            padding: 1rem 1.5rem; border-radius: 0.5rem; margin-bottom: 1rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .alert-item.warning { border-left-color: var(--status-warning); }
+        .alert-info h4 { margin-bottom: 0.25rem; font-size: 1rem; }
+        .alert-info p { color: var(--text-secondary); font-size: 0.875rem; }
+        
+        .dismiss-alert {
+            background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary);
+            padding: 0.5rem; border-radius: 0.25rem; cursor: pointer; transition: 0.2s;
+        }
+        .dismiss-alert:hover { background: var(--bg-secondary); color: var(--text-primary); }
+    </style>
+</head>
+<body>
     <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon" style="color: var(--brand-green);"><i class="fa-solid fa-kiwi-bird"></i></div>
+                <div class="brand-name">Avisens</div>
+            </div>
+            <ul class="side-nav">
+                <li><a href="dashboard.html" class="nav-item active"><i class="fa-solid fa-table-columns"></i><span>Dashboard</span></a></li>
+                <li><a href="novedades.html" class="nav-item"><i class="fa-solid fa-skull-crossbones"></i><span>Mortalidad</span></a></li>
+                <li><a href="consumos.html" class="nav-item"><i class="fa-solid fa-wheat-awn"></i><span>Consumos</span></a></li>
+                <li><a href="#" class="nav-item"><i class="fa-solid fa-clipboard-list"></i><span>Mis Tareas</span></a></li>
+            </ul>
+        </aside>
 
-      <!-- ===== SIDEBAR ===== -->
-      <aside class="sidebar">
-        <div class="brand">
-          <div class="brand-icon"><img src="img/logo.png" alt="Avisens logo" onerror="this.outerHTML='🐔'"></div>
-          <h1 class="brand-name">Avisens</h1>
-        </div>
-        <nav class="side-nav">
-          <a href="dashboard.html" class="nav-item active">
-            <i class="fa-solid fa-house"></i> Mi Panel
-          </a>
-          <a href="alertas.html" class="nav-item">
-            <i class="fa-solid fa-bell"></i> Alertas
-          </a>
-          <a href="control.html" class="nav-item">
-            <i class="fa-solid fa-sliders"></i> Control Manual
-          </a>
+        <nav class="bottom-nav">
+            <a href="dashboard.html" class="bottom-nav-item active"><i class="fa-solid fa-table-columns"></i><span>Inicio</span></a>
+            <a href="novedades.html" class="bottom-nav-item"><i class="fa-solid fa-skull-crossbones"></i><span>Mortalidad</span></a>
+            <a href="consumos.html" class="bottom-nav-item"><i class="fa-solid fa-wheat-awn"></i><span>Consumos</span></a>
+            <a href="../../login.html" class="bottom-nav-item"><i class="fa-solid fa-right-from-bracket"></i><span>Salir</span></a>
         </nav>
-      </aside>
 
-      <!-- ===== MAIN CONTENT ===== -->
-      <div class="main-wrapper">
+        <div class="main-wrapper">
+            <header class="top-header">
+                <div class="header-titles">
+                    <h2>Panel Operativo</h2>
+                    <span class="subtitle">Resumen de tu turno actual</span>
+                </div>
+            </header>
 
-        <header class="top-header">
-          <div class="header-titles">
-            <h2>Mi Panel</h2>
-            <p class="subtitle">Estado de tus galpones asignados</p>
-          </div>
-          <div class="header-right">
-            <div class="user-profile">
-              <div class="user-info">
-                <span class="user-name">Carlos Ruiz</span>
-                <span class="user-role">Operario</span>
-              </div>
-              <div class="user-avatar"><i class="fa-solid fa-hard-hat"></i></div>
-            </div>
-            <button class="btn-logout" onclick="cerrarSesion()">
-              <i class="fa-solid fa-right-from-bracket"></i> Salir
-            </button>
-          </div>
-        </header>
+            <main class="content-area">
+                
+                <div class="dashboard-grid fade-in">
+                    <a href="novedades.html" class="summary-card">
+                        <div class="summary-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="summary-info">
+                            <h4>Novedades Pendientes</h4>
+                            <h2>0 Registros hoy</h2>
+                        </div>
+                    </a>
+                    <a href="consumos.html" class="summary-card">
+                        <div class="summary-icon" style="color: var(--status-warning); background: rgba(234, 179, 8, 0.1);"><i class="fa-solid fa-boxes-stacked"></i></div>
+                        <div class="summary-info">
+                            <h4>Estado de Alimento</h4>
+                            <h2>Galpón 1: 45%</h2>
+                        </div>
+                    </a>
+                    <div class="summary-card">
+                        <div class="summary-icon" style="color: var(--status-optimal); background: rgba(34, 197, 94, 0.1);"><i class="fa-solid fa-check-double"></i></div>
+                        <div class="summary-info">
+                            <h4>Tareas Completadas</h4>
+                            <h2>3 / 5</h2>
+                        </div>
+                    </div>
+                </div>
 
-        <main class="content-area">
+                <div class="section-block fade-in">
+                    <h3 class="section-title">
+                        Alertas Recientes
+                        <span id="contadorAlertasBadge" class="badge warning-badge">2 Pendientes</span>
+                    </h3>
+                    
+                    <div class="alert-item warning">
+                        <div class="alert-info">
+                            <h4><i class="fa-solid fa-temperature-arrow-up" style="margin-right: 0.5rem; color: var(--status-warning);"></i> Galpón 2 - Temperatura Elevada</h4>
+                            <p>La temperatura actual es de 31°C (Límite: 30°C). Favor revisar extractores.</p>
+                        </div>
+                        <button class="dismiss-alert" title="Marcar como revisado"><i class="fa-solid fa-check"></i></button>
+                    </div>
 
-          <!-- TURNO ACTIVO -->
-          <section class="section-block fade-in">
-            <div style="display:flex; align-items:center; gap:0.75rem; padding: 0.875rem 1rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 0.75rem; border-left: 3px solid var(--status-optimal);">
-              <i class="fa-solid fa-clock" style="color:var(--status-optimal); font-size:1.25rem;"></i>
-              <div>
-                <div style="font-weight:600; color:var(--text-primary); font-size:0.9rem;">Turno Activo: Día (06:00 – 14:00)</div>
-                <div style="font-size:0.78rem; color:var(--text-muted);">Galpones asignados: <strong style="color:var(--text-secondary);">Galpón 1, Galpón 2</strong></div>
-              </div>
-            </div>
-          </section>
+                    <div class="alert-item">
+                        <div class="alert-info">
+                            <h4><i class="fa-solid fa-droplet" style="margin-right: 0.5rem; color: var(--status-critical);"></i> Galpón 1 - Presión de Agua Baja</h4>
+                            <p>Posible obstrucción en la línea de bebederos B.</p>
+                        </div>
+                        <button class="dismiss-alert" title="Marcar como revisado"><i class="fa-solid fa-check"></i></button>
+                    </div>
+                </div>
 
-          <!-- RESUMEN KPIs -->
-          <section class="section-block fade-in" style="animation-delay: 0.05s">
-            <div class="stats-grid">
-              <div class="stat-card">
-                <span class="stat-icon" style="color: var(--status-optimal);">
-                  <i class="fa-solid fa-warehouse"></i>
-                </span>
-                <span class="stat-value">2</span>
-                <span class="stat-label">Galpones Asignados</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-icon" style="color: var(--status-optimal);">
-                  <i class="fa-solid fa-kiwi-bird"></i>
-                </span>
-                <span class="stat-value">29,500</span>
-                <span class="stat-label">Aves a Cargo</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-icon" style="color: var(--status-warning);">
-                  <i class="fa-solid fa-bell"></i>
-                </span>
-                <span class="stat-value">1</span>
-                <span class="stat-label">Alerta Activa</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-icon" style="color: var(--status-info);">
-                  <i class="fa-solid fa-clipboard-list"></i>
-                </span>
-                <span class="stat-value">3</span>
-                <span class="stat-label">Tareas Pendientes</span>
-              </div>
-            </div>
-          </section>
-
-          <!-- ESTADO DE GALPONES ASIGNADOS -->
-          <section class="section-block fade-in" style="animation-delay: 0.1s">
-            <h2 class="section-title" style="margin-bottom: 1rem;">Estado de Galpones</h2>
-            <div class="sheds-grid">
-
-              <article class="shed-card" data-status="optimal">
-                <div class="shed-header">
-                  <h3 class="shed-name">Galpón 1</h3>
-                  <span class="status-indicator"></span>
-                </div>
-                <div class="shed-metrics">
-                  <div class="metric">
-                    <span class="metric-label">Temp:</span>
-                    <span class="metric-value">22°C</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">Hum:</span>
-                    <span class="metric-value">65%</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">CO₂:</span>
-                    <span class="metric-value">2,200 ppm</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">NH₃:</span>
-                    <span class="metric-value">18 ppm</span>
-                  </div>
-                </div>
-                <div class="shed-footer">
-                  <span><i class="fa-solid fa-kiwi-bird"></i> 15,000 aves</span>
-                  <span>Día 28</span>
-                </div>
-              </article>
-
-              <article class="shed-card" data-status="warning">
-                <div class="shed-header">
-                  <h3 class="shed-name">Galpón 2</h3>
-                  <span class="status-indicator"></span>
-                </div>
-                <div class="shed-metrics">
-                  <div class="metric">
-                    <span class="metric-label">Temp:</span>
-                    <span class="metric-value warning-text">26°C</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">Hum:</span>
-                    <span class="metric-value">58%</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">CO₂:</span>
-                    <span class="metric-value warning-text">2,800 ppm</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">NH₃:</span>
-                    <span class="metric-value warning-text">22 ppm</span>
-                  </div>
-                </div>
-                <div class="shed-footer">
-                  <span><i class="fa-solid fa-kiwi-bird"></i> 14,500 aves</span>
-                  <span>Día 35</span>
-                </div>
-              </article>
-
-            </div>
-          </section>
-
-          <!-- ALERTAS ACTIVAS -->
-          <section class="section-block fade-in" style="animation-delay: 0.15s">
-            <div class="section-header">
-              <h2 class="section-title">Alertas Activas</h2>
-            </div>
-            <div class="alerts-list">
-              <div class="alert-item" data-type="warning">
-                <div class="alert-icon">
-                  <i class="fa-solid fa-circle-exclamation"></i>
-                </div>
-                <div class="alert-content">
-                  <div class="alert-top">
-                    <strong>Galpón 2</strong>
-                    <span class="alert-time">Hace 30 min</span>
-                  </div>
-                  <p>Temperatura en advertencia: 26°C — Verifique ventilación</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- TAREAS DEL DÍA -->
-          <section class="section-block fade-in" style="animation-delay: 0.2s">
-            <h2 class="section-title" style="margin-bottom: 1rem;">Tareas del Día</h2>
-            <div class="rules-list">
-              <div class="rule-card">
-                <div class="rule-info">
-                  <div class="rule-name"><i class="fa-solid fa-wheat-awn" style="color:var(--status-optimal);"></i> Verificar dispensadores de alimento</div>
-                  <div class="rule-condition">Galpón 1 y Galpón 2 — Turno mañana</div>
-                  <div class="rule-meta"><span>Alta prioridad</span><span>Pendiente</span></div>
-                </div>
-                <div class="rule-actions">
-                  <button class="btn-primary btn-sm" onclick="completarTarea(this, 'Verificar dispensadores')">
-                    <i class="fa-solid fa-check"></i> Completar
-                  </button>
-                </div>
-              </div>
-              <div class="rule-card">
-                <div class="rule-info">
-                  <div class="rule-name"><i class="fa-solid fa-spray-can-sparkles" style="color:var(--status-info);"></i> Desinfección bebederos</div>
-                  <div class="rule-condition">Galpón 2 — Rutina diaria</div>
-                  <div class="rule-meta"><span>Media prioridad</span><span>Pendiente</span></div>
-                </div>
-                <div class="rule-actions">
-                  <button class="btn-primary btn-sm" onclick="completarTarea(this, 'Desinfección bebederos')">
-                    <i class="fa-solid fa-check"></i> Completar
-                  </button>
-                </div>
-              </div>
-              <div class="rule-card">
-                <div class="rule-info">
-                  <div class="rule-name"><i class="fa-solid fa-eye" style="color:var(--status-warning);"></i> Revisar ventilación manual — Galpón 2</div>
-                  <div class="rule-condition">Galpón 2 — Alerta temperatura activa</div>
-                  <div class="rule-meta"><span>Alta prioridad</span><span>Pendiente</span></div>
-                </div>
-                <div class="rule-actions">
-                  <button class="btn-primary btn-sm" onclick="completarTarea(this, 'Revisar ventilación')">
-                    <i class="fa-solid fa-check"></i> Completar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-
-        </main>
-      </div>
-
-      <!-- BOTTOM NAV (Mobile) -->
-      <nav class="bottom-nav">
-        <a href="dashboard.html" class="bottom-nav-item active">
-          <i class="fa-solid fa-house"></i>
-          <span>Panel</span>
-        </a>
-        <a href="alertas.html" class="bottom-nav-item">
-          <i class="fa-solid fa-bell"></i>
-          <span>Alertas</span>
-        </a>
-        <a href="control.html" class="bottom-nav-item">
-          <i class="fa-solid fa-sliders"></i>
-          <span>Control</span>
-        </a>
-      </nav>
+            </main>
+        </div>
     </div>
 
-    <script src="utils.js"></script>
-    <script>
-      window.completarTarea = function(btn, nombre) {
-        const card = btn.closest('.rule-card');
-        showConfirm(
-          'Completar Tarea',
-          `¿Marcar como completada: "${nombre}"?`,
-          () => {
-            const meta = card.querySelector('.rule-meta span:last-child');
-            if (meta) meta.textContent = '✅ Completada';
-            btn.innerHTML = '<i class="fa-solid fa-check-double"></i> Hecha';
-            btn.disabled = true;
-            btn.classList.remove('btn-primary');
-            btn.classList.add('btn-secondary');
-            card.style.opacity = '0.6';
-            showToast('success', 'Tarea completada', `"${nombre}" registrada como completada.`);
-          }
-        );
-      };
-    </script>
-  </body>
+    <script src="js/dashboard.js"></script>
+</body>
 </html>
